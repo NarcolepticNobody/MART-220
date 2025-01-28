@@ -1,0 +1,25 @@
+function setup() {
+  createCanvas(400, 400);
+  noLoop();
+}
+
+function draw() {
+  background(240);
+  drawWaffle(100, 100, 200, 200, 6);
+}
+
+function drawWaffle(x, y, w, h, gridSize) {
+  // Draw waffle base
+  fill(240, 200, 130); // Light waffle color
+  noStroke();
+  rect(x, y, w, h, 12); // Rounded edges
+
+  // Draw waffle grid
+  let cellSize = w / gridSize;
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      fill(210, 170, 100); // Grid cell color
+      rect(x + i * cellSize + 5, y + j * cellSize + 5, cellSize - 10, cellSize - 10, 4);
+    }
+  }
+}

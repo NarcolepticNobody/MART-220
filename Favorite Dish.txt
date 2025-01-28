@@ -1,0 +1,73 @@
+function setup() {
+  createCanvas(400, 400);
+  
+  
+}
+
+function draw() {
+  background('#FFFFFF');
+ 
+ 
+  
+  
+
+   fill('#D89F0A');
+  stroke(0);
+  strokeWeight(5);
+  
+circle(200,180,300);
+  stroke(0);
+  strokeWeight(0);
+ 
+ 
+
+  
+  
+  //rect 0 vertical 
+  fill('#F8D271');
+  rect(65, 80, 15,200);
+  fill('#F8D271');
+  //rect 1 vertical        
+  rect(100, 60, 15,245);
+   //rect 2 vertical
+  rect(135, 40, 15, 285);
+   //rect 3 vertical
+  rect(170, 25, 15, 310);
+   //rect 4 vertical
+  rect(205, 25, 15, 315);
+    //rect 5 vertical
+  rect(240, 30, 15, 305);
+   //rect 6 vertical
+  rect(275, 40, 15, 280);
+   //rect 7 vertical        
+  rect(310, 70, 15,225);
+     //rect 0 horizontal
+  rect(45,150,310,15);
+     //rect 0 horizontal
+  rect(45,120,290,15);
+     //rect 4 horizontal
+  rect(60,90,275,15);
+     //rect 3 horizontal
+  rect(95,60,215,15);
+     //rect 2 horizontal
+  rect(150,30,100,15);
+  //rect 5 horizontal
+  rect(50,180,295,15);
+      //rect 6 horizontal
+  rect(50,210,295,15);
+      //rect 7 horizontal
+  rect(80,240,260,15);
+      //rect 8 horizontal
+  rect(90,270,220,15);
+      //rect 9 horizontal
+  rect(120,300,150,15);
+
+  
+
+
+  
+ 
+  
+
+  
+}
