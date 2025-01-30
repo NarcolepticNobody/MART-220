@@ -61,8 +61,11 @@ circle(200,180,300);
   rect(90,270,220,15);
       //rect 9 horizontal
   rect(120,300,150,15);
-
-  
+  //rect 6 vertical
+  fill('#FFEB3B')
+  rect(150, 100, 100, 50);
+    fill('#FFEB3B')
+  rect(150, 160, 50, 50);
 
 
   
