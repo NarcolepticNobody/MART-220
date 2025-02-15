@@ -1,4 +1,4 @@
-class Popcorn
+class popcorn
 {
     constructor(path)
     {

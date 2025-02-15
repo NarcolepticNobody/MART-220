@@ -5,10 +5,10 @@ function preload()
 {
 
     //myPopcorn = new popcorn("../images/Idle__000.png");
-    for(var i = 1; i< 10; i++)
+    for(var i = 0; i< 10; i++)
     {
         // concatenation - adding strings together
-        myPopcorn = new popcorn("../creative_coding_2/Run (" + i + ").png");  
+        myPopcorn = new myPopcorn("../Homework 5/Run (" + i + ").png");  
         animation.push(myPopcorn);
     }
     
