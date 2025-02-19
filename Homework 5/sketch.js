@@ -8,7 +8,7 @@ function preload()
     for(var i = 1; i< 9; i++)
     {
         // concatenation - adding strings together
-        myPopcorn = new popcorn("images/Dead (" + i + ").png");  
+        myPopcorn = new myPopcorn("images/Dead (" + i + ").png");  
         animation.push(myPopcorn);
     }
    
