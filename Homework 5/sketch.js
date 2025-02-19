@@ -5,14 +5,14 @@ function preload()
 {
 
     //myPopcorn = new popcorn("../images/Idle__000.png");
-    for(var i = 0; i< 10; i++)
+    for(var i = 1; i< 9; i++)
     {
         // concatenation - adding strings together
-        myPopcorn = new myPopcorn("Dead (1).png");  
+        myPopcorn = new popcorn("images/Dead (" + i + ").png");  
         animation.push(myPopcorn);
     }
-    
-    
+   
+   
     }
 
 function setup()
@@ -33,9 +33,9 @@ function draw()
 function updateIndex()
 {
     i++;
-    if(i > 9)
+    if(i > 7)
     {
         i = 0;
     }
-    
+   
 }
