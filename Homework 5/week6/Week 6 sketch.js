@@ -1,41 +1,28 @@
 var animation = [];
 var i = 0;
-var mycharacter;
-function preload()
-{
 
-   
-    for(var i = 1; i < 33; i++)
-    {
-        // concatenation - adding strings together
-        mycharacter = new character("images/D (" + i + ").png");  
+function preload() {
+    for (var j = 1; j < 33; j++) { // Use a different loop variable (j) to avoid conflicts
+        let mycharacter = new character("images/D (" + j + ").png");
         animation.push(mycharacter);
     }
+}
 
-    
-    }
-
-function setup()
-{
+function setup() {
     createCanvas(800, 800);
     setInterval(updateIndex, 50);
 }
 
-function draw()
-{
-
+function draw() {
     background(120);
-    //image(animation[i], 100,100);
-    animation[i].draw();
-    //character.draw();
+    if (animation.length > 0) {
+        animation[i].draw();
+    }
 }
 
-function updateIndex()
-{
+function updateIndex() {
     i++;
-    if(i > 32)
-    {
+    if (i >= animation.length) { // Ensure looping correctly
         i = 0;
     }
-    
 }
