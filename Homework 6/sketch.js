@@ -3,7 +3,7 @@ var i = 0;
 
 function preload() {
     for (var j = 1; j < 33; j++) { // Use a different loop variable (j) to avoid conflicts
-        let mycharacter = new character("images/D (" + j + ").png");
+        let mycharacter = new character("images/waffle (" + j + ").png");
         animation.push(mycharacter);
     }
 }
@@ -18,6 +18,8 @@ function draw() {
     if (animation.length > 0) {
         animation[i].draw();
     }
+    circle (100,100,100); 
+    
 }
 
 function updateIndex() {
