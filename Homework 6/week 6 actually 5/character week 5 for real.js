@@ -18,7 +18,7 @@ class character
     {
         // image draw
         //image(this.myImage, 150, 200);
-        image(this.myImage, this.x, this.y,200,150);
+        image(this.myImage, this.x, this.y, 200, 150);
     }
 
     hasCollided(x2, y2, w2, h2) {

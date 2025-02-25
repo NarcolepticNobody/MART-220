@@ -18,17 +18,17 @@ function preload() {
 
 function setup() {
     createCanvas(800, 800);
-    setInterval(updateIndex, 80);
+    setInterval(updateIndex, 70);
 
-    for (let i = 0; i < 5; i++) {
-        myFood = new food(random(50,600), random(100,690), 25);
+    for (let i = 0; i < 9 ; i++) {
+        myFood = new food(random(50,600), random(500,200), 25);
         foodArray.push(myFood)
 
     }
 }
 
 function draw() {
-    background(40,100,1, 10);
+    background(40, 100, 10); //this is the part to change the thing you like
     if (animation.length > 0) {
         animation[i].draw();
     }
@@ -53,9 +53,15 @@ if (keyIsPressed) {
     animation[i].x = x;
     animation[i].y = y;
     }
+
+for (let k = 0; k < foodArray.length; k++) {
+if (animation[i].hasCollided(foodArray[k].x, foodArray[k].y, 25,25)) {
+    foodArray.splice(k, 1);
+
+}
 }
 
-
+}
 
 
     

@@ -8,8 +8,8 @@ class food
 
     draw()
     {
-        fill(220, 120, 120);
-        circle(this.x, this.y, 25);
+        fill(22, 1, 120);
+        circle(this.x, this.y, 50);
     }
 
 
