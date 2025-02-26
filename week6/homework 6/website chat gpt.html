@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slideshow with Thumbnails</title>
+    <style>
+        /* Basic resets and body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            background-color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Thumbnails container */
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background-color: #ccc;
+            border: 2px solid #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail:hover {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+
+        /* Fullscreen Modal */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        /* Close button for fullscreen */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            font-size: 30px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Next and previous buttons for slideshow */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 30px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+        <img class="slide" src="https://via.placeholder.com/800x300/FF0000/FFFFFF?text=Image+1" alt="Slide 1">
+        <img class="slide" src="https://via.placeholder.com/800x300/00FF00/FFFFFF?text=Image+2" alt="Slide 2">
+        <img class="slide" src="https://via.placeholder.com/800x300/0000FF/FFFFFF?text=Image+3" alt="Slide 3">
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+
+    <!-- Thumbnail Frames -->
+    <div class="thumbnails">
+        <div class="thumbnail" data-index="0"></div>
+        <div class="thumbnail" data-index="1"></div>
+        <div class="thumbnail" data-index="2"></div>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <button class="close-btn" id="closeBtn">&#10006;</button>
+        <img class="fullscreen-image" id="fullscreenImage" src="" alt="Fullscreen Image">
+        <button class="prev" id="fullscreenPrev">&#10094;</button>
+        <button class="next" id="fullscreenNext">&#10095;</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const fullscreenModal = document.getElementById('fullscreenModal');
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        const closeBtn = document.getElementById('closeBtn');
+        const fullscreenPrev = document.getElementById('fullscreenPrev');
+        const fullscreenNext = document.getElementById('fullscreenNext');
+
+        // Function to show the current slide
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.style.display = "none");
+            // Show the current slide
+            slides[index].style.display = "block";
+        }
+
+        // Initialize the slideshow
+        showSlide(currentSlideIndex);
+
+        // Next and Previous buttons for slideshow
+        document.querySelector('.next').addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            showSlide(currentSlideIndex);
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            showSlide(currentSlideIndex);
+        });
+
+        // Thumbnail click functionality (opens in fullscreen modal)
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.style.backgroundImage = `url(https://via.placeholder.com/80x80/${(index === 0 ? 'FF0000' : index === 1 ? '00FF00' : '0000FF')}/FFFFFF?text=Image+${index+1})`;
+            thumbnail.addEventListener('click', () => {
+                currentSlideIndex = index;
+                openFullscreen();
+            });
+        });
+
+        // Open fullscreen modal and display the image
+        function openFullscreen() {
+            fullscreenImage.src = slides[currentSlideIndex].src;
+            fullscreenModal.style.display = "flex";
+        }
+
+        // Close fullscreen modal
+        closeBtn.addEventListener('click', () => {
+            fullscreenModal.style.display = "none";
+        });
+
+        // Fullscreen Next and Previous buttons
+        fullscreenNext.addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            openFullscreen();
+        });
+
+        fullscreenPrev.addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            openFullscreen();
+        });
+
+        // Keyboard navigation for arrow keys (left and right)
+        document.addEventListener('keydown', (e) => {
+            if (fullscreenModal.style.display === "flex") {
+                if (e.key === "ArrowRight") {
+                    fullscreenNext.click();
+                } else if (e.key === "ArrowLeft") {
+                    fullscreenPrev.click();
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
