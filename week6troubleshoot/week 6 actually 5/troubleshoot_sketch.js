@@ -8,8 +8,8 @@ var myfood;
 var circle = 0;
 
 function preload() {
-    for (var j = 1; j < 33; j++) { // Use a different loop variable (j) to avoid conflicts
-        let mycharacter = new character("images/D (" + j + ").png",x,y);
+    for (var j = 1; j < 10; j++) { // Use a different loop variable (j) to avoid conflicts
+        let mycharacter = new character("images/Run (" + j + ").png",x,y);
         animation.push(mycharacter);
     }
   console.log(animation.length)
@@ -49,7 +49,7 @@ if (keyIsPressed) {
     if (key == "s") {
         y++;
     }
-  for (let i = 0; i < 32; i++) {
+  for (let i = 0; i < 9; i++) {
     animation[i].x = x;
     animation[i].y = y;
     }
