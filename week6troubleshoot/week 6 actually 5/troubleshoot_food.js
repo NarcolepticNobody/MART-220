@@ -9,7 +9,7 @@ class food
     draw()
     {
         fill(22, 1, 120);
-        circle(this.x, this.y, 50);
+        circle(this.x, this.y, 35);
     }
 
 

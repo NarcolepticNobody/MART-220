@@ -1,30 +1,45 @@
 var animation = [];
 var i = 0;
+var j = 0;
 var x = 100;
 var y = 100;
 var foodArray = [];
 var foodFound = false;
 var myfood;
 var circle = 0;
+var idlestring = []
+var runstring = []
+var animation = [];
+var result;
 
 function preload() {
-    for (var j = 1; j < 10; j++) { // Use a different loop variable (j) to avoid conflicts
-        let mycharacter = new character("images/Run (" + j + ").png",x,y);
-        animation.push(mycharacter);
+    idlestring = loadStrings('characteridle.txt')
+      
     }
-  console.log(animation.length)
-    }
+
+   // {
+       // idlestring = loadStrings('characterrun.txt') 
+   // }
 
 
 function setup() {
     createCanvas(800, 800);
     setInterval(updateIndex, 70);
-
-    for (let i = 0; i < 9 ; i++) {
-        myFood = new food(random(50,600), random(500,200), 25);
+    for (var j = 10; j < idlestring.length; j++) { // Use a different loop variable (j) to avoid conflicts
+        let mycharacter = new character(idlestring[j],x,y);
+        animation.push(mycharacter);
+    }
+      for (var j = 8; i < runstring.length; j++) { // Use a different loop variable (j) to avoid conflicts
+        let mycharacter = new character(runstring[j],x,y);
+        animation.push(mycharacter);
+      }
+      
+    for (let i = 0; i < 10 ; i++) {
+        myFood = new food(random(19,600), random(500,100), 25);
         foodArray.push(myFood)
 
     }
+    
 }
 
 function draw() {
@@ -32,8 +47,8 @@ function draw() {
     if (animation.length > 0) {
         animation[i].draw();
     }
-for (let i = 0; i < foodArray.length; i++) {
-    foodArray[i].draw();
+for (let j = 0; j < foodArray.length; j++) {
+    foodArray[j].draw();
 }
 
 if (keyIsPressed) {
@@ -49,10 +64,14 @@ if (keyIsPressed) {
     if (key == "s") {
         y++;
     }
-  for (let i = 0; i < 9; i++) {
-    animation[i].x = x;
-    animation[i].y = y;
+  for (let j = 0; j < 9; j++) {
+    animation[j].x = x;
+    animation[j].y = y;
     }
+    for (let j = 0; j < 7; j++) {
+        animation[j].x = x;
+        animation[j].y = y;
+        }
 
 for (let k = 0; k < foodArray.length; k++) {
 if (animation[i].hasCollided(foodArray[k].x, foodArray[k].y, 25,25)) {
@@ -62,9 +81,6 @@ if (animation[i].hasCollided(foodArray[k].x, foodArray[k].y, 25,25)) {
 }
 
 }
-
-
-    
 
 }
 function updateIndex() {
