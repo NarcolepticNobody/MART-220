@@ -8,6 +8,9 @@ class character
         this.imageWidth = 100;
         this.imageHight = 200;
 
+
+
+        // need the image
         this.myImage = loadImage(this.path);
     }
 

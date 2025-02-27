@@ -3,35 +3,23 @@ var i = 0;
 var x = 100;
 var y = 100;
 var foodArray = [];
-//var foodFound = false;
+var foodFound = false;
 var myfood;
 var circle = 0;
-var idlestring = []
-var runstring = []
-//var dinosourObjects = [];
-var animation = [];
-var result;
-
 
 function preload() {
-    idlestring = loadStrings('characteridle.txt')
-    //idlestring = loadStrings("characterrun.txt")
+    for (var j = 1; j < 33; j++) { // Use a different loop variable (j) to avoid conflicts
+        let mycharacter = new character("images/D (" + j + ").png",x,y);
+        animation.push(mycharacter);
+    }
+  console.log(animation.length)
     }
 
 
 function setup() {
     createCanvas(800, 800);
     setInterval(updateIndex, 70);
-   for (var j = 0; j < idlestring.length; j++) { // Use a different loop variable (j) to avoid conflicts
-        let mycharacter = new character(idlestring[j],x,y);
-        animation.push(mycharacter);
-    }
-        
-  //for (var j = 0; j < runstring.length; j++) { // Use a different loop variable (j) to avoid conflicts
-       // let mycharacter = new character(runstring[j],x,y);
-       // animation.push(mycharacter);
-    //}
-  
+
     for (let i = 0; i < 9 ; i++) {
         myFood = new food(random(50,600), random(500,200), 25);
         foodArray.push(myFood)

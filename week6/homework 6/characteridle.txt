@@ -1,23 +1,10 @@
-class imageclass{
-
-    constructor(path, x, y)
-    {
-        this.path = path;
-        this.x = x;
-        this.y = y;
-    }
-
-    getImage()
-    {
-        var myImage = loadImage(this.path);
-        return myImage;
-    }
-    getX()
-    {
-        return this.x;
-    }
-    getY()
-    {
-        return this.y;
-    }
-}
+images/Idle (1)
+images/Idle (2)
+images/Idle (3)
+images/Idle (4)
+images/Idle (5)
+images/Idle (6)
+images/Idle (7)
+images/Idle (8)
+images/Idle (9)
+images/Idle (10)
