@@ -14,7 +14,7 @@ var result;
 
 function preload() {
     idlestring = loadStrings('characteridle.txt')
-    runstring = loadStrings('characteridle.txt')
+    runstring = loadStrings('characterrun.txt')
     }
 
    
