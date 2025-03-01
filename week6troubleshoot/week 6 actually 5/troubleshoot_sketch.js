@@ -13,8 +13,8 @@ var runstring = [];
 var result;
 
 function preload() {
-    idlestring = loadStrings('images1/Idle (1).png')
-    runstring = loadStrings('images/Run (1).png')
+    idlestring = loadStrings("images1/Idle (1).png")
+    runstring = loadStrings("images/Run (1).png")
     }
 
    
