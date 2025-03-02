@@ -4,17 +4,18 @@ var j = 0;
 var x = 100;
 var y = 100;
 var foodArray = [];
+var idlestring = [];
+var runstring = [];
 var foodFound = false;
 var myfood;
 var circle = 0;
-var idlestring = [];
-var runstring = [];
+
 
 var result;
 
 function preload() {
-    idlestring = loadStrings("images1/Idle (1).png")
-    runstring = loadStrings("images/Run (1).png")
+    idlestring = loadStrings('images1/Idle (1).png');
+    runstring = loadStrings('images/Run (1).png');
     }
 
    
@@ -37,6 +38,7 @@ function setup() {
         myFood = new food(random(19,600), random(500,100), 25);
         foodArray.push(myFood)
 
+    
     }
     setInterval(updateIndex, 70);
 }
