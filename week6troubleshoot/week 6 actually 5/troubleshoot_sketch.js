@@ -6,7 +6,7 @@ var y = 100;
 var foodArray = [];
 var idlestring = [];
 var runstring = [];
-var foodFound = false;
+//var foodFound = false;
 var myfood;
 var circle = 0;
 
