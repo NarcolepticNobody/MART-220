@@ -1,14 +1,14 @@
 class character
 {
-    constructor(path, x,y)
+    constructor(path, x, y)
     {
         this.path = path;
         this.x = x;
         this.y = y;
         this.imageWidth = 100;
-        this.imageHight = 100;
+        this.imageHeight = 100;
         this.flipX = false;
-        //this.flipRun = false;
+        this.flipRun = false;
 
 
 
@@ -19,7 +19,7 @@ class character
     draw()
     {
        
-        //image(this.myImage, 150, 200);
+    
         push();
         if (this.flipX) {
         translate(this.imageWidth, 0);
@@ -32,6 +32,7 @@ class character
         } 
         pop();
 
+        
 
      
     }
@@ -40,6 +41,7 @@ class character
 
     hasCollided(x2, y2, w2, h2) {
     return (
+
 
         this.x < x2 + w2 &&
         this.x + this.imageWidth > x2 &&
