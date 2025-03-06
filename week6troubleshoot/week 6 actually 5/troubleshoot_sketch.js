@@ -13,6 +13,8 @@ var keys = [];
 let score = 0;
 let startTime;
 let elapsedTime = 0;
+let countdown = 15; 
+
 
 
 function preload() {
@@ -23,7 +25,7 @@ function preload() {
 function setup() {
     createCanvas(500, 600);
 
-    startTime = millis(); 
+    startTime = millis(); // Start time when the game begins
     // Load idle animations
     for (let j = 0; j < idlestring.length; j++) {
         let mycharacter = new character(idlestring[j], x, y);
@@ -47,13 +49,38 @@ function setup() {
 function draw() {
     background(40, 100, 10);
 
-    elapsedTime = int((millis() - startTime) / 1000);
+    let timePassed = int((millis() - startTime) / 1000);
+    let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
-  fill(0);
-  textSize(20);
-  text("Score: " + score, 20, 30);
 
-  text("Time: " + elapsedTime + "s", width - 100, 30);
+// Display countdown timer
+fill(255);
+textSize(20);
+text("Score: " + score, 30, 35);
+text("Time Left: " + timeLeft + "s", width - 150, 30);
+
+// Check if time is up
+if (timeLeft <= 0) {
+    textSize(40);
+    text("Game Over!", width / 2 - 100, height / 2);
+    noLoop(); // Stop the game when time runs out
+}
+ // Check for win condition
+ if (score >= 50) {
+    textSize(40);
+    fill(255, 215, 0);
+    text("YOU WIN!", width / 2 - 100, height / 2);
+    noLoop(); // Stop the game
+    return;
+}
+ // If player touches food, remove it and update score
+ if (dist(x, y, foodArray[j].x, foodArray[j].y) < 20) {  
+    foodArray.splice(j, 1);  
+    score += 10;  // Increase score
+}
+
+
+
 
     // Draw food
     for (let j = 0; j < foodArray.length; j++) {
@@ -78,13 +105,7 @@ function draw() {
             foodArray.splice(j, 1); 
             
         }
-        // Check for collision
-    /* if (dist(x, y, foodArray[j].x, foodArray[j].y) > 25) 
-        score += 10; // Increase score when player collides with food
-        foodArray.splice(j, 1); // Remove the eaten food item
-
-        
-      */  
+     
     }
     
 
