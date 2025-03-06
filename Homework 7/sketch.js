@@ -14,7 +14,7 @@ let score = 0;
 let startTime;
 let elapsedTime = 0;
 let countdown = 15;
-
+let foods = [];
 
 
 function preload() {
@@ -25,8 +25,10 @@ function preload() {
 
 function setup() {
     createCanvas(500, 600);
- 
 
+ /* foods.push(new food(100, 100, "blueberry"));
+    foods.push(new food(200, 100, "cherry"));
+*/
     startTime = millis(); // Start time when the game begins
     // Load idle animations
     for (let j = 0; j < idlestring.length; j++) {
@@ -38,11 +40,12 @@ function setup() {
         let mycharacter = new character(runstring[j], x, y);
         run.push(mycharacter);
     }
-    // Create food objects
+/*// Create food objects
     for (let i = 0; i < 9; i++) {
-        let myFood = new food(random(0, 490), random(0, 490), 25);
-        foodArray.push(myFood);
+        let myfood = new food(random(0, 490), random(0, 490), 25);
+        foodArray.push(myfood);
     }
+ */
 
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
@@ -51,6 +54,8 @@ function setup() {
 function draw() {
     background(40, 100, 10);
 
+    for (let f of foods) 
+        f.draw();
     let timePassed = int((millis() - startTime) / 1000);
     let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
@@ -78,6 +83,7 @@ function draw() {
             foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
+
     textSize(30);
     fill(255, 255, 255)
     text("Feed the Dino!", width / 1 - 490, height / 20); 
