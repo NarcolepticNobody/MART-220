@@ -80,7 +80,7 @@ function draw() {
         }
     textSize(30);
     fill(255, 255, 255)
-    text("Feed the Dino!", width / 1 - 500, height / 20); 
+    text("Feed the Dino!", width / 1 - 490, height / 20); 
     }
       //trees   
       fill(153, 95, 30);
