@@ -9,11 +9,11 @@ var idlestring = [];
 var runstring = [];
 var flipX = false;
 var moving = false;
-var keys = []; 
+var keys = [];
 let score = 0;
 let startTime;
 let elapsedTime = 0;
-let countdown = 15; 
+let countdown = 15;
 
 
 
@@ -41,7 +41,7 @@ function setup() {
         let myFood = new food(random(19, 600), random(100, 500), 25);
         foodArray.push(myFood);
     }
-    
+
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
 }
@@ -55,10 +55,10 @@ function draw() {
 
     // Draw food
     for (let j = 0; j < foodArray.length; j++) {
-        
+
         foodArray[j].draw();
     }
-   
+
     // Handle movement
     handleMovement();
 
@@ -69,36 +69,35 @@ function draw() {
     currentFrame.flipX = flipX;
     currentFrame.draw();
 
-    
+
     // Check for food collision
     for (let j = 0; j < foodArray.length; j++) {
         if (currentFrame.hasCollided(foodArray[j].x, foodArray[j].y, 25, 25)) {
-            foodArray.splice(j, 1); 
+            foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
-     // Display countdown timer
-fill(255);
-textSize(20);
-text("Score: " + score, 30, 35);
-text("Time Left: " + timeLeft + "s", width - 150, 30);
+        // Display countdown timer
+        fill(255);
+        textSize(20);
+        text("Score: " + score, 30, 35);
+        text("Time Left: " + timeLeft + "s", width - 150, 30);
 
-// Check if time is up
-if (timeLeft <= 0) {
-    textSize(40);
-    fill(255, 0, 0)
-    text("Game Over!", width / 2 - 100, height / 2);
-    noLoop(); // Stop the game when time runs out
-}
- // Check for win condition
- if (score >= 90) {
-    textSize(40);
-    fill(255, 215, 0);
-    text("YOU WIN!", width / 2 - 100, height / 2);
-    noLoop(); // Stop the game
-    return;
-}
+        // Check if time is up
+        if (timeLeft <= 0) {
+            textSize(40);
+            fill(255, 0, 0)
+            text("Game Over!", width / 2 - 100, height / 2);
+            noLoop(); // Stop the game when time runs out
+        }
+        // Check for win condition
+        if (score >= 90) {
+            textSize(40);
+            fill(255, 215, 0);
+            text("YOU WIN!", width / 2 - 100, height / 2);
+            noLoop(); // Stop the game
+            return;
+        }
     }
-
 }
 
 // Idle animation update
@@ -117,38 +116,38 @@ function updateRunIndex() {
 
 // Handle movement using key states
 function handleMovement() {
- moving = false;
-    
-if (keyIsPressed){
-    
-    if (keys["a"]) {
-        x -= 3;
-        flipX = true;
-        moving = true;
+    moving = false;
+
+    if (keyIsPressed) {
+
+        if (keys["a"]) {
+            x -= 3;
+            flipX = true;
+            moving = true;
+        }
+        if (keys["d"]) {
+            x += 3;
+            flipX = false;
+            moving = true;
+        }
+        if (keys["w"]) {
+            y -= 3;
+            moving = true;
+        }
+        if (keys["s"]) {
+            y += 3;
+            moving = true;
+        }
+
     }
-    if (keys["d"]) {
-        x += 3;
-        flipX = false;
-        moving = true;
-    }
-    if (keys["w"]) {
-        y -= 3;
-        moving = true;
-    }
-    if (keys["s"]) {
-        y += 3;
-        moving = true;
-    }
- 
-}
     //trees   
     fill(153, 95, 30);
     //1
-    rect(119,200,10,130);
+    rect(119, 200, 10, 130);
     //2
-    rect(300,400,10,130);
+    rect(300, 400, 10, 130);
     //3
-    rect(400,200,10,120);
+    rect(400, 200, 10, 120);
 
     //green topper
     fill(100, 150, 10);
@@ -168,6 +167,6 @@ function keyPressed() {
 // Detect when a key is released
 function keyReleased() {
     keys[key] = false;
-   
+
 }
 
