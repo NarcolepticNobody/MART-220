@@ -117,9 +117,9 @@ function draw() {
       }
       // Check for win condition
       if (score >= 90) {
-          textSize(40);
+          textSize(60);
           fill(255, 215, 0);
-          text("YOU WIN!", width / 2 - 100, height / 3);
+          text("YOU WIN!", width / 2 - 125, height / 2);
           noLoop(); // Stop the game
           return;
       }
