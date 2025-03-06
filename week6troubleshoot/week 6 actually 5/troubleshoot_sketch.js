@@ -2,8 +2,8 @@ var animation = [];
 var run = [];
 var i = 0;
 var k = 0;
-var x = 20;
-var y = 30;
+var x = 200;
+var y = 90;
 var foodArray = [];
 var idlestring = [];
 var runstring = [];
@@ -20,10 +20,12 @@ let countdown = 15;
 function preload() {
     idlestring = loadStrings('characteridle.txt');
     runstring = loadStrings('characterrun.txt');
+   
 }
 
 function setup() {
     createCanvas(500, 600);
+ 
 
     startTime = millis(); // Start time when the game begins
     // Load idle animations
@@ -38,7 +40,7 @@ function setup() {
     }
     // Create food objects
     for (let i = 0; i < 9; i++) {
-        let myFood = new food(random(19, 600), random(100, 500), 25);
+        let myFood = new food(random(0, 490), random(0, 490), 25);
         foodArray.push(myFood);
     }
 
@@ -76,28 +78,51 @@ function draw() {
             foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
-        // Display countdown timer
-        fill(255);
-        textSize(20);
-        text("Score: " + score, 30, 35);
-        text("Time Left: " + timeLeft + "s", width - 150, 30);
-
-        // Check if time is up
-        if (timeLeft <= 0) {
-            textSize(40);
-            fill(255, 0, 0)
-            text("Game Over!", width / 2 - 100, height / 2);
-            noLoop(); // Stop the game when time runs out
-        }
-        // Check for win condition
-        if (score >= 90) {
-            textSize(40);
-            fill(255, 215, 0);
-            text("YOU WIN!", width / 2 - 100, height / 2);
-            noLoop(); // Stop the game
-            return;
-        }
+    textSize(30);
+    fill(0, 0, 0)
+    text("Feed the Dino!", width / 1 - 350, height / 10); 
     }
+      //trees   
+      fill(153, 95, 30);
+      //1
+      rect(119, 200, 10, 130);
+      //2
+      rect(300, 400, 10, 130);
+      //3
+      rect(400, 200, 10, 120);
+  
+      //green topper
+      fill(100, 150, 10);
+      //1
+      triangle(125, 150, 150, 300, 100, 300);
+      //2
+      triangle(270, 500, 300, 360, 340, 500);
+      //3
+      triangle(410, 150, 440, 300, 370, 300);
+
+      
+
+      // Display countdown timer
+      fill(255);
+      textSize(20);
+      text("Score: " + score, 30, 35);
+      text("Time Left: " + timeLeft + "s", width - 150, 30);
+
+      // Check if time is up
+      if (timeLeft <= 0) {
+          textSize(50);
+          fill(255, 0, 0)
+          text("You Big Lose!", width / 2 - 150, height / 2);
+          noLoop(); // Stop the game when time runs out
+      }
+      // Check for win condition
+      if (score >= 90) {
+          textSize(40);
+          fill(255, 215, 0);
+          text("YOU WIN!", width / 2 - 100, height / 3);
+          noLoop(); // Stop the game
+          return;
+      }
 }
 
 // Idle animation update
@@ -140,23 +165,7 @@ function handleMovement() {
         }
 
     }
-    //trees   
-    fill(153, 95, 30);
-    //1
-    rect(119, 200, 10, 130);
-    //2
-    rect(300, 400, 10, 130);
-    //3
-    rect(400, 200, 10, 120);
-
-    //green topper
-    fill(100, 150, 10);
-    //1
-    triangle(125, 150, 150, 300, 100, 300);
-    //2
-    triangle(270, 500, 300, 360, 340, 500);
-    //3
-    triangle(410, 150, 440, 300, 370, 300);
+  
 }
 
 // Detect when a key is pressed
