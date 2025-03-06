@@ -79,8 +79,8 @@ function draw() {
             score += 10;  // Increase score
         }
     textSize(30);
-    fill(0, 0, 0)
-    text("Feed the Dino!", width / 1 - 350, height / 10); 
+    fill(255, 255, 255)
+    text("Feed the Dino!", width / 1 - 500, height / 20); 
     }
       //trees   
       fill(153, 95, 30);
@@ -105,8 +105,8 @@ function draw() {
       // Display countdown timer
       fill(255);
       textSize(20);
-      text("Score: " + score, 30, 35);
-      text("Time Left: " + timeLeft + "s", width - 150, 30);
+      text("Score: " + score, 390, 60);
+      text("Time Left: " + timeLeft + "s", width - 150, 35);
 
       // Check if time is up
       if (timeLeft <= 0) {
