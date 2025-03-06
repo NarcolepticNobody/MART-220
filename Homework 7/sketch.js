@@ -18,8 +18,8 @@ let countdown = 15;
 
 
 function preload() {
-    idlestring = loadStrings('characteridle.txt');
-    runstring = loadStrings('characterrun.txt');
+    idlestring = loadStrings('idle.txt');
+    runstring = loadStrings('run.txt');
    
 }
 
