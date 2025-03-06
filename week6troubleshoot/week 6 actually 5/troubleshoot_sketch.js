@@ -18,7 +18,7 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(500, 600);
 
     // Load idle animations
     for (let j = 0; j < idlestring.length; j++) {
@@ -69,6 +69,21 @@ function draw() {
         }
         
     }
+//trees   
+fill(153, 95, 30);
+//1
+rect(100,200,10,130);
+//2
+rect(300,400,10,130);
+//3
+rect(400,200,10,120);
+
+//green topper
+fill(40, 100, 10);
+triangle(30, 95, 58, 20, 86, 300);
+
+ 
+
 
 }
 
