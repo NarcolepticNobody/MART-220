@@ -57,6 +57,7 @@ function draw() {
 
     // Draw food
     for (let j = 0; j < foodArray.length; j++) {
+        
         foodArray[j].draw();
     }
    
@@ -174,4 +175,7 @@ function keyPressed() {
 // Detect when a key is released
 function keyReleased() {
     keys[key] = false;
+
+    
 }
+
