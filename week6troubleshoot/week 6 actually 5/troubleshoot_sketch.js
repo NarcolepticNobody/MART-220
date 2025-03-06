@@ -3,13 +3,16 @@ var run = [];
 var i = 0;
 var k = 0;
 var x = 20;
-var y = 10;
+var y = 30;
 var foodArray = [];
 var idlestring = [];
 var runstring = [];
 var flipX = false;
 var moving = false;
 var keys = []; 
+let score = 0;
+let startTime;
+let elapsedTime = 0;
 
 
 function preload() {
@@ -20,6 +23,7 @@ function preload() {
 function setup() {
     createCanvas(500, 600);
 
+    startTime = millis(); 
     // Load idle animations
     for (let j = 0; j < idlestring.length; j++) {
         let mycharacter = new character(idlestring[j], x, y);
@@ -43,15 +47,19 @@ function setup() {
 function draw() {
     background(40, 100, 10);
 
+    elapsedTime = int((millis() - startTime) / 1000);
+
+  fill(0);
+  textSize(20);
+  text("Score: " + score, 20, 30);
+
+  text("Time: " + elapsedTime + "s", width - 100, 30);
+
     // Draw food
     for (let j = 0; j < foodArray.length; j++) {
         foodArray[j].draw();
     }
-
-    
    
-   
-
     // Handle movement
     handleMovement();
 
@@ -61,15 +69,24 @@ function draw() {
     currentFrame.y = y;
     currentFrame.flipX = flipX;
     currentFrame.draw();
+
+    
     // Check for food collision
     for (let j = 0; j < foodArray.length; j++) {
         if (currentFrame.hasCollided(foodArray[j].x, foodArray[j].y, 25, 25)) {
             foodArray.splice(j, 1); 
             
         }
+        // Check for collision
+    /* if (dist(x, y, foodArray[j].x, foodArray[j].y) > 25) 
+        score += 10; // Increase score when player collides with food
+        foodArray.splice(j, 1); // Remove the eaten food item
+
         
+      */  
     }
     
+
 //trees   
 fill(153, 95, 30);
 //1
@@ -108,8 +125,7 @@ function updateRunIndex() {
 
 // Handle movement using key states
 function handleMovement() {
-
-    moving = false;
+ moving = false;
     
 if (keyIsPressed){
     
@@ -133,6 +149,10 @@ if (keyIsPressed){
         y += 3;
         moving = true;
     }
+   
+    //if (key === ' ') { // Press space to add points
+       // score += 10;
+    //}
     /*for (let i = 0; i < run.length; i++) {
         run[i].x=x 
         run[i].y=y
@@ -145,13 +165,7 @@ if (keyIsPressed){
     
 
 }
-
-
-
-
-
 }
-
 // Detect when a key is pressed
 function keyPressed() {
     keys[key] = true;
