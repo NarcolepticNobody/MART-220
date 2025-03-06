@@ -2,14 +2,15 @@ var animation = [];
 var run = [];
 var i = 0;
 var k = 0;
-var x = 100;
-var y = 100;
+var x = 20;
+var y = 10;
 var foodArray = [];
 var idlestring = [];
 var runstring = [];
 var flipX = false;
 var moving = false;
 var keys = []; 
+
 
 function preload() {
     idlestring = loadStrings('characteridle.txt');
@@ -46,6 +47,10 @@ function draw() {
     for (let j = 0; j < foodArray.length; j++) {
         foodArray[j].draw();
     }
+
+    
+   
+   
 
     // Handle movement
     handleMovement();
@@ -120,6 +125,10 @@ if (keyIsPressed){
     
 
 }
+
+
+
+
 
 }
 
