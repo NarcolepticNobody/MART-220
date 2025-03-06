@@ -53,35 +53,6 @@ function draw() {
     let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
 
-// Display countdown timer
-fill(255);
-textSize(20);
-text("Score: " + score, 30, 35);
-text("Time Left: " + timeLeft + "s", width - 150, 30);
-
-// Check if time is up
-if (timeLeft <= 0) {
-    textSize(40);
-    text("Game Over!", width / 2 - 100, height / 2);
-    noLoop(); // Stop the game when time runs out
-}
- // Check for win condition
- if (score >= 50) {
-    textSize(40);
-    fill(255, 215, 0);
-    text("YOU WIN!", width / 2 - 100, height / 2);
-    noLoop(); // Stop the game
-    return;
-}
- // If player touches food, remove it and update score
- if (dist(x, y, foodArray[j].x, foodArray[j].y) < 20) {  
-    foodArray.splice(j, 1);  
-    score += 10;  // Increase score
-}
-
-
-
-
     // Draw food
     for (let j = 0; j < foodArray.length; j++) {
         
@@ -103,31 +74,30 @@ if (timeLeft <= 0) {
     for (let j = 0; j < foodArray.length; j++) {
         if (currentFrame.hasCollided(foodArray[j].x, foodArray[j].y, 25, 25)) {
             foodArray.splice(j, 1); 
-            
+            score += 10;  // Increase score
         }
-     
+     // Display countdown timer
+fill(255);
+textSize(20);
+text("Score: " + score, 30, 35);
+text("Time Left: " + timeLeft + "s", width - 150, 30);
+
+// Check if time is up
+if (timeLeft <= 0) {
+    textSize(40);
+    fill(255, 0, 0)
+    text("Game Over!", width / 2 - 100, height / 2);
+    noLoop(); // Stop the game when time runs out
+}
+ // Check for win condition
+ if (score >= 90) {
+    textSize(40);
+    fill(255, 215, 0);
+    text("YOU WIN!", width / 2 - 100, height / 2);
+    noLoop(); // Stop the game
+    return;
+}
     }
-    
-
-//trees   
-fill(153, 95, 30);
-//1
-rect(119,200,10,130);
-//2
-rect(300,400,10,130);
-//3
-rect(400,200,10,120);
-
-//green topper
-fill(100, 150, 10);
-//1
-triangle(125, 150, 150, 300, 100, 300);
-//2
-triangle(270, 500, 300, 360, 340, 500);
-//3
-triangle(410, 150, 440, 300, 370, 300);
- 
-
 
 }
 
@@ -151,8 +121,6 @@ function handleMovement() {
     
 if (keyIsPressed){
     
-
-
     if (keys["a"]) {
         x -= 3;
         flipX = true;
@@ -171,23 +139,27 @@ if (keyIsPressed){
         y += 3;
         moving = true;
     }
-   
-    //if (key === ' ') { // Press space to add points
-       // score += 10;
-    //}
-    /*for (let i = 0; i < run.length; i++) {
-        run[i].x=x 
-        run[i].y=y
-    }
-    for (let i = 0; i < animation.length; i++) {
-        animation[i].x=x 
-        animation[i].y=y
-    }
-    */
-    
+ 
+}
+    //trees   
+    fill(153, 95, 30);
+    //1
+    rect(119,200,10,130);
+    //2
+    rect(300,400,10,130);
+    //3
+    rect(400,200,10,120);
 
+    //green topper
+    fill(100, 150, 10);
+    //1
+    triangle(125, 150, 150, 300, 100, 300);
+    //2
+    triangle(270, 500, 300, 360, 340, 500);
+    //3
+    triangle(410, 150, 440, 300, 370, 300);
 }
-}
+
 // Detect when a key is pressed
 function keyPressed() {
     keys[key] = true;
@@ -196,7 +168,6 @@ function keyPressed() {
 // Detect when a key is released
 function keyReleased() {
     keys[key] = false;
-
-    
+   
 }
 
