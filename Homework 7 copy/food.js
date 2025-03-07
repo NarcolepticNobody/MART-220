@@ -10,9 +10,6 @@ class food
     {
         fill(22, 1, 120);
         circle(this.x, this.y, 50);
-        
-        fill(22, 1, 120);
-        circle(this.x, this.y, 50);
     }
 
 

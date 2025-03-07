@@ -14,20 +14,21 @@ let score = 0;
 let startTime;
 let elapsedTime = 0;
 let countdown = 15;
-
+let foods = [];
 
 
 function preload() {
-    idlestring = loadStrings('characteridle.txt');
-    runstring = loadStrings('characterrun.txt');
-    
+    idlestring = loadStrings('idle.txt');
+    runstring = loadStrings('run.txt');
+   
 }
-
 
 function setup() {
     createCanvas(500, 600);
- 
 
+ /* foods.push(new food(100, 100, "blueberry"));
+    foods.push(new food(200, 100, "cherry"));
+*/
     startTime = millis(); // Start time when the game begins
     // Load idle animations
     for (let j = 0; j < idlestring.length; j++) {
@@ -39,11 +40,12 @@ function setup() {
         let mycharacter = new character(runstring[j], x, y);
         run.push(mycharacter);
     }
-    // Create food objects
+/*// Create food objects
     for (let i = 0; i < 9; i++) {
-        let myFood = new food(random(0, 490), random(0, 490), 25);
-        foodArray.push(myFood);
+        let myfood = new food(random(0, 490), random(0, 490), 25);
+        foodArray.push(myfood);
     }
+ */
 
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
@@ -52,14 +54,17 @@ function setup() {
 function draw() {
     background(40, 100, 10);
 
-    
-
+    for (let f of foods) 
+        f.draw();
     let timePassed = int((millis() - startTime) / 1000);
     let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
-    
 
 
-   
+    // Draw food
+    for (let j = 0; j < foodArray.length; j++) {
+
+        foodArray[j].draw();
+    }
 
     // Handle movement
     handleMovement();
@@ -79,7 +84,9 @@ function draw() {
             score += 10;  // Increase score
         }
 
- 
+    textSize(30);
+    fill(255, 255, 255)
+    text("Feed the Dino!", width / 1 - 490, height / 20); 
     }
       //trees   
       fill(153, 95, 30);
@@ -99,16 +106,13 @@ function draw() {
       //3
       triangle(410, 150, 440, 300, 370, 300);
 
-   // Draw food
-   for (let j = 0; j < foodArray.length; j++) {
-    foodArray[j].draw();
-    }
+      
 
       // Display countdown timer
       fill(255);
       textSize(20);
-      text("Score: " + score, 30, 35);
-      text("Time Left: " + timeLeft + "s", width - 150, 30);
+      text("Score: " + score, 390, 60);
+      text("Time Left: " + timeLeft + "s", width - 150, 35);
 
       // Check if time is up
       if (timeLeft <= 0) {
@@ -140,8 +144,6 @@ function updateRunIndex() {
         k = (k + 1) % run.length;
     }
 }
-
-createText();
 
 // Handle movement using key states
 function handleMovement() {
@@ -181,10 +183,4 @@ function keyPressed() {
 function keyReleased() {
     keys[key] = false;
 
-}
-function createText() {
-    textSize(30);
-    fill(0, 0, 0)
-    text("Feed the Dino!", width / 1 - 350, height / 10); 
-   
 }
