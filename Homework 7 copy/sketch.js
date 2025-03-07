@@ -24,7 +24,7 @@ function preload() {
 }
 
 function setup() {
-    
+
     createCanvas(500, 600);
  
 
@@ -39,11 +39,7 @@ function setup() {
         let mycharacter = new character(runstring[j], x, y);
         run.push(mycharacter);
     }
-    // Create food objects
-    for (let j = 0; j < 9; j++) {
-        let myFood = new food(random(0, 490), random(0, 490), 25);
-        foodArray.push(myFood);
-    }
+   
 
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
@@ -71,6 +67,11 @@ function draw() {
     currentFrame.flipX = flipX;
     currentFrame.draw();
 
+     // Create food objects
+ for (let j = 0; j < 9; j++) {
+    let myFood = new food(random(0, 490), random(0, 490), 25);
+    foodArray.push(myFood);
+}
 
     // Check for food collision
     for (let j = 0; j < foodArray.length; j++) {
@@ -78,9 +79,7 @@ function draw() {
             foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
-    textSize(30);
-    fill(0, 0, 0)
-    text("Feed the Dino!", width / 1 - 350, height / 10); 
+   
     }
       //trees   
       fill(153, 95, 30);
