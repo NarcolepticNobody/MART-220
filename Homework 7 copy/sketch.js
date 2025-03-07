@@ -78,9 +78,7 @@ function draw() {
             foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
-    textSize(30);
-    fill(0, 0, 0)
-    text("Feed the Dino!", width / 1 - 350, height / 10); 
+  
     }
       //trees   
       fill(153, 95, 30);
