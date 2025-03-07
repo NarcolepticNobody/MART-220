@@ -11,8 +11,6 @@ class character
         this.flipX = false;
         this.flipRun = false;
 
-
-
         // need the image
         this.myImage = loadImage(this.path);
     }
@@ -40,7 +38,7 @@ class character
 
 
 
-    hasCollided(x2, y2, w2, h2) {
+   /* hasCollided(x2, y2, w2, h2) {
     return (
 
 
@@ -49,6 +47,8 @@ class character
         this.y < y2 + h2 &&
         this.y + this.imageHeight > y2 
     );
+    
 
 }
+    */
 }

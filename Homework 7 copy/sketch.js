@@ -1,5 +1,3 @@
-
-
 var animation = [];
 var run = [];
 var i = 0;
@@ -26,6 +24,7 @@ function preload() {
 }
 
 function setup() {
+    
     createCanvas(500, 600);
  
 
@@ -41,7 +40,7 @@ function setup() {
         run.push(mycharacter);
     }
     // Create food objects
-    for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
         let myFood = new food(random(0, 490), random(0, 490), 25);
         foodArray.push(myFood);
     }
@@ -59,7 +58,6 @@ function draw() {
 
     // Draw food
     for (let j = 0; j < foodArray.length; j++) {
-
         foodArray[j].draw();
     }
 
@@ -80,7 +78,6 @@ function draw() {
             foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
-        
     textSize(30);
     fill(0, 0, 0)
     text("Feed the Dino!", width / 1 - 350, height / 10); 
