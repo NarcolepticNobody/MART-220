@@ -43,17 +43,10 @@ function setup() {
         let myFood = new food(random(0, 490), random(0, 490), 25);
         foodArray.push(myFood);
     }
-    // Create food objects
-    for (let i = 0; i < 9; i++) {
-        let myFood = new food(random(0, 490), random(0, 490), 25);
-        foodArray.push(myFood);
-    }
-    bgSound();
 
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
 }
-
 
 function draw() {
     background(40, 100, 10);
@@ -61,25 +54,12 @@ function draw() {
     let timePassed = int((millis() - startTime) / 1000);
     let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
-    function loadFood() {
-    
+
     // Draw food
     for (let j = 0; j < foodArray.length; j++) {
 
         foodArray[j].draw();
     }
- 
-//food fight?
-
-function bgSound() {
-    bgmusic.play();
-    bgmusic.loop();
-    bgmusic.setVolume(0.1);
-    userStartAudio();
-}
-
-
-
 
     // Handle movement
     handleMovement();
@@ -93,31 +73,12 @@ function bgSound() {
 
 
     // Check for food collision
-  /*for (let j = 0; j < foodArray.length; j++) {
+    for (let j = 0; j < foodArray.length; j++) {
         if (currentFrame.hasCollided(foodArray[j].x, foodArray[j].y, 25, 25)) {
             foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
-*/
-for (let j = 0; j < foodArray.length; j++) 
-    if(collideRectCircle(animation[i].x, animation[i].y, animation[i].imageWidth, animation[i].imageHeight, foodArray[j].x, foodArray[j].y, 10,))      
-    {
-        if (foodArray[j].r==34) {
-            eat.play();
-            score = score + 1;
-        }
-        else {
-            retch.play();
-            score = score -1;
-        }
-        foodArray.splice(j, 1);
-    }
-
-
-
-    textSize(30);
-    fill(255, 255, 255)
-    text("Feed the Dino!", 10, 40); 
+  
     }
       //trees   
       fill(153, 95, 30);
@@ -142,7 +103,7 @@ for (let j = 0; j < foodArray.length; j++)
       // Display countdown timer
       fill(255);
       textSize(20);
-      text("Score: " + score, 380, 60);
+      text("Score: " + score, 30, 35);
       text("Time Left: " + timeLeft + "s", width - 150, 30);
 
       // Check if time is up
@@ -215,4 +176,3 @@ function keyReleased() {
     keys[key] = false;
 
 }
-
