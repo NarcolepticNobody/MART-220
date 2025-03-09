@@ -48,7 +48,7 @@ function setup() {
         let myFood = new food(random(0, 490), random(0, 490), 25);
         foodArray.push(myFood);
     }
-    bgSound();
+   
 
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
@@ -60,6 +60,17 @@ function setup() {
 
 function draw() {
     background(40, 100, 10);
+
+    function mousePressed() {
+        if (song.isPlaying()) {
+          // .isPlaying() returns a boolean
+          song.stop();
+          background(255, 0, 0);
+        } else {
+          song.play();
+          background(0, 255, 0);
+        }
+    }
 
     let timePassed = int((millis() - startTime) / 1000);
     let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
@@ -115,7 +126,7 @@ for (let j = 0; j < foodArray.length; j++)
         }
         foodArray.splice(j, 1);
     }
-
+  
 
 
     textSize(30);
@@ -178,15 +189,7 @@ function updateRunIndex() {
         k = (k + 1) % run.length;
     }
 }
-function mousePressed() 
-    if (song.isPlaying()) {
-      // .isPlaying() returns a boolean
-      song.stop();
-      background(255, 0, 0);
-    } else {
-      song.play();
-      background(0, 255, 0);
-    }
+
 // Handle movement using key states
 function handleMovement() {
     moving = false;
@@ -226,4 +229,5 @@ function keyReleased() {
     keys[key] = false;
 
 }
+
 
