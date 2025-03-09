@@ -14,7 +14,7 @@ let score = 0;
 let startTime;
 let elapsedTime = 0;
 let countdown = 15;
-
+let song;
 
 
 function preload() {
@@ -25,7 +25,7 @@ function preload() {
 
 function setup() {
     createCanvas(500, 600);
- 
+    song = loadSound('218181__qubodup__cat-eating-dry-food');
 
     startTime = millis(); // Start time when the game begins
     // Load idle animations
@@ -52,7 +52,10 @@ function setup() {
 
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
+
+    
 }
+
 
 
 function draw() {
@@ -175,7 +178,15 @@ function updateRunIndex() {
         k = (k + 1) % run.length;
     }
 }
-
+function mousePressed() 
+    if (song.isPlaying()) {
+      // .isPlaying() returns a boolean
+      song.stop();
+      background(255, 0, 0);
+    } else {
+      song.play();
+      background(0, 255, 0);
+    }
 // Handle movement using key states
 function handleMovement() {
     moving = false;
