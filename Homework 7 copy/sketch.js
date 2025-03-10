@@ -14,18 +14,20 @@ let score = 0;
 let startTime;
 let elapsedTime = 0;
 let countdown = 15;
-
+let bgSound;
 
 
 function preload() {
     idlestring = loadStrings('characteridle.txt');
     runstring = loadStrings('characterrun.txt');
-   
+    mySound = loadSound("assets/532265__orginaljun__pixel_piano_adventure_melody_loop_version_2.mp3")
 }
 
 function setup() {
+    song = loadSound('assets/532265__orginaljun__pixel_piano_adventure_melody_loop_version_2');
     createCanvas(500, 600);
- 
+
+    
 
     startTime = millis(); // Start time when the game begins
     // Load idle animations
@@ -48,8 +50,26 @@ function setup() {
     setInterval(updateRunIndex, 50); // Run animation updates faster
 }
 
+bgSound();
+
+function mousePressed() {
+    mySound.play();
+}
+
 function draw() {
     background(40, 100, 10);
+
+
+    function mousePressed() {
+        if (song.isPlaying()) {
+          // .isPlaying() returns a boolean
+          song.stop();
+          background(255, 0, 0);
+        } else {
+          song.play();
+          background(0, 255, 0);
+        }
+    }
 
     let timePassed = int((millis() - startTime) / 1000);
     let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
@@ -72,13 +92,30 @@ function draw() {
     currentFrame.draw();
 
 
-    // Check for food collision
+   
+   for (let j = 0; j < foodArray.length; j++)  {
+    if(collodeRectCircle(animation[i].x, animation[i].y, animation[i].imageWidth, animation[i].imageHeight, foodArray[j].x, foodArray[j].y, 10))
+    {
+        if (foodArray[j].r==34){
+            eat.play();
+            score = score + 1;
+        }
+        else
+        {
+           retch.play();
+        }
+    }
+    }
+   
+   
+   
+   /* // Check for food collision
     for (let j = 0; j < foodArray.length; j++) {
         if (currentFrame.hasCollided(foodArray[j].x, foodArray[j].y, 25, 25)) {
             foodArray.splice(j, 1);
             score += 10;  // Increase score
         }
-  
+  */
     }
       //trees   
       fill(153, 95, 30);
@@ -121,7 +158,7 @@ function draw() {
           noLoop(); // Stop the game
           return;
       }
-}
+
 
 // Idle animation update
 function updateIdleIndex() {
