@@ -5,30 +5,47 @@ var k = 0;
 var x = 200;
 var y = 90;
 var foodArray = [];
+
+
 var idlestring = [];
 var runstring = [];
 var flipX = false;
 var moving = false;
 var keys = [];
+var mySound;
+var song;
+var slider;
 let score = 0;
 let startTime;
 let elapsedTime = 0;
-let countdown = 15;
-let bgSound;
+let countdown = 30;
+let timeLeft = 30; //the whole point is for this to count down not just say 30 it needs this for some reason?
+let good;
+let bad;
+let end;
+
+
 
 
 function preload() {
-    idlestring = loadStrings('characteridle.txt');
-    runstring = loadStrings('characterrun.txt');
-    mySound = loadSound("assets/532265__orginaljun__pixel_piano_adventure_melody_loop_version_2.mp3")
+    
+    //background music
+    song = loadSound("assets/melody.mp3");
+    //good food
+    good = loadSound("assets/yes.mp3")
+    //bad food
+    bad = loadSound("assets/442602__topschool__ow-sound.mp3")
+    //failed
+    end = loadSound("assets/wampp.mp3")
+    idlestring = loadStrings('idle.txt');
+    runstring = loadStrings('run.txt');
+    
+    
+    
 }
 
 function setup() {
-    song = loadSound('assets/532265__orginaljun__pixel_piano_adventure_melody_loop_version_2');
     createCanvas(500, 600);
-
-    
-
     startTime = millis(); // Start time when the game begins
     // Load idle animations
     for (let j = 0; j < idlestring.length; j++) {
@@ -40,49 +57,105 @@ function setup() {
         let mycharacter = new character(runstring[j], x, y);
         run.push(mycharacter);
     }
-    // Create food objects
-    for (let i = 0; i < 9; i++) {
-        let myFood = new food(random(0, 490), random(0, 490), 25);
-        foodArray.push(myFood);
+   // Create food objects
+   for (let i = 0; i < 9; i++) {
+    let myFood = new food(random(0, 490), random(0, 490), 25, 34, 50);
+    foodArray.push(myFood);
+    }
+
+   // Create bad food objects
+   for (let i = 0; i < 9; i++) {
+    let myFood = new food(random(10, 490), random(10, 490), 255, 0, 255);
+    foodArray.push(myFood);
     }
 
     setInterval(updateIdleIndex, 100); // Idle animation updates slower
     setInterval(updateRunIndex, 50); // Run animation updates faster
+  
 }
 
-bgSound();
 
 function mousePressed() {
-    mySound.play();
+    if (song.isPlaying()) {
+
+        song.loop();
+    }
+    else {
+        song.play();  
+    }
 }
 
 function draw() {
-    background(40, 100, 10);
+background(40, 100, 10);
+loadFood();
+
+// Handle movement
+ handleMovement();
+ collideRectCircle();
+
+ //Feed the Dino
+ textSize(20);
+ fill(255, 50, 100)
+ text("Pink food is bad, blue food is good!", width / 1 - 380, height / 1.1); 
+ 
+ //Feed the Dino
+ textSize(30);
+ fill(0, 0, 0)
+ text("Feed the Dino!", width / 1 - 350, height / 10); 
+
+ // Check if time is up //why wont this display that I lost?
+if (timeLeft <= 0) {
+    textSize(50);
+    fill(255, 0, 0)
+    text("You Big Lose!", width / 2 - 100, height / 100);
+    noLoop(); // Stop the game when time runs out
+    
+}
+
+// Check for win condition
+if (score >= 15) {
+    textSize(60);
+    fill(255, 215, 0);
+    text("YOU WIN!", width / 2 - 125, height / 2);
+    noLoop(); // Stop the game
+}
 
 
-    function mousePressed() {
-        if (song.isPlaying()) {
-          // .isPlaying() returns a boolean
-          song.stop();
-          background(255, 0, 0);
-        } else {
-          song.play();
-          background(0, 255, 0);
+
+function loadFood() {
+    for (let i = 0; i < foodArray.length -1; i++)
+
+    foodArray[i].draw();
+}
+function foodFight() {
+    for (let i = 0; i < foodArray.length; i++) {
+        foodArray[i].x = random(100,200);
+        foodArray[i].y = random(300,400);
+    } 
+}
+   
+  
+//food array and collision
+for (let j = 0; j < foodArray.length; j++) {
+    if (collideRectCircle(animation[i].x, animation[i].y, animation[i].imageWidth, animation[i].imageHeight, foodArray[j].x, foodArray[j].y, 10, 10)) {
+        if (foodArray[j].r == 25) {
+
+            good.play();
+            score += + 2;
+            
         }
+
+        else {
+           bad.play(); 
+           score = score -1;
+        }
+        foodArray.splice (j, 1);
     }
 
-    let timePassed = int((millis() - startTime) / 1000);
+
+
+    let timePassed = int((millis() - startTime) / 1500);
     let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
-
-
-    // Draw food
-    for (let j = 0; j < foodArray.length; j++) {
-
-        foodArray[j].draw();
-    }
-
-    // Handle movement
-    handleMovement();
 
     // Choose correct animation
     let currentFrame = moving ? run[k] : animation[i];
@@ -91,79 +164,41 @@ function draw() {
     currentFrame.flipX = flipX;
     currentFrame.draw();
 
+    // Display countdown timer
+    textSize(20);
+    fill(255);
+    text("Score: " + score, 30, 35);
+    text("Time Left: " + timeLeft + "s", width - 150, 30);
 
-   
-   for (let j = 0; j < foodArray.length; j++)  {
-    if(collodeRectCircle(animation[i].x, animation[i].y, animation[i].imageWidth, animation[i].imageHeight, foodArray[j].x, foodArray[j].y, 10))
-    {
-        if (foodArray[j].r==34){
-            eat.play();
-            score = score + 1;
-        }
-        else
-        {
-           retch.play();
-        }
-    }
-    }
-   
-   
-   
-   /* // Check for food collision
-    for (let j = 0; j < foodArray.length; j++) {
-        if (currentFrame.hasCollided(foodArray[j].x, foodArray[j].y, 25, 25)) {
-            foodArray.splice(j, 1);
-            score += 10;  // Increase score
-        }
-  */
-    }
-      //trees   
-      fill(153, 95, 30);
-      //1
-      rect(119, 200, 10, 130);
-      //2
-      rect(300, 400, 10, 130);
-      //3
-      rect(400, 200, 10, 120);
-  
-      //green topper
-      fill(100, 150, 10);
-      //1
-      triangle(125, 150, 150, 300, 100, 300);
-      //2
-      triangle(270, 500, 300, 360, 340, 500);
-      //3
-      triangle(410, 150, 440, 300, 370, 300);
 
-      
+//trees   //why are my trees behind my text?
+fill(153, 95, 30);
+//1
+rect(119, 200, 10, 130);
+//2
+rect(300, 400, 10, 130);
+//3
+rect(400, 200, 10, 120);
 
-      // Display countdown timer
-      fill(255);
-      textSize(20);
-      text("Score: " + score, 30, 35);
-      text("Time Left: " + timeLeft + "s", width - 150, 30);
+//green topper
+fill(100, 150, 10);
+//1
+triangle(125, 150, 150, 300, 100, 300);
+//2
+triangle(270, 500, 300, 360, 340, 500);
+//3
+triangle(410, 150, 440, 300, 370, 300);
 
-      // Check if time is up
-      if (timeLeft <= 0) {
-          textSize(50);
-          fill(255, 0, 0)
-          text("You Big Lose!", width / 2 - 150, height / 2);
-          noLoop(); // Stop the game when time runs out
-      }
-      // Check for win condition
-      if (score >= 90) {
-          textSize(60);
-          fill(255, 215, 0);
-          text("YOU WIN!", width / 2 - 125, height / 2);
-          noLoop(); // Stop the game
-          return;
-      }
+}
+
+}
+    
 
 
 // Idle animation update
 function updateIdleIndex() {
     if (moving) {
-        i = (i + 1) % animation.length;
+        i = (i + 1) % animation.length; //this was animation.length
     }
 }
 
@@ -200,7 +235,7 @@ function handleMovement() {
         }
 
     }
-  
+
 }
 
 // Detect when a key is pressed
