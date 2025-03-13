@@ -103,22 +103,7 @@ loadFood();
  fill(0, 0, 0)
  text("Feed the Dino!", width / 1 - 350, height / 10); 
 
- // Check if time is up //why wont this display that I lost?
-if (timeLeft <= 0) {
-    textSize(50);
-    fill(255, 0, 0)
-    text("You Big Lose!", width / 2 - 100, height / 100);
-    noLoop(); // Stop the game when time runs out
-    
-}
 
-// Check for win condition
-if (score >= 15) {
-    textSize(60);
-    fill(255, 215, 0);
-    text("YOU WIN!", width / 2 - 125, height / 2);
-    noLoop(); // Stop the game
-}
 
 
 
@@ -141,7 +126,7 @@ for (let j = 0; j < foodArray.length; j++) {
         if (foodArray[j].r == 25) {
 
             good.play();
-            score += + 2;
+            score +=  2;
             
         }
 
@@ -191,6 +176,22 @@ triangle(410, 150, 440, 300, 370, 300);
 
 }
 
+ // Check if time is up //why wont this display that I lost?
+ if (timeLeft <= 0) {
+    textSize(50);
+    fill(255, 0, 0)
+    text("You Big Lose!", width / 2 - 100, height / 100);
+    noLoop(); // Stop the game when time runs out
+    
+}
+
+// Check for win condition
+if (score >= 15) {
+    textSize(60);
+    fill(255, 215, 0);
+    text("YOU WIN!", width / 2 - 125, height / 2);
+    noLoop(); // Stop the game
+}
 }
     
 

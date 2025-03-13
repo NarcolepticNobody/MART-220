@@ -6,8 +6,8 @@ class character
         this.path = path;
         this.x = x;
         this.y = y;
-        this.imageWidth = 100;
-        this.imageHeight = 100;
+        this.imageWidth = 75;
+        this.imageHeight = 75;
         this.flipX = false;
         this.flipRun = false;
 
