@@ -19,7 +19,7 @@ let score = 0;
 let startTime;
 let elapsedTime = 0;
 let countdown = 30;
-let timeLeft = 30; //the whole point is for this to count down not just say 30 it needs this for some reason?
+let timeLeft = 30; 
 let good;
 let bad;
 let end;
