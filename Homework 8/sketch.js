@@ -18,8 +18,8 @@ var slider;
 let score = 0;
 let startTime;
 let elapsedTime = 0;
-let countdown = 30;
-let timeLeft = 30; 
+let countdown = 20;
+let timeLeft = 20; 
 let good;
 let bad;
 let end;
@@ -96,7 +96,7 @@ loadFood();
  
  textSize(20);
  fill(255, 50, 100)
- text("Pink food is bad, blue food is good!", width / 1 - 380, height / 1.1); 
+ text("Pink food is bad, blue food is good!", width / 1 - 400, height / 1.03); 
  
  //Feed the Dino
  textSize(30);
@@ -132,7 +132,7 @@ for (let j = 0; j < foodArray.length; j++) {
 
         else {
            bad.play(); 
-           score = score -1;
+           score -= 1;
         }
         foodArray.splice (j, 1);
     }
@@ -140,7 +140,7 @@ for (let j = 0; j < foodArray.length; j++) {
 
 
     let timePassed = int((millis() - startTime) / 1500);
-    let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
+    timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
     // Choose correct animation
     let currentFrame = moving ? run[k] : animation[i];
@@ -176,21 +176,20 @@ triangle(410, 150, 440, 300, 370, 300);
 
 }
 
- // Check if time is up //why wont this display that I lost?
- if (timeLeft <= 0) {
-    textSize(50);
-    fill(255, 0, 0)
-    text("You Big Lose!", width / 2 - 1, height / 100);
-    noLoop(); // Stop the game when time runs out
-    
-}
-
 // Check for win condition
-if (score >= 15) {
+if (score >= 10) {
     textSize(60);
     fill(255, 215, 0);
     text("YOU WIN!", width / 2 - 125, height / 2);
     noLoop(); // Stop the game
+}
+ // Check if time is up 
+ if (timeLeft <= 1) {
+    textSize(50);
+    fill(255, 0, 0)
+    text("You Big Lose!", width / 2 - 125, height / 2);
+    noLoop(); // Stop the game when time runs out
+    
 }
 }
     
