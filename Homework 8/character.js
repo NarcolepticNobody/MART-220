@@ -21,11 +21,11 @@ class character
         if (this.flipX) {
         translate(this.imageWidth, 0);
         scale(-1, 1);
-        image(this.myImage, -this.x, this.y, 100, 100); 
+        image(this.myImage, -this.x, this.y, 50, 50); 
 
         }
         else {
-        image(this.myImage, this.x, this.y, 100, 100);
+        image(this.myImage, this.x, this.y, 50, 50);
         } 
         pop();
     }

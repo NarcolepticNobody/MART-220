@@ -93,7 +93,7 @@ loadFood();
  handleMovement();
  collideRectCircle();
 
- //Feed the Dino
+ 
  textSize(20);
  fill(255, 50, 100)
  text("Pink food is bad, blue food is good!", width / 1 - 380, height / 1.1); 
@@ -180,7 +180,7 @@ triangle(410, 150, 440, 300, 370, 300);
  if (timeLeft <= 0) {
     textSize(50);
     fill(255, 0, 0)
-    text("You Big Lose!", width / 2 - 100, height / 100);
+    text("You Big Lose!", width / 2 - 1, height / 100);
     noLoop(); // Stop the game when time runs out
     
 }
