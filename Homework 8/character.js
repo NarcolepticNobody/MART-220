@@ -28,6 +28,11 @@ class character
         image(this.myImage, this.x, this.y, 50, 50);
         } 
         pop();
+  
+
+        /*this.currentAnimation.frameDelay = 5;
+        animation(this.currentAnimation, 300,250);
+        */
     }
 
 }
