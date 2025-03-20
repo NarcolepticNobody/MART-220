@@ -1,38 +1,82 @@
-
-class character
-{
-    constructor(path, x, y)
-    {
-        this.path = path;
-        this.x = x;
-        this.y = y;
-        this.imageWidth = 75;
-        this.imageHeight = 75;
-        this.flipX = false;
-        this.flipRun = false;
-
-        // need the image
-        this.myImage = loadImage(this.path);
-    }
-
-    draw()
-    {
-        push();
-        if (this.flipX) {
-        translate(this.imageWidth, 0);
-        scale(-1, 1);
-        image(this.myImage, -this.x, this.y, 50, 50); 
-
-        }
-        else {
-        image(this.myImage, this.x, this.y, 50, 50);
-        } 
-        pop();
+class character {
+    constructor(x, y) {
+    
+      this.x = x;
+      this.y = y;
+      this.currentAnimation;
+      this.createAnimation();
+      this.speed = 3;
   
-
-        /*this.currentAnimation.frameDelay = 5;
-        animation(this.currentAnimation, 300,250);
-        */
     }
+  
+    // Sprite
+    createAnimation() {
+      this.currentAnimation = createSprite(this.x, this.y);
+    }
+  
+  
+    // fill the animation frames into the current animation object
+    loadAnimation(animationType, fileNames) {
+  
+      this.currentAnimation.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
+      // set the hit box
+      this.currentAnimation.width = 300;
+      this.currentAnimation.height = 150;
+  
+    }
+  
+    // draw the character sprite
+    draw(animationType) {
 
-}
+  
+      this.currentAnimation.frameDelay = 5;
+      this.currentAnimation.scale = .5;
+      this.currentAnimation.changeAnimation(animationType);
+      if (animationType == 'run' && this.direction == 'forward') {
+        this.currentAnimation.direction = 0;
+        this.currentAnimation.mirror.x = false;
+        this.currentAnimation.speed = this.speed;
+  
+      }
+      else if (animationType == 'run' && this.direction == 'reverse') {
+  
+        this.currentAnimation.mirror.x = true;
+        this.currentAnimation.direction = 180;
+        this.currentAnimation.speed = this.speed;
+  
+      }
+      else if (animationType == 'run' && this.direction == 'down') {
+  
+        this.currentAnimation.mirror.x = false;
+        this.currentAnimation.direction = -270;
+        this.currentAnimation.speed = this.speed;
+  
+      }
+      else if (animationType == 'run' && this.direction == 'up') {
+  
+        this.currentAnimation.mirror.x = false;
+        this.currentAnimation.direction = 270;
+        this.currentAnimation.speed = this.speed;
+  
+      }
+      else {
+        this.currentAnimation.velocity.x = 0;
+        this.currentAnimation.velocity.y = 0;
+      }
+    }
+  
+  
+    // this gives direction in words
+    updatePosition(direction) {
+      this.direction = direction;
+    }
+  
+    
+  
+    // using the overlap function in p5play for collision
+    isColliding(myImage) {
+      return this.currentAnimation.overlaps(myImage);
+    }
+  
+  
+  }

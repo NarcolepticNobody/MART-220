@@ -1,19 +1,31 @@
 class food
 {
-    constructor(x, y, r, g, b)
+    constructor(x,y, isGood)
     {
         this.x = x;
         this.y = y;
-        this.r = r;
-        this.g = g;
-        this.b = b;
+        this.isGood = isGood;
+        // by creating a sprite (which we only do once, it will appear)
+        this.foodPiece = new Sprite(x, y, 50);
+        
+  
+
     }
 
+    // use color instead of fill
     draw()
     {
-        fill(this.r, this.g, this.b);
-        circle(this.x, this.y, 15);
-
-       
+        if(this.isGood)
+        {
+           // fill(0, 255, 0);
+        this.foodPiece.color = "green"
+        }
+        else
+        {
+           // fill(255, 0, 0);
+            this.foodPiece.color = "red"
+        
+        }
+       // circle(this.x, this.y, 25);
     }
 }

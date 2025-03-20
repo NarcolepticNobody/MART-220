@@ -5,16 +5,20 @@ var k = 0;
 var x = 200;
 var y = 90;
 var foodArray = [];
-
-
-var idlestring = [];
-var runstring = [];
+var loadAnimation = [];
+var runAnimation = [];
+var idleStrings = [];
+var runStrings = [];
 var flipX = false;
 var moving = false;
-var keys = [];
+var moveCharacter = [];
+var countDown = [];
+var kb = [];
 var mySound;
 var song;
 var slider;
+var currentFrame;
+
 let score = 0;
 let startTime;
 let elapsedTime = 0;
@@ -27,8 +31,10 @@ let end;
 
 
 
+
 function preload() {
     
+    soundFormats('mp3', 'ogg', 'wav');
     //background music
     song = loadSound("assets/melody.mp3");
     //good food
@@ -36,9 +42,9 @@ function preload() {
     //bad food
     bad = loadSound("assets/442602__topschool__ow-sound.mp3")
     //failed
-    end = loadSound("assets/wampp.mp3")
-    idlestring = loadStrings('idle.txt');
-    runstring = loadStrings('run.txt');
+    //end = loadSound("assets/wampp.mp3")
+    idleStrings = loadStrings('idle.txt');
+    runStrings = loadStrings('run.txt');
     
     
     
@@ -46,17 +52,15 @@ function preload() {
 
 function setup() {
     createCanvas(500, 600);
-    startTime = millis(); // Start time when the game begins
-    // Load idle animations
-    for (let j = 0; j < idlestring.length; j++) {
-        let mycharacter = new character(idlestring[j], x, y);
-        animation.push(mycharacter);
-    }
-    // Load run animations
-    for (let j = 0; j < runstring.length; j++) {
-        let mycharacter = new character(runstring[j], x, y);
-        run.push(mycharacter);
-    }
+    startTime = millis(); 
+    myAnimation = new character(200, 200);
+    myAnimation.loadAnimation('idle', idleStrings);
+    myAnimation.loadAnimation('run', runStrings); 
+
+
+    
+
+
    // Create food objects
    for (let i = 0; i < 9; i++) {
     let myFood = new food(random(0, 490), random(0, 490), 25, 34, 50);
@@ -68,36 +72,80 @@ function setup() {
     let myFood = new food(random(10, 490), random(10, 490), 255, 0, 255);
     foodArray.push(myFood);
     }
+    
 
-    setInterval(updateIdleIndex, 100); // Idle animation updates slower
-    setInterval(updateRunIndex, 50); // Run animation updates faster
-  
+
+//setInterval(updateIdleIndex, 100); // Idle animation updates slower
+//setInterval(updateRunIndex, 50); // Run animation updates faster
+
+countDownInterval = setInterval(updateCountDown, 1000);
+setInterval(replayAnimation, 2000);
+
 }
 
 
-function mousePressed() {
-    if (song.isPlaying()) {
-
-        song.loop();
-    }
-    else {
-        song.play();  
-    }
+function playBackgroundSound() {
+//empty
 }
 
 function draw() {
 background(40, 100, 10);
-loadFood();
 
-// Handle movement
- handleMovement();
+
+stroke(0);
+strokeWeight(1);
+
+displayFood();
+
+moveCharacter();
+
+displayScore();
+
+displayCountDown();
+
+displayAnimation();
+
+
+
+function displayAnimation() {
+    noFill();
+    stroke(0, 0, 100);
+    strokeWeight(5);
+    
+}
+
+function moveCharacter() {
+
+    if (kb.pressing('d')) {
+        myAnimation.updatePosition('forward');
+        myAnimation.draw('run');
+       
+    }
+    else if (kb.pressing('a')) {
+        myAnimation.updatePosition('reverse');
+        myAnimation.draw('run');
+    }
+    else if (kb.pressing('w')) {
+        myAnimation.updatePosition('up');
+        myAnimation.draw('run');
+    }
+    else if (kb.pressing('s')) {
+        myAnimation.updatePosition('down');
+        myAnimation.draw('run');
+    }
+    else {
+    
+        myAnimation.draw('idle');
+    }
+
+}
+
  collideRectCircle();
-
+//do I need this?
  
  textSize(20);
  fill(255, 50, 100)
  text("Pink food is bad, blue food is good!", width / 1 - 400, height / 1.03); 
- 
  //Feed the Dino
  textSize(30);
  fill(0, 0, 0)
@@ -121,34 +169,34 @@ function foodFight() {
    
   
 //food array and collision
-for (let j = 0; j < foodArray.length; j++) {
-    if (collideRectCircle(animation[i].x, animation[i].y, animation[i].imageWidth, animation[i].imageHeight, foodArray[j].x, foodArray[j].y, 10, 10)) {
+ for (let j = 0; j < foodArray.length; j++) {
+    if (myAnimation.isColliding(foodArray[i].foodPiece)) {
         if (foodArray[j].r == 25) {
 
-            good.play();
-            score +=  2;
+           
+            score ++;
             
         }
 
         else {
-           bad.play(); 
-           score -= 1;
+           
+           score --;
         }
-        foodArray.splice (j, 1);
+        foodArray[i].foodPiece.remove();
     }
-
+ }
 
 
     let timePassed = int((millis() - startTime) / 1500);
     timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
     // Choose correct animation
-    let currentFrame = moving ? run[k] : animation[i];
+   /* let currentFrame = moving ? run[k] : animation[i];
     currentFrame.x = x;
     currentFrame.y = y;
     currentFrame.flipX = flipX;
     currentFrame.draw();
-
+*/
     // Display countdown timer
     textSize(20);
     fill(255);
@@ -191,8 +239,7 @@ if (score >= 10) {
     noLoop(); // Stop the game when time runs out
     
 }
-}
-    
+   
 
 
 // Idle animation update
@@ -209,42 +256,72 @@ function updateRunIndex() {
     }
 }
 
-// Handle movement using key states
-function handleMovement() {
-    moving = false;
+for(let i = 0; i < foodArray.length; i++)
+{
+    foodArray[i].draw();
 
-    if (keyIsPressed) {
+  if(myAnimation.isColliding(foodArray[i].foodPiece))
+     {
+        if(foodArray[i].isGood)
+            {
+           
 
-        if (keys["a"]) {
-            x -= 3;
-            flipX = true;
-            moving = true;
-        }
-        if (keys["d"]) {
-            x += 3;
-            flipX = false;
-            moving = true;
-        }
-        if (keys["w"]) {
-            y -= 3;
-            moving = true;
-        }
-        if (keys["s"]) {
-            y += 3;
-            moving = true;
-        }
+                score++;
+                // play good sound
+            }
+            else
+            {
+          
 
+                score--;
+                // play bad sound
+            }
+            
+            // use the remove function in p5play instead of splice now
+            foodArray[i].foodPiece.remove();
+           // foodArray.splice(i, 1);
+        
+         
+     } 
     }
 
+function displayFood() {
+for (let i = 0; i < foodArray.length; i++) {
+    foodArray[i].draw();
 }
 
-// Detect when a key is pressed
-function keyPressed() {
-    keys[key] = true;
 }
 
-// Detect when a key is released
-function keyReleased() {
-    keys[key] = false;
+function displayScore() {
+fill(0);
+textSize(24);
+text("Score: " + score, 50, 50);
+}
+
+function updateIndex() {
+//i++;
+// if (i > idleStrings.length-1) {
+//    i = 0;
+// }
+
+}
+
+function playBackgroundSound() {
+//mySound.play();
+}
+
+function updateCountDown() {
+countDown--;
+if (countDown == 0) {
+    clearInterval(countDownInterval);
+}
+}
+
+function displayCountDown() {
+textSize(24);
+text("Time left: " + countDown, width - 200, 50);
+}
+
+function replayAnimation() {
 
 }
