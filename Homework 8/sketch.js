@@ -9,6 +9,8 @@ var loadAnimation = [];
 var runAnimation = [];
 var idleStrings = [];
 var runStrings = [];
+var hedgeStrings = [];
+var hedgeArray = [];
 var flipX = false;
 var moving = false;
 var moveCharacter = [];
@@ -45,7 +47,7 @@ function preload() {
     //end = loadSound("assets/wampp.mp3")
     idleStrings = loadStrings('idle.txt');
     runStrings = loadStrings('run.txt');
-    
+    hedgeStrings = loadStrings('hedge.txt');
     
     
 }
@@ -56,7 +58,7 @@ function setup() {
     myAnimation = new character(200, 200);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings); 
-
+    myAnimation.loadAnimation('hedge', hedgeStrings); 
 
     
 
@@ -73,6 +75,11 @@ function setup() {
     foodArray.push(myFood);
     }
     
+     // Create hedge food objects
+   for (let i = 0; i < 50; i++) {
+    let myHedge = new food(200);
+    hedgeArray.push(myHedge);
+    }
 
 
 //setInterval(updateIdleIndex, 100); // Idle animation updates slower
@@ -110,7 +117,7 @@ displayAnimation();
 function displayAnimation() {
     noFill();
     stroke(0, 0, 100);
-    strokeWeight(5);
+    strokeWeight(1);
     
 }
 
@@ -152,7 +159,10 @@ function moveCharacter() {
  text("Feed the Dino!", width / 1 - 350, height / 10); 
 
 
+function loadHedge() {
 
+
+}
 
 
 function loadFood() {
@@ -173,30 +183,19 @@ function foodFight() {
     if (myAnimation.isColliding(foodArray[i].foodPiece)) {
         if (foodArray[j].r == 25) {
 
-           
             score ++;
-            
         }
-
         else {
-           
            score --;
         }
         foodArray[i].foodPiece.remove();
     }
  }
 
-
     let timePassed = int((millis() - startTime) / 1500);
     timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
-    // Choose correct animation
-   /* let currentFrame = moving ? run[k] : animation[i];
-    currentFrame.x = x;
-    currentFrame.y = y;
-    currentFrame.flipX = flipX;
-    currentFrame.draw();
-*/
+  
     // Display countdown timer
     textSize(20);
     fill(255);
@@ -264,23 +263,15 @@ for(let i = 0; i < foodArray.length; i++)
      {
         if(foodArray[i].isGood)
             {
-           
-
                 score++;
-                // play good sound
+               
             }
             else
             {
-          
-
                 score--;
-                // play bad sound
+                
             }
-            
-            // use the remove function in p5play instead of splice now
             foodArray[i].foodPiece.remove();
-           // foodArray.splice(i, 1);
-        
          
      } 
     }
@@ -293,9 +284,9 @@ for (let i = 0; i < foodArray.length; i++) {
 }
 
 function displayScore() {
-fill(0);
-textSize(24);
-text("Score: " + score, 50, 50);
+//fill(0);
+//textSize(24);
+//text("Score: " + score, 50, 50);
 }
 
 function updateIndex() {
@@ -318,8 +309,8 @@ if (countDown == 0) {
 }
 
 function displayCountDown() {
-textSize(24);
-text("Time left: " + countDown, width - 200, 50);
+//textSize(24);
+//text("Time left: " + countDown, width - 200, 50);
 }
 
 function replayAnimation() {

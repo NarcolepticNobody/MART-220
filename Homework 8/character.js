@@ -29,8 +29,8 @@ class character {
     draw(animationType) {
 
   
-      this.currentAnimation.frameDelay = 5;
-      this.currentAnimation.scale = .5;
+      this.currentAnimation.frameDelay = 5; 
+      this.currentAnimation.scale = .2;
       this.currentAnimation.changeAnimation(animationType);
       if (animationType == 'run' && this.direction == 'forward') {
         this.currentAnimation.direction = 0;
