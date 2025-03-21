@@ -1,30 +1,24 @@
-class edge
-{
-    constructor(x, y, hedge)
-    {
-        this.x = x;
-        this.y = y;
-        
-        this.hedge = new Sprite(x, y, 20);
-        
+class hedge{
+    constructor(x, y) {
+    
+      this.x = x;
+      this.y = y;
+      this.path = path;
+      this.imageWidth = 150;
+      this.imageHeight = 200;
+      this.myImage = loadImage(this.path);
   
-
+    }
+  
+    // Sprite
+    hedgeAnimation() {
+      this.hedgeAnimation = createSprite(this.x, this.y);
     }
 
     // use color instead of fill
     draw()
     {
-        if(this.hedge)
-        {
-           // fill(0, 255, 0);
-        this.hedgePiece.color = "green"
-        }
-        else
-        {
-           // fill(255, 0, 0);
-            this.hedgePiece.color = "red"
+       
         
-        }
-       // circle(this.x, this.y, 25);
     }
 }

@@ -26,6 +26,6 @@ class food
             this.foodPiece.color = "red"
         
         }
-       // circle(this.x, this.y, 25);
+       
     }
 }

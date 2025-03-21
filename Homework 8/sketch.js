@@ -1,4 +1,5 @@
 var animation = [];
+var hedge = [];
 var run = [];
 var i = 0;
 var k = 0;
@@ -47,7 +48,11 @@ function preload() {
     //end = loadSound("assets/wampp.mp3")
     idleStrings = loadStrings('idle.txt');
     runStrings = loadStrings('run.txt');
-    hedgeStrings = loadStrings('hedge.txt');
+   
+    
+    img1 =loadImage("hedge/hedge 01.png")
+       
+     
     
     
 }
@@ -94,6 +99,7 @@ setInterval(replayAnimation, 2000);
 function playBackgroundSound() {
 //empty
 }
+image(img1,0,200,400,200);
 
 function draw() {
 background(40, 100, 10);
