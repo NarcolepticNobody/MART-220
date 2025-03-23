@@ -10,15 +10,12 @@ class hedge{
   
     }
   
-    // Sprite
-    hedgeAnimation() {
-      this.hedgeAnimation = createSprite(this.x, this.y);
-    }
+   
 
     // use color instead of fill
     draw()
     {
-       
-        
+      image(img, 0, 0);
+
     }
 }

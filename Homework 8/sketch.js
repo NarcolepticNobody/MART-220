@@ -5,6 +5,7 @@ var i = 0;
 var k = 0;
 var x = 200;
 var y = 90;
+var r = 0; //idk
 var foodArray = [];
 var loadAnimation = [];
 var runAnimation = [];
@@ -34,7 +35,6 @@ let end;
 
 
 
-
 function preload() {
     
     soundFormats('mp3', 'ogg', 'wav');
@@ -50,7 +50,7 @@ function preload() {
     runStrings = loadStrings('run.txt');
    
     
-    img1 =loadImage("hedge/hedge 01.png")
+    img = loadImage("hedge/hedgeEdge.txt");
        
      
     
@@ -82,8 +82,8 @@ function setup() {
     
      // Create hedge food objects
    for (let i = 0; i < 50; i++) {
-    let myHedge = new food(200);
-    hedgeArray.push(myHedge);
+    let myImage = new image(200);
+    imageArray.push(myImage);
     }
 
 
@@ -95,15 +95,11 @@ setInterval(replayAnimation, 2000);
 
 }
 
-
-function playBackgroundSound() {
-//empty
-}
-image(img1,0,200,400,200);
-
 function draw() {
 background(40, 100, 10);
 
+
+image(img, 0, 0);
 
 stroke(0);
 strokeWeight(1);
@@ -117,15 +113,6 @@ displayScore();
 displayCountDown();
 
 displayAnimation();
-
-
-
-function displayAnimation() {
-    noFill();
-    stroke(0, 0, 100);
-    strokeWeight(1);
-    
-}
 
 function moveCharacter() {
 
@@ -152,10 +139,6 @@ function moveCharacter() {
     }
 
 }
-
- collideRectCircle();
-//do I need this?
- 
  textSize(20);
  fill(255, 50, 100)
  text("Pink food is bad, blue food is good!", width / 1 - 400, height / 1.03); 
@@ -163,38 +146,18 @@ function moveCharacter() {
  textSize(30);
  fill(0, 0, 0)
  text("Feed the Dino!", width / 1 - 350, height / 10); 
-
-
-function loadHedge() {
-
-
-}
-
-
-function loadFood() {
-    for (let i = 0; i < foodArray.length -1; i++)
-
-    foodArray[i].draw();
-}
-function foodFight() {
-    for (let i = 0; i < foodArray.length; i++) {
-        foodArray[i].x = random(100,200);
-        foodArray[i].y = random(300,400);
-    } 
-}
-   
   
 //food array and collision
  for (let j = 0; j < foodArray.length; j++) {
-    if (myAnimation.isColliding(foodArray[i].foodPiece)) {
-        if (foodArray[j].r == 25) {
+    if (myAnimation.isColliding(foodArray[j].foodPiece)) {
+        if (foodArray[j] == 25) {
 
             score ++;
         }
         else {
            score --;
         }
-        foodArray[i].foodPiece.remove();
+        foodArray[j].foodPiece.remove();
     }
  }
 
@@ -246,21 +209,6 @@ if (score >= 10) {
 }
    
 
-
-// Idle animation update
-function updateIdleIndex() {
-    if (moving) {
-        i = (i + 1) % animation.length; //this was animation.length
-    }
-}
-
-// Running animation update
-function updateRunIndex() {
-    if (moving) {
-        k = (k + 1) % run.length;
-    }
-}
-
 for(let i = 0; i < foodArray.length; i++)
 {
     foodArray[i].draw();
@@ -281,6 +229,14 @@ for(let i = 0; i < foodArray.length; i++)
          
      } 
     }
+
+ function displayAnimation() {
+    noFill();
+    stroke(0, 0, 100);
+    strokeWeight(1);
+        
+}
+
 
 function displayFood() {
 for (let i = 0; i < foodArray.length; i++) {
@@ -321,4 +277,29 @@ function displayCountDown() {
 
 function replayAnimation() {
 
+}
+// Idle animation update
+function updateIdleIndex() {
+    if (moving) {
+        i = (i + 1) % animation.length; //this was animation.length
+    }
+}
+
+// Running animation update
+function updateRunIndex() {
+    if (moving) {
+        k = (k + 1) % run.length;
+    }
+}
+function loadFood() {
+    for (let i = 0; i < foodArray.length -1; i++) {
+
+    foodArray[i].draw();
+}
+function foodFight() {
+    for (let i = 0; i < foodArray.length; i++) {
+        foodArray[i].x = random(100,200);
+        foodArray[i].y = random(300,400);
+    } 
+}
 }
