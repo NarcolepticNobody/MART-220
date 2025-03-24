@@ -42,6 +42,8 @@ let end;
 //health 
 let health = 50;
 let maxHealth = 100;
+//img
+let img;
 
 
 
@@ -56,8 +58,8 @@ function preload() {
     bad = loadSound("assets/442602__topschool__ow-sound.mp3")
     //failed
     //end = loadSound("assets/wampp.mp3")
-    image(img, 100, 100);//confused
-    hedge = loadImage("hedgeEdge.png");//confused
+    
+    hedge = loadImage("assets/hedgeEdge.png");//confused
 
     idleStrings = loadStrings('idle.txt');
     runStrings = loadStrings('run.txt');
@@ -130,6 +132,7 @@ function draw() {
 
     displayAnimation();
 
+    image(hedge, 100, 100, 200, 200);
 
 function updateHealth(health, madHealth) {
    stroke(0);
@@ -141,14 +144,15 @@ function updateHealth(health, madHealth) {
    
 }
 }
-function foodHealth() {
-    good.play();
+function foodArray(i) {
+   if (isood.play());
     health += 10;
     good.setLoop(false);
     good.remove();
     good.position.x = 10;
-}
-function foodHealth() {
+
+    else {
+ 
     bad.play();
     health -= 10;
     bad.setLoop(false);
