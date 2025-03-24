@@ -1,13 +1,18 @@
 var animation = [];
-var hedge = [];
+//var hedge = [];
 var run = [];
 var i = 0;
 var k = 0;
 var x = 200;
 var y = 90;
 var r = 0; //idk
+
+//character stuff/food
 var foodArray = [];
 var loadAnimation = [];
+//Do I need this?
+var loadImage = [];
+//
 var runAnimation = [];
 var idleStrings = [];
 var runStrings = [];
@@ -20,18 +25,23 @@ var countDown = [];
 var kb = [];
 var mySound;
 var song;
-var slider;
 var currentFrame;
 
 let score = 0;
 let startTime;
+
 let elapsedTime = 0;
 let countdown = 20;
 let timeLeft = 20; 
+
+//sounds
 let good;
 let bad;
 let end;
 
+//health 
+let health = 50;
+let maxHealth = 100;
 
 
 
@@ -46,12 +56,15 @@ function preload() {
     bad = loadSound("assets/442602__topschool__ow-sound.mp3")
     //failed
     //end = loadSound("assets/wampp.mp3")
+    image(img, 100, 100);//confused
+    hedge = loadImage("hedgeEdge.png");//confused
+
     idleStrings = loadStrings('idle.txt');
     runStrings = loadStrings('run.txt');
    
     
-    img = loadImage("hedge/hedgeEdge.txt");
-       
+    
+      
      
     
     
@@ -82,7 +95,7 @@ function setup() {
     
      // Create hedge food objects
    for (let i = 0; i < 50; i++) {
-    let myImage = new image(200);
+    let myImage = new img(200);
     imageArray.push(myImage);
     }
 
@@ -96,23 +109,69 @@ setInterval(replayAnimation, 2000);
 }
 
 function draw() {
-background(40, 100, 10);
+
+    background(40, 100, 10);
+
+    updateHealth(health, maxHealth);
+
+    foodHealth();
+
+    stroke(0);
+
+    strokeWeight(1);
+
+    displayFood();
+
+    moveCharacter();
+
+    displayScore();
+
+    displayCountDown();
+
+    displayAnimation();
 
 
-image(img, 0, 0);
+function updateHealth(health, madHealth) {
+   stroke(0);
+   strokeWeight(4);
+   noFill();
+   rect(width / 2 - 100, 300, map(health, 0, maxHealth, 0, 200),15);
+   nostroke();
+   fill(233, 0, 0);
+   
+}
+}
+function foodHealth() {
+    good.play();
+    health += 10;
+    good.setLoop(false);
+    good.remove();
+    good.position.x = 10;
+}
+function foodHealth() {
+    bad.play();
+    health -= 10;
+    bad.setLoop(false);
+    bad.remove();
+    bad.position.x = 10;
+}
 
-stroke(0);
-strokeWeight(1);
 
-displayFood();
 
-moveCharacter();
+//food array and collision
+for (let j = 0; j < foodArray.length; j++) {
+    if (myAnimation.isColliding(foodArray[j].foodPiece)) {
+        if (foodArray[j] == 25) {
 
-displayScore();
+            score ++;
+        }
+        else {
+           score --;
+        }
+        foodArray[j].foodPiece.remove();
+    }
+ }
 
-displayCountDown();
-
-displayAnimation();
 
 function moveCharacter() {
 
@@ -138,59 +197,43 @@ function moveCharacter() {
         myAnimation.draw('idle');
     }
 
-}
+
  textSize(20);
- fill(255, 50, 100)
- text("Pink food is bad, blue food is good!", width / 1 - 400, height / 1.03); 
+    fill(255, 50, 100)
+    text("Pink food is bad, blue food is good!", width / 1 - 400, height / 1.03); 
  //Feed the Dino
- textSize(30);
- fill(0, 0, 0)
- text("Feed the Dino!", width / 1 - 350, height / 10); 
-  
-//food array and collision
- for (let j = 0; j < foodArray.length; j++) {
-    if (myAnimation.isColliding(foodArray[j].foodPiece)) {
-        if (foodArray[j] == 25) {
+    textSize(30);
+    fill(0, 0, 0)
+    text("Feed the Dino!", width / 1 - 350, height / 10); 
 
-            score ++;
-        }
-        else {
-           score --;
-        }
-        foodArray[j].foodPiece.remove();
-    }
- }
-
-    let timePassed = int((millis() - startTime) / 1500);
-    timeLeft = max(countdown - timePassed, 0); // Prevents negative values
-
-  
-    // Display countdown timer
+// Display countdown timer
     textSize(20);
     fill(255);
     text("Score: " + score, 30, 35);
     text("Time Left: " + timeLeft + "s", width - 150, 30);
 
 
-//trees   //why are my trees behind my text?
-fill(153, 95, 30);
-//1
-rect(119, 200, 10, 130);
-//2
-rect(300, 400, 10, 130);
-//3
-rect(400, 200, 10, 120);
+let timePassed = int((millis() - startTime) / 1500);
+timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
-//green topper
-fill(100, 150, 10);
-//1
-triangle(125, 150, 150, 300, 100, 300);
-//2
-triangle(270, 500, 300, 360, 340, 500);
-//3
-triangle(410, 150, 440, 300, 370, 300);
+  
+    //trees   //why are my trees behind my text?
+    fill(153, 95, 30);
+    //1
+    rect(119, 200, 10, 130);
+    //2
+    rect(300, 400, 10, 130);
+    //3
+    rect(400, 200, 10, 120);
 
-}
+    //green topper
+    fill(100, 150, 10);
+    //1
+    triangle(125, 150, 150, 300, 100, 300);
+    //2
+    triangle(270, 500, 300, 360, 340, 500);
+    //3
+    triangle(410, 150, 440, 300, 370, 300);
 
 // Check for win condition
 if (score >= 10) {
@@ -209,9 +252,9 @@ if (score >= 10) {
 }
    
 
-for(let i = 0; i < foodArray.length; i++)
-{
-    foodArray[i].draw();
+for(let i = 0; i < foodArray.length; i++) {
+
+ foodArray[i].draw(); 
 
   if(myAnimation.isColliding(foodArray[i].foodPiece))
      {
@@ -226,7 +269,6 @@ for(let i = 0; i < foodArray.length; i++)
                 
             }
             foodArray[i].foodPiece.remove();
-         
      } 
     }
 
@@ -237,46 +279,45 @@ for(let i = 0; i < foodArray.length; i++)
         
 }
 
-
 function displayFood() {
-for (let i = 0; i < foodArray.length; i++) {
+    for (let i = 0; i < foodArray.length; i++) {
     foodArray[i].draw();
 }
 
 }
 
 function displayScore() {
-//fill(0);
-//textSize(24);
-//text("Score: " + score, 50, 50);
+    //fill(0);
+    //textSize(24);
+    //text("Score: " + score, 50, 50);
 }
 
 function updateIndex() {
-//i++;
-// if (i > idleStrings.length-1) {
-//    i = 0;
-// }
+    //i++;
+    // if (i > idleStrings.length-1) {
+    //    i = 0;
+    // }
 
 }
 
 function playBackgroundSound() {
-//mySound.play();
+    //mySound.play();
 }
 
 function updateCountDown() {
-countDown--;
+    countDown--;
 if (countDown == 0) {
     clearInterval(countDownInterval);
 }
 }
 
 function displayCountDown() {
-//textSize(24);
-//text("Time left: " + countDown, width - 200, 50);
+    //textSize(24);
+    //text("Time left: " + countDown, width - 200, 50);
 }
 
 function replayAnimation() {
-
+//hmmmmm
 }
 // Idle animation update
 function updateIdleIndex() {
@@ -301,5 +342,6 @@ function foodFight() {
         foodArray[i].x = random(100,200);
         foodArray[i].y = random(300,400);
     } 
+}
 }
 }

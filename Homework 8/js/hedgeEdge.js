@@ -15,7 +15,8 @@ class hedge{
     // use color instead of fill
     draw()
     {
-      image(img, 0, 0);
+      image(img, imgWidth, imageHeight);
 
     }
 }
+    
