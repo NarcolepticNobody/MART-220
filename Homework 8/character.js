@@ -5,7 +5,7 @@ class character {
       this.y = y;
       this.currentAnimation;
       this.createAnimation();
-      this.speed = 3;
+      this.speed = 5;
   
     }
   
