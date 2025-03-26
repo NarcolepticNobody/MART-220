@@ -43,7 +43,7 @@ let maxHealth = 100;
 let img;
 let img2;
 //Do I need this?
-var loadImage = [];
+var loadImage;
 //var imgSize = 100;
 
 
@@ -59,16 +59,16 @@ function preload() {
     //failed
     end = loadSound("assets/wampp.mp3")
     
-   
-
     idleStrings = loadStrings('idle.txt');
 
     runStrings = loadStrings('run.txt'); 
 
     img = loadImage('trees/PineTree.png');
 
-    img2 = loadImage('assets/hedge 01.png')
+    img2 = loadImage('assets/log.png')
+   
 }
+
 
 function setup() {
     createCanvas(1280, 450);
@@ -122,13 +122,25 @@ function draw() {
     image(img, 900, 200, 160, 120);
     //Tree far right
     image(img, 1000, 1, 100, 100);
+    //Tree farest right
+    image(img, 1070, 40, 100, 100);
+
+    //Upper right Log
+    image(img2, 70, 100, 100, 100);
+     //Upper right Log
+     image(img2, 200, 300, 100, 100);
+      //Upper right Log
+      image(img2, 400, 300, 100, 100);
+       //Upper right Log
+       image(img2, 600, 100, 100, 100);
+        //Upper right Log
+        image(img2, 800, 300, 150, 100);
+    
+
+
 
     //hedge upper dont need this now
     //image(img2, 80, 50, 30, 160);
-
-
-
-
 
 // Check for win condition
 if (score >= 10) {
