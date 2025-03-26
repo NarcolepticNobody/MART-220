@@ -1,12 +1,12 @@
 class character {
-    constructor(x, y) {
+    constructor(x, y, isGood) {
     
       this.x = x;
       this.y = y;
       this.currentAnimation;
       this.createAnimation();
       this.speed = 5;
-  
+      this.isGood = isGood;
     }
   
     // Sprite
@@ -75,7 +75,7 @@ class character {
   
     // using the overlap function in p5play for collision
     isColliding(myImage) {
-      return this.currentAnimation.overlaps(myImage);
+      return this.currentAnimation.collide(myImage);
     }
   
   

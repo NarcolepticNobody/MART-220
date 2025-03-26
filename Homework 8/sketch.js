@@ -81,16 +81,15 @@ function setup() {
     
    // Create food objects
    for (let i = 0; i < 9; i++) {
-    let myFood = new food(random(0, 490), random(0, 490), 25, 34, 50);
-    foodArray.push(myFood);
+    if(floor(random(0,2)) == 0) {
+        myFood = new food(random(0, 490), random(0, 490), false);
     }
-
-   // Create bad food objects
-   for (let i = 0; i < 9; i++) {
-    let myFood = new food(random(10, 490), random(10, 490), 255, 0, 255);
-    foodArray.push(myFood);
+    else {
+        myFood = new food(random(0, 490), random(0, 490), true);
+        foodArray.push(myFood);
     }
-    
+   }
+ 
   
 //setInterval(updateIdleIndex, 100); // Idle animation updates slower
 //setInterval(updateRunIndex, 50); // Run animation updates faster
@@ -114,16 +113,16 @@ function draw() {
 
     //Tree upper left
     image(img, 100, 40, 190, 140);
-    //Tree mid
-    image(img, 400, 200, 190, 140);
-    //Tree mid2
-    image(img, 650, 100, 130, 110);
-    //Tree lower right
-    image(img, 900, 200, 160, 120);
-    //Tree far right
-    image(img, 1000, 1, 100, 100);
-    //Tree farest right
-    image(img, 1070, 40, 100, 100);
+     //Tree mid
+     image(img, 400, 200, 190, 140);
+      //Tree mid2
+      image(img, 650, 100, 130, 110);
+       //Tree lower right
+       image(img, 900, 200, 160, 120);
+        //Tree far right
+        image(img, 1000, 1, 100, 100);
+         //Tree farest right
+         image(img, 1070, 40, 100, 100);
 
     //Upper right Log
     image(img2, 70, 100, 100, 100);
@@ -134,7 +133,7 @@ function draw() {
        //Upper right Log
        image(img2, 600, 100, 100, 100);
         //Upper right Log
-        image(img2, 800, 300, 150, 100);
+         image(img2, 800, 300, 150, 100);
     
 
 
@@ -148,6 +147,7 @@ if (score >= 10) {
     fill(255, 215, 0);
     text("YOU WIN!", width / 2 - 125, height / 2);
     noLoop(); // Stop the game
+    
 }
  // Check if time is up 
  if (timeLeft <= 1) {
@@ -170,7 +170,7 @@ function updateHealth(health, maxHealth) {
 }
 }
 function foodArray(i) {
-   if (isood.play());
+   if (good.play());
     health += 10;
     good.setLoop(false);
     good.remove();
@@ -191,7 +191,7 @@ function foodArray(i) {
 //food array and collision
 for (let j = 0; j < foodArray.length; j++) {
     if (myAnimation.isColliding(foodArray[j].foodPiece)) {
-        if (foodArray[j] == 25) {
+        if (foodArray[j].isGood) {
 
             score ++;
         }
