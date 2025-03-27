@@ -63,6 +63,8 @@ function preload() {
 
     runStrings = loadStrings('run.txt'); 
 
+    attackStrings = loadStrings('attack.txt');
+
     img = loadImage('trees/PineTree.png');
 
     img2 = loadImage('assets/log.png')
@@ -89,6 +91,13 @@ function setup() {
         foodArray.push(myFood);
     }
    }
+ //new image add?  
+imgImage = createSprite(100, 200, 100, 500, 'static');
+imgImage.img = "trees/PineTree.png";
+imgImage.scale = .3;
+imgImage.diameter = .3;
+imgImage.rotation = 0;
+
  
   
 //setInterval(updateIdleIndex, 100); // Idle animation updates slower
@@ -111,6 +120,7 @@ function draw() {
 
     moveCharacter();
 
+//how to compact all this?
     //Tree upper left
     image(img, 100, 40, 190, 140);
      //Tree mid
@@ -208,6 +218,7 @@ function moveCharacter() {
     if (kb.pressing('d')) {
         myAnimation.updatePosition('forward');
         myAnimation.draw('run');
+ 
        
     }
     else if (kb.pressing('a')) {

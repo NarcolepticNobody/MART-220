@@ -7,6 +7,7 @@ class character {
       this.createAnimation();
       this.speed = 5;
       this.isGood = isGood;
+      this.rotationSpeed = 0;
     }
   
     // Sprite
@@ -36,6 +37,7 @@ class character {
         this.currentAnimation.direction = 0;
         this.currentAnimation.mirror.x = false;
         this.currentAnimation.speed = this.speed;
+        
   
       }
       else if (animationType == 'run' && this.direction == 'reverse') {
@@ -73,9 +75,10 @@ class character {
   
     
   
-    // using the overlap function in p5play for collision
+    // using the overlap function in p5play?
     isColliding(myImage) {
-      return this.currentAnimation.collide(myImage);
+      return this.currentAnimation.collided(myImage); //bad foods
+      
     }
   
   
