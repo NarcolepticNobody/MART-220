@@ -1,12 +1,12 @@
 class character {
-    constructor(x, y, isGood) {
+    constructor(x, y) {
     
       this.x = x;
       this.y = y;
       this.currentAnimation;
       this.createAnimation();
       this.speed = 5;
-      this.isGood = isGood;
+      //this.isGood = isGood;
       this.rotationSpeed = 0;
     }
   
@@ -67,13 +67,10 @@ class character {
       }
     }
   
-  
     // this gives direction in words
     updatePosition(direction) {
       this.direction = direction;
     }
-  
-    
   
     // using the overlap function in p5play?
     isColliding(myImage) {

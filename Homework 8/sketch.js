@@ -146,11 +146,6 @@ function draw() {
          image(img2, 800, 300, 150, 100);
     
 
-
-
-    //hedge upper dont need this now
-    //image(img2, 80, 50, 30, 160);
-
 // Check for win condition
 if (score >= 10) {
     textSize(60);
@@ -218,8 +213,6 @@ function moveCharacter() {
     if (kb.pressing('d')) {
         myAnimation.updatePosition('forward');
         myAnimation.draw('run');
- 
-       
     }
     else if (kb.pressing('a')) {
         myAnimation.updatePosition('reverse');
@@ -234,9 +227,7 @@ function moveCharacter() {
         myAnimation.draw('run');
     }
     else {
-    
         myAnimation.draw('idle');
-        
     }
 
 
@@ -258,27 +249,7 @@ function moveCharacter() {
 let timePassed = int((millis() - startTime) / 1500);
 timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
-  
-    /*//trees   //why are my trees behind my text?
-    fill(153, 95, 30);
-    //1
-    rect(119, 200, 10, 130);
-    //2
-    rect(300, 400, 10, 130);
-    //3
-    rect(400, 200, 10, 120);
 
-    //green topper
-    fill(100, 150, 10);
-    //1
-    triangle(125, 150, 150, 300, 100, 300);
-    //2
-    triangle(270, 500, 300, 360, 340, 500);
-    //3
-    triangle(410, 150, 440, 300, 370, 300);
-*/
-
-   
 
 for(let i = 0; i < foodArray.length; i++) {
 
@@ -298,24 +269,13 @@ for(let i = 0; i < foodArray.length; i++) {
      } 
     }
 
- function displayAnimation() {
-    noFill();
-    stroke(0, 0, 100);
-    strokeWeight(1);
-        
-}
+
 
 function displayFood() {
     for (let i = 0; i < foodArray.length; i++) {
     foodArray[i].draw();
 }
 
-}
-
-function displayScore() {
-    //fill(0);
-    //textSize(24);
-    //text("Score: " + score, 50, 50);
 }
 
 function updateIndex() {
@@ -337,14 +297,9 @@ if (countDown == 0) {
 }
 }
 
-function displayCountDown() {
-    //textSize(24);
-    //text("Time left: " + countDown, width - 200, 50);
-}
 
-function replayAnimation() {
-//hmmmmm
-}
+
+
 // Idle animation update
 function updateIdleIndex() {
     if (moving) {
