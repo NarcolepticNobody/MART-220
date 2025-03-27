@@ -197,15 +197,20 @@ function foodArray(i) {
 for (let j = 0; j < foodArray.length; j++) {
     if (myAnimation.isColliding(foodArray[j].foodPiece)) {
         if (foodArray[j].isGood) {
+            score++;
+        } else {
+            score--;
+        }
 
-            score ++;
-        }
-        else {
-           score --;
-        }
+        // why doesn't this work?
+        myAnimation.currentAnimation.velocity.x = 0;
+        myAnimation.currentAnimation.velocity.y = 0;
+        myAnimation.currentAnimation.direction = 0;  // Reset direction
+        myAnimation.currentAnimation.rotation = 0;   // Ensure rotation is reset
+
         foodArray[j].foodPiece.remove();
     }
- }
+}
 
 
 function moveCharacter() {
@@ -213,6 +218,7 @@ function moveCharacter() {
     if (kb.pressing('d')) {
         myAnimation.updatePosition('forward');
         myAnimation.draw('run');
+        
     }
     else if (kb.pressing('a')) {
         myAnimation.updatePosition('reverse');
@@ -245,11 +251,8 @@ function moveCharacter() {
     text("Score: " + score, 30, 35);
     text("Time Left: " + timeLeft + "s", width - 150, 30);
 
-
 let timePassed = int((millis() - startTime) / 1500);
 timeLeft = max(countdown - timePassed, 0); // Prevents negative values
-
-
 
 for(let i = 0; i < foodArray.length; i++) {
 
@@ -269,8 +272,6 @@ for(let i = 0; i < foodArray.length; i++) {
      } 
     }
 
-
-
 function displayFood() {
     for (let i = 0; i < foodArray.length; i++) {
     foodArray[i].draw();
@@ -286,19 +287,12 @@ function updateIndex() {
 
 }
 
-function playBackgroundSound() {
-    //mySound.play();
-}
-
 function updateCountDown() {
     countDown--;
 if (countDown == 0) {
     clearInterval(countDownInterval);
 }
 }
-
-
-
 
 // Idle animation update
 function updateIdleIndex() {

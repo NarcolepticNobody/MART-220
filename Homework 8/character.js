@@ -33,6 +33,7 @@ class character {
       this.currentAnimation.frameDelay = 5; 
       this.currentAnimation.scale = .2;
       this.currentAnimation.changeAnimation(animationType);
+      
       if (animationType == 'run' && this.direction == 'forward') {
         this.currentAnimation.direction = 0;
         this.currentAnimation.mirror.x = false;
@@ -74,9 +75,10 @@ class character {
   
     // using the overlap function in p5play?
     isColliding(myImage) {
-      return this.currentAnimation.collided(myImage); //bad foods
+      return this.currentAnimation.collided(myImage); //bad foods?
       
     }
+   
   
   
   }
