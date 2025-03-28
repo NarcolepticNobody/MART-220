@@ -63,7 +63,7 @@ function preload() {
 
     runStrings = loadStrings('run.txt'); 
 
-    //treeStrings = loadStrings('tree.txt'); //why no work?
+    treeStrings = loadStrings('tree.txt'); //why no work?
 
     attackStrings = loadStrings('attack.txt');
 
@@ -85,7 +85,7 @@ function setup() {
 
     
    // Create food objects
-   for (let i = 0; i < 700; i++) {
+   for (let i = 0; i < 30; i++) {
     if(floor(random(0,2)) == 0) {
         myFood = new food(random(200, 490), random(200, 490), false);
     }
@@ -173,7 +173,6 @@ if (score >= 20) {
     
 }
     
-
 function updateHealth(health, maxHealth) {
    stroke(0);
    strokeWeight(4);
@@ -239,7 +238,7 @@ function moveCharacter() {
         myAnimation.draw('idle');
     }
 
-
+//Health bar 
     textSize(20);
     fill(255, 50, 100)
     text("Health bar", 600, 440); 
