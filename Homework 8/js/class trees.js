@@ -5,8 +5,9 @@ constructor(x, y) {
     this.y = y;
     this.currentAnimation;
     this.createAnimation();
+    this.img();
     
-    //this.isGood = isGood;
+   
     this.rotationSpeed = 0;
   }
 
@@ -19,6 +20,16 @@ constructor(x, y) {
   // fill the animation frames into the current animation object
   loadAnimation(animationType, fileNames) {
 
+    this.currentAnimation.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
+    // set the hit box
+    this.currentAnimation.width = 300;
+    this.currentAnimation.height = 150;
+
+  }
+
+   // fill the animation frames into the current animation object
+   loadAnimation(animationType, fileNames) {
+  
     this.currentAnimation.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
     // set the hit box
     this.currentAnimation.width = 300;
