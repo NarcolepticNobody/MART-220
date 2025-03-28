@@ -39,11 +39,11 @@ var foodHealth;
 let health = 50;
 let maxHealth = 100;
 //img
-let img;
-let img2;
+let tree;
+let log;
 var loadImage;
 var treeStrings = [];
-//var setCollider;
+
 
 
 
@@ -97,14 +97,10 @@ function setup() {
  //new image add?  
 imgImage = createSprite(100, 200, 100, 500, 'static');
 imgImage.img = "trees/PineTree 01.png";
-//imgImage.setCollider("rectangle", 0, 50, 300, 900); // Moves collider 
+//imgImage.setCollider("rectangle", 0, 0, 190, 140); 
 imgImage.scale = .3;
 imgImage.diameter = .3;
 imgImage.rotation = 0;
-
-
-
- 
   
 //setInterval(updateIdleIndex, 100); // Idle animation updates slower
 //setInterval(updateRunIndex, 50); // Run animation updates faster
@@ -128,7 +124,7 @@ function draw() {
 
     checkCollision();
 
-    loadImage();
+    //loadImage();
 
     //setCollider();
 
@@ -176,6 +172,23 @@ if (score >= 20) {
     noLoop(); // Stop the game when time runs out
     
 }
+//Health bar 
+textSize(20);
+fill(255, 50, 100)
+text("Health bar", 600, 440); 
+//Feed the Dino
+textSize(30);
+fill(0, 0, 0)
+text("Feed the Dino!", width / 2 - 100, height / 12); 
+
+// Display countdown timer
+textSize(20);
+fill(255);
+text("Score: " + score, 30, 35);
+text("Time Left: " + timeLeft + "s", width - 150, 30);
+
+let timePassed = int((millis() - startTime) / 1500);
+timeLeft = max(countdown - timePassed, 0); // Prevents negative values
     
 function updateHealth(health, maxHealth) {
    stroke(0);
@@ -205,10 +218,10 @@ for (let j = 0; j < foodArray.length; j++) {
         }
 
         // why doesn't this work?
-        myAnimation.currentAnimation.velocity.x = 0;
-        myAnimation.currentAnimation.velocity.y = 0;
-        myAnimation.currentAnimation.direction = 0;  // Reset direction
-        myAnimation.currentAnimation.rotation = 0;   // Ensure rotation is reset
+        //myAnimation.currentAnimation.velocity.x = 0;
+        //myAnimation.currentAnimation.velocity.y = 0;
+        //myAnimation.currentAnimation.direction = 0;  // Reset direction
+        //myAnimation.currentAnimation.rotation = 0;   // Ensure rotation is reset
 
         foodArray[j].foodPiece.remove();
     }
@@ -241,25 +254,6 @@ function moveCharacter() {
     else {
         myAnimation.draw('idle');
     }
-
-
-//Health bar 
-    textSize(20);
-    fill(255, 50, 100)
-    text("Health bar", 600, 440); 
- //Feed the Dino
-    textSize(30);
-    fill(0, 0, 0)
-    text("Feed the Dino!", width / 2 - 100, height / 12); 
-
-// Display countdown timer
-    textSize(20);
-    fill(255);
-    text("Score: " + score, 30, 35);
-    text("Time Left: " + timeLeft + "s", width - 150, 30);
-
-let timePassed = int((millis() - startTime) / 1500);
-timeLeft = max(countdown - timePassed, 0); // Prevents negative values
 
 for(let i = 0; i < foodArray.length; i++) {
 
