@@ -43,6 +43,7 @@ let img;
 let img2;
 var loadImage;
 var treeStrings = [];
+//var setCollider;
 
 
 
@@ -96,9 +97,11 @@ function setup() {
  //new image add?  
 imgImage = createSprite(100, 200, 100, 500, 'static');
 imgImage.img = "trees/PineTree 01.png";
-imgImage.scale = .6;
+//imgImage.setCollider("rectangle", 0, 50, 300, 900); // Moves collider 
+imgImage.scale = .3;
 imgImage.diameter = .3;
 imgImage.rotation = 0;
+
 
 
  
@@ -125,6 +128,8 @@ function draw() {
 
     checkCollision();
 
+    //setCollider();
+    
 //how to compact all this?
     //Tree upper left
     image(img, 100, 40, 190, 140);
