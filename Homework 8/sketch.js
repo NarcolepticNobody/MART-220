@@ -128,7 +128,11 @@ function draw() {
 
     checkCollision();
 
+    loadImage();
+
     //setCollider();
+
+  
     
 //how to compact all this?
     //Tree upper left
@@ -237,6 +241,7 @@ function moveCharacter() {
     else {
         myAnimation.draw('idle');
     }
+
 
 //Health bar 
     textSize(20);

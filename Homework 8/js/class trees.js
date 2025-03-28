@@ -40,7 +40,9 @@ constructor(x, y) {
   // draw the character sprite
   draw() {
 
-
+    this.currentAnimation.frameDelay = 5; 
+    this.currentAnimation.scale = .2;
+    this.currentAnimation.changeAnimation(animationType);
     
   }
  
