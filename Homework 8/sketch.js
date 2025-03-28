@@ -42,7 +42,7 @@ let maxHealth = 100;
 let img;
 let img2;
 var loadImage;
-//var treeStrings = [];
+var treeStrings = [];
 
 
 
@@ -62,11 +62,11 @@ function preload() {
 
     runStrings = loadStrings('run.txt'); 
 
-    //treeStrings = loadStrings('tree.txt');
+    //treeStrings = loadStrings('tree.txt'); //why no work?
 
     attackStrings = loadStrings('attack.txt');
 
-    img = loadImage('tree/Pinetree.png');
+    img = loadImage('trees/PineTree 01.png');
 
     img2 = loadImage('assets/log.png')
    
@@ -79,26 +79,27 @@ function setup() {
     myAnimation = new character(200, 200);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings); 
-    //myAnimation.loadAnimation('tree', runStrings); 
+    myAnimation.loadAnimation('tree', runStrings); 
     
 
     
    // Create food objects
-   for (let i = 0; i < 9; i++) {
+   for (let i = 0; i < 700; i++) {
     if(floor(random(0,2)) == 0) {
-        myFood = new food(random(0, 490), random(0, 490), false);
+        myFood = new food(random(200, 490), random(200, 490), false);
     }
     else {
-        myFood = new food(random(0, 490), random(0, 490), true);
+        myFood = new food(random(200, 490), random(200, 490), true);
         foodArray.push(myFood);
     }
    }
  //new image add?  
 imgImage = createSprite(100, 200, 100, 500, 'static');
-imgImage.img = "trees/PineTree.png";
-imgImage.scale = .3;
+imgImage.img = "trees/PineTree 01.png";
+imgImage.scale = .6;
 imgImage.diameter = .3;
 imgImage.rotation = 0;
+
 
  
   
@@ -151,7 +152,7 @@ function draw() {
     
 
 // Check for win condition
-if (score >= 10) {
+if (score >= 20) {
     textSize(60);
     fill(255, 215, 0);
     text("YOU WIN!", width / 2 - 125, height / 2);
