@@ -7,6 +7,7 @@ var idleStrings = [];
 var runStrings = [];
 var moveCharacter;
 var currentFrame;
+var checkCollision;
 //character stuff collision with food
 var foodArray = [];
 //cordinates?
@@ -15,9 +16,7 @@ var k = 0;
 var x = 200;
 var y = 90;
 var r = 0; //idk why I need this
-//Hedge
-var hedgeStrings = [];
-var hedgeArray = [];
+
 var flipX = false;
 var moving = false;
 //movement
@@ -42,9 +41,9 @@ let maxHealth = 100;
 //img
 let img;
 let img2;
-//Do I need this?
 var loadImage;
-//var imgSize = 100;
+//var treeStrings = [];
+
 
 
 function preload() {
@@ -63,9 +62,11 @@ function preload() {
 
     runStrings = loadStrings('run.txt'); 
 
+    //treeStrings = loadStrings('tree.txt');
+
     attackStrings = loadStrings('attack.txt');
 
-    img = loadImage('trees/PineTree.png');
+    img = loadImage('tree/Pinetree.png');
 
     img2 = loadImage('assets/log.png')
    
@@ -78,6 +79,7 @@ function setup() {
     myAnimation = new character(200, 200);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings); 
+    //myAnimation.loadAnimation('tree', runStrings); 
     
 
     
@@ -119,6 +121,8 @@ function draw() {
     strokeWeight(1);
 
     moveCharacter();
+
+    checkCollision();
 
 //how to compact all this?
     //Tree upper left
@@ -182,17 +186,6 @@ function foodArray(i) {
     good.position.x = 10;
 }
    
-   /* function foodArray(i) {
-    bad.play();
-    health -= 10;
-    bad.setLoop(false);
-    bad.remove();
-    bad.position.x = 10;
-}
-    */
-
-
-
 //food array and collision
 for (let j = 0; j < foodArray.length; j++) {
     if (myAnimation.isColliding(foodArray[j].foodPiece)) {
@@ -211,7 +204,11 @@ for (let j = 0; j < foodArray.length; j++) {
         foodArray[j].foodPiece.remove();
     }
 }
-
+//on here twice
+function checkCollision() {
+    myAnimation.currentAnimation.rotationSpeed = 0;
+    myAnimation.currentAnimation.rotation = 0;
+}
 
 function moveCharacter() {
 
@@ -237,7 +234,7 @@ function moveCharacter() {
     }
 
 
- textSize(20);
+    textSize(20);
     fill(255, 50, 100)
     text("Health bar", 600, 440); 
  //Feed the Dino
@@ -271,6 +268,15 @@ for(let i = 0; i < foodArray.length; i++) {
             foodArray[i].foodPiece.remove();
      } 
     }
+
+
+//on here
+function checkCollision() {
+    myAnimation.currentAnimation.rotationSpeed = 0;
+    myAnimation.currentAnimation.rotation = 0;
+}
+
+
 
 function displayFood() {
     for (let i = 0; i < foodArray.length; i++) {
