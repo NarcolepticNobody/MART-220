@@ -287,7 +287,7 @@ function moveCharacter() {
     }
 
     myAnimation.draw(moving ? 'run' : 'idle');
-    console.log("New X:", newX, "New Y:", newY, "Collision:", collision);
+    //console.log("New X:", newX, "New Y:", newY, "Collision:", collision);
 }
 
 for(let i = 0; i < foodArray.length; i++) {
