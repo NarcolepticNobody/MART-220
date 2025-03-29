@@ -183,33 +183,6 @@ function draw() {
       text("Time Left: " + timeLeft + "s", width - 150, 30);  
   }
 
-
-//how to compact all this?
-/* //Tree upper left
-    image(img, 100, 40, 190, 140);
-     //Tree mid
-     image(img, 400, 200, 190, 140);
-      //Tree mid2
-      image(img, 650, 100, 130, 110);
-       //Tree lower right
-       image(img, 900, 200, 160, 120);
-        //Tree far right
-        image(img, 1000, 1, 100, 100);
-         //Tree farest right
-         image(img, 1070, 40, 100, 100);
-
-    //Upper right Log
-    image(img2, 70, 100, 100, 100);
-     //Upper right Log
-     image(img2, 200, 300, 100, 100);
-      //Upper right Log
-      image(img2, 400, 300, 100, 100);
-       //Upper right Log
-       image(img2, 600, 100, 100, 100);
-        //Upper right Log
-         image(img2, 800, 300, 150, 100);
-    */
-
 // Check for win condition
 if (score >= 20) {
     textSize(60);
