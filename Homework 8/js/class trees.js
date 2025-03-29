@@ -9,6 +9,7 @@ class tree {
  isColliding(myImage) {
   return this.currentAnimation.collide(myImage);
   
+   
 }
   display(img) {
     image(img, this.x, this.y, this.w, this.h);
