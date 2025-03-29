@@ -21,8 +21,8 @@ class character {
   
       this.currentAnimation.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
       // set the hit box
-      this.currentAnimation.width = 300;
-      this.currentAnimation.height = 150;
+      this.currentAnimation.width = 100;
+      this.currentAnimation.height = 100;
   
     }
   

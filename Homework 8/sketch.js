@@ -133,13 +133,6 @@ function setup() {
     ];
 }
 
-  
-//setInterval(updateIdleIndex, 100); // Idle animation updates slower
-//setInterval(updateRunIndex, 50); // Run animation updates faster
-
-//countDownInterval = setInterval(updateCountDown, 1000);
-//setInterval(replayAnimation, 2000);
-
 
 
 function draw() {   
@@ -152,11 +145,11 @@ function draw() {
 
     strokeWeight(1);
 
-    moveCharacter();
+   //moveCharacter();
 
     //myAnimation();
 
-    checkCollision();
+    //checkCollision();
 
     //setCollider();
 
@@ -242,52 +235,33 @@ for (let j = 0; j < foodArray.length; j++) {
             score--;
         }
 
-        // why doesn't this work?
-        myAnimation.currentAnimation.velocity.x = 0;
-        myAnimation.currentAnimation.velocity.y = 0;
-        myAnimation.currentAnimation.direction = 0;  // Reset direction
-        myAnimation.currentAnimation.rotation = 0;   // Ensure rotation is reset
+       
 
         foodArray[j].foodPiece.remove();
     }
     
 }
-//on here twice
-function checkCollision() {
-    myAnimation.currentAnimation.rotationSpeed = 0;
-    myAnimation.currentAnimation.rotation = 0;
-}
 
-function moveCharacter() {
-    let newX = myAnimation.x;
-    let newY = myAnimation.y;
-    let speed = 5;
-
-    if (kb.pressing('d')) newX += speed;
-    if (kb.pressing('a')) newX -= speed;
-    if (kb.pressing('w')) newY -= speed;
-    if (kb.pressing('s')) newY += speed;
-
+if (kb.pressing('d')) {
+    myAnimation.updatePosition('forward');
+    myAnimation.draw('run');
    
-    // Create a temporary object to represent the character's future position
-    let futurePosition = {
-        x: newX,
-        y: newY,
-        width: 50,  // Adjust as per character size
-        height: 50
-    };
+}
+else if (kb.pressing('a')) {
+    myAnimation.updatePosition('reverse');
+    myAnimation.draw('run');
+}
+else if (kb.pressing('w')) {
+    myAnimation.updatePosition('up');
+    myAnimation.draw('run');
+}
+else if (kb.pressing('s')) {
+    myAnimation.updatePosition('down');
+    myAnimation.draw('run');
+}
+else {
 
-    // Check collision with trees
-    let collision = trees.some(tree => tree.collidesWith(futurePosition));
-
-    // If no collision, update position
-    if (!collision) {
-        myAnimation.x = newX;
-        myAnimation.y = newY;
-    }
-
-    myAnimation.draw(moving ? 'run' : 'idle');
-    //console.log("New X:", newX, "New Y:", newY, "Collision:", collision);
+    myAnimation.draw('idle');
 }
 
 for(let i = 0; i < foodArray.length; i++) {
