@@ -91,8 +91,8 @@ function setup() {
     myAnimation = new character(200, 200);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings); 
-    myAnimation.loadAnimation('tree', runStrings); 
-    myAnimation.loadAnimation('log', logStrings); 
+    //myAnimation.loadAnimation('tree', treeStrings); //strings don't work
+    //myAnimation.loadAnimation('log', logStrings); //strings don't work
     
     
     
@@ -114,7 +114,7 @@ function setup() {
 
      // Initialize trees     //I want these to be random
      trees = [
-        new tree(100, 40, 190, 140),
+        new tree(300, 40, 190, 140),
         new tree(400, 200, 190, 140),
         new tree(650, 100, 130, 110),
         new tree(900, 200, 160, 120),
@@ -142,7 +142,7 @@ function setup() {
 
 
 
-function draw() {
+function draw() {   
 
     background(40, 100, 10);
 
@@ -158,6 +158,16 @@ function draw() {
 
     //setCollider();
 
+    // Draw the border without affecting other objects
+    push(); // Save current style settings
+    stroke(0); // Black border
+    strokeWeight(10); // Thickness
+    noFill();
+    rect(0, 0, width, height);
+    pop(); // Restore previous style settings
+
+
+
       // Display trees
       for (let tree of trees) {
         tree.display(img);
@@ -167,6 +177,7 @@ function draw() {
     for (let log of logs) {
         log.display(img2);
     }
+ 
       //Health bar 
       textSize(20);
       fill(255, 50, 100)
@@ -179,25 +190,26 @@ function draw() {
   // Display countdown timer
       textSize(20);
       fill(255);
-      text("Score: " + score, 30, 35);
-      text("Time Left: " + timeLeft + "s", width - 150, 30);  
+      text("Score: " + score, 400, 30);
+      text("Time Left: " + timeLeft + "s", width - 500, 30);  
   }
 
-// Check for win condition
-if (score >= 20) {
+    // Check for win condition
+    if (score >= 20) {
     textSize(60);
     fill(255, 215, 0);
     text("YOU WIN!", width / 2 - 125, height / 2);
     noLoop(); // Stop the game
     
 }
- // Check if time is up 
- if (timeLeft <= 1) {
+    // Check if time is up 
+    if (timeLeft <= 1) {
     textSize(50);
     fill(255, 0, 0)
     text("You Big Lose!", width / 2 - 125, height / 2);
     noLoop(); // Stop the game when time runs out
 
+     
  }
    
 function updateHealth(health, maxHealth) {
@@ -244,27 +256,30 @@ function checkCollision() {
 }
 
 function moveCharacter() {
+    let newX = myAnimation.x;
+    let newY = myAnimation.y;
 
     if (kb.pressing('d')) {
-        myAnimation.updatePosition('forward');
-        myAnimation.draw('run');
-        
+        newX += 5;
+    } else if (kb.pressing('a')) {
+        newX -= 5;
+    } else if (kb.pressing('w')) {
+        newY -= 5;
+    } else if (kb.pressing('s')) {
+        newY += 5;
     }
-    else if (kb.pressing('a')) {
-        myAnimation.updatePosition('reverse');
-        myAnimation.draw('run');
+
+    // Check if new position collides with any tree
+    let collision = trees.some(tree => tree.collidesWith({ x: newX, y: newY, width: 50, height: 50 }));
+
+    // Move only if no collision
+    if (!collision) {
+        myAnimation.x = newX;
+        myAnimation.y = newY;
     }
-    else if (kb.pressing('w')) {
-        myAnimation.updatePosition('up');
-        myAnimation.draw('run');
-    }
-    else if (kb.pressing('s')) {
-        myAnimation.updatePosition('down');
-        myAnimation.draw('run');
-    }
-    else {
-        myAnimation.draw('idle');
-    }
+
+    myAnimation.draw('idle'); // Change this based on movement state
+}
 
 for(let i = 0; i < foodArray.length; i++) {
 
@@ -329,6 +344,5 @@ function foodFight() {
         foodArray[i].x = random(100,200);
         foodArray[i].y = random(300,400);
     } 
-}
 }
 }
