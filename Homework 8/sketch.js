@@ -75,7 +75,13 @@ function preload() {
     img = loadImage('trees/PineTree 01.png');
 
     img2 = loadImage('assets/log.png')
-   
+
+   /* let tree = createSprite(x, y, 50, 50);
+    tree.addImage(PineTree.png);
+    tree.scale = 1.0;
+    tree.collider = 'static';
+    tree.push(tree);
+   */
 }
 
 
@@ -88,7 +94,7 @@ function setup() {
     myAnimation.loadAnimation('tree', runStrings); 
     myAnimation.loadAnimation('log', logStrings); 
     
-
+    
     
    // Create food objects
    for (let i = 0; i < 20; i++) {
@@ -115,6 +121,7 @@ function setup() {
         new tree(1000, 1, 100, 100),
         new tree(1070, 40, 100, 100)
     ];
+   
 
     // Initialize logs          //I want these to be random
     logs = [
@@ -149,8 +156,6 @@ function draw() {
 
     checkCollision();
 
-    
-
     //setCollider();
 
       // Display trees
@@ -162,9 +167,22 @@ function draw() {
     for (let log of logs) {
         log.display(img2);
     }
-}
-   
-    
+      //Health bar 
+      textSize(20);
+      fill(255, 50, 100)
+      text("Health bar", 600, 440); 
+  //Feed the Dino
+      textSize(30);
+      fill(0, 0, 0)
+      text("Feed the Dino!", width / 2 - 100, height / 12); 
+  
+  // Display countdown timer
+      textSize(20);
+      fill(255);
+      text("Score: " + score, 30, 35);
+      text("Time Left: " + timeLeft + "s", width - 150, 30);  
+  }
+
 
 //how to compact all this?
 /* //Tree upper left
@@ -207,26 +225,8 @@ if (score >= 20) {
     text("You Big Lose!", width / 2 - 125, height / 2);
     noLoop(); // Stop the game when time runs out
 
-  //Health bar 
-textSize(20);
-fill(255, 50, 100)
-text("Health bar", 600, 440); 
-//Feed the Dino
-textSize(30);
-fill(0, 0, 0)
-text("Feed the Dino!", width / 2 - 100, height / 12); 
-
-// Display countdown timer
-textSize(20);
-fill(255);
-text("Score: " + score, 30, 35);
-text("Time Left: " + timeLeft + "s", width - 150, 30);  
-}
-
-
-
-
-    
+ }
+   
 function updateHealth(health, maxHealth) {
    stroke(0);
    strokeWeight(4);
@@ -262,6 +262,7 @@ for (let j = 0; j < foodArray.length; j++) {
 
         foodArray[j].foodPiece.remove();
     }
+    
 }
 //on here twice
 function checkCollision() {
@@ -309,11 +310,6 @@ for(let i = 0; i < foodArray.length; i++) {
             foodArray[i].foodPiece.remove();
      } 
     }
-
-
-
-
-
 
 function displayFood() {
     for (let i = 0; i < foodArray.length; i++) {
