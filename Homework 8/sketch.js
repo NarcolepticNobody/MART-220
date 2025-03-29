@@ -38,12 +38,15 @@ let end;
 var foodHealth;
 let health = 50;
 let maxHealth = 100;
-//img
-let tree;
-let log;
+
+
+
 var loadImage;
 var treeStrings = [];
+var logStrings = [];
 
+let trees = [];
+let logs = [];
 
 
 
@@ -63,7 +66,9 @@ function preload() {
 
     runStrings = loadStrings('run.txt'); 
 
-    treeStrings = loadStrings('tree.txt'); //why no work?
+    treeStrings = loadStrings('tree.txt');
+
+    logStrings = loadStrings('log.txt');
 
     attackStrings = loadStrings('attack.txt');
 
@@ -81,26 +86,46 @@ function setup() {
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings); 
     myAnimation.loadAnimation('tree', runStrings); 
+    myAnimation.loadAnimation('log', logStrings); 
     
 
     
    // Create food objects
-   for (let i = 0; i < 30; i++) {
+   for (let i = 0; i < 20; i++) {
     if(floor(random(0,2)) == 0) {
-        myFood = new food(random(200, 490), random(200, 490), false);
+        myFood = new food(random(50, width - 50), random(50, height - 50), true);
+        
     }
     else {
-        myFood = new food(random(200, 490), random(200, 490), true);
+        myFood = new food(random(50, width - 50), random(50, height - 50), true);
         foodArray.push(myFood);
     }
+    let timePassed = int((millis() - startTime) / 1500);
+    timeLeft = max(countdown - timePassed, 0); // Prevents negative values
    }
- //new image add?  
-imgImage = createSprite(100, 200, 100, 500, 'static');
-imgImage.img = "trees/PineTree 01.png";
-//imgImage.setCollider("rectangle", 0, 0, 190, 140); 
-imgImage.scale = .3;
-imgImage.diameter = .3;
-imgImage.rotation = 0;
+
+
+
+     // Initialize trees
+     trees = [
+        new tree(100, 40, 190, 140),
+        new tree(400, 200, 190, 140),
+        new tree(650, 100, 130, 110),
+        new tree(900, 200, 160, 120),
+        new tree(1000, 1, 100, 100),
+        new tree(1070, 40, 100, 100)
+    ];
+
+    // Initialize logs
+    logs = [
+        new log(70, 100, 100, 100),
+        new log(200, 300, 100, 100),
+        new log(400, 300, 100, 100),
+        new log(600, 100, 100, 100),
+        new log(800, 300, 150, 100)
+    ];
+}
+
   
 //setInterval(updateIdleIndex, 100); // Idle animation updates slower
 //setInterval(updateRunIndex, 50); // Run animation updates faster
@@ -108,7 +133,7 @@ imgImage.rotation = 0;
 //countDownInterval = setInterval(updateCountDown, 1000);
 //setInterval(replayAnimation, 2000);
 
-}
+
 
 function draw() {
 
@@ -124,14 +149,25 @@ function draw() {
 
     checkCollision();
 
-    //loadImage();
+    
 
     //setCollider();
 
-  
+      // Display trees
+      for (let tree of trees) {
+        tree.display(img);
+    }
+
+    // Display logs
+    for (let log of logs) {
+        log.display(img2);
+    }
+}
+   
     
+
 //how to compact all this?
-    //Tree upper left
+/* //Tree upper left
     image(img, 100, 40, 190, 140);
      //Tree mid
      image(img, 400, 200, 190, 140);
@@ -154,7 +190,7 @@ function draw() {
        image(img2, 600, 100, 100, 100);
         //Upper right Log
          image(img2, 800, 300, 150, 100);
-    
+    */
 
 // Check for win condition
 if (score >= 20) {
@@ -170,9 +206,8 @@ if (score >= 20) {
     fill(255, 0, 0)
     text("You Big Lose!", width / 2 - 125, height / 2);
     noLoop(); // Stop the game when time runs out
-    
-}
-//Health bar 
+
+  //Health bar 
 textSize(20);
 fill(255, 50, 100)
 text("Health bar", 600, 440); 
@@ -185,10 +220,12 @@ text("Feed the Dino!", width / 2 - 100, height / 12);
 textSize(20);
 fill(255);
 text("Score: " + score, 30, 35);
-text("Time Left: " + timeLeft + "s", width - 150, 30);
+text("Time Left: " + timeLeft + "s", width - 150, 30);  
+}
 
-let timePassed = int((millis() - startTime) / 1500);
-timeLeft = max(countdown - timePassed, 0); // Prevents negative values
+
+
+
     
 function updateHealth(health, maxHealth) {
    stroke(0);
@@ -199,7 +236,7 @@ function updateHealth(health, maxHealth) {
    fill(233, 0, 0);
    
 }
-}
+
 function foodArray(i) {
    if (good.play());
     health += 10;

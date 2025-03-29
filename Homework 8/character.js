@@ -75,7 +75,7 @@ class character {
   
     // using the overlap function in p5play?
     isColliding(myImage) {
-      return this.currentAnimation.collided(myImage); //bad foods?
+      return this.currentAnimation.overlap(myImage); //bad foods?
       
     }
    
