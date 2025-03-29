@@ -6,8 +6,8 @@ class character {
       this.currentAnimation;
       this.createAnimation();
       this.speed = 5;
-      //this.isGood = isGood;
       this.rotationSpeed = 0;
+     
     }
   
     // Sprite

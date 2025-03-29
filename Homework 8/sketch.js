@@ -154,6 +154,8 @@ function draw() {
 
     moveCharacter();
 
+    //myAnimation();
+
     checkCollision();
 
     //setCollider();
@@ -258,27 +260,33 @@ function checkCollision() {
 function moveCharacter() {
     let newX = myAnimation.x;
     let newY = myAnimation.y;
+    let speed = 5;
 
-    if (kb.pressing('d')) {
-        newX += 5;
-    } else if (kb.pressing('a')) {
-        newX -= 5;
-    } else if (kb.pressing('w')) {
-        newY -= 5;
-    } else if (kb.pressing('s')) {
-        newY += 5;
-    }
+    if (kb.pressing('d')) newX += speed;
+    if (kb.pressing('a')) newX -= speed;
+    if (kb.pressing('w')) newY -= speed;
+    if (kb.pressing('s')) newY += speed;
 
-    // Check if new position collides with any tree
-    let collision = trees.some(tree => tree.collidesWith({ x: newX, y: newY, width: 50, height: 50 }));
+    
+    // Create a temporary object to represent the character's future position
+    let futurePosition = {
+        x: newX,
+        y: newY,
+        width: 50,  // Adjust as per character size
+        height: 50
+    };
 
-    // Move only if no collision
+    // Check collision with trees
+    let collision = trees.some(tree => tree.collidesWith(futurePosition));
+
+    // If no collision, update position
     if (!collision) {
         myAnimation.x = newX;
         myAnimation.y = newY;
     }
 
-    myAnimation.draw('idle'); // Change this based on movement state
+    myAnimation.draw(moving ? 'run' : 'idle');
+    //console.log("New X:", newX, "New Y:", newY, "Collision:", collision);
 }
 
 for(let i = 0; i < foodArray.length; i++) {
@@ -344,5 +352,7 @@ function foodFight() {
         foodArray[i].x = random(100,200);
         foodArray[i].y = random(300,400);
     } 
+
+    myAnimation.draw();
 }
 }
