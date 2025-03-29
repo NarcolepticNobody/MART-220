@@ -106,7 +106,7 @@ function setup() {
 
 
 
-     // Initialize trees
+     // Initialize trees     //I want these to be random
      trees = [
         new tree(100, 40, 190, 140),
         new tree(400, 200, 190, 140),
@@ -116,7 +116,7 @@ function setup() {
         new tree(1070, 40, 100, 100)
     ];
 
-    // Initialize logs
+    // Initialize logs          //I want these to be random
     logs = [
         new log(70, 100, 100, 100),
         new log(200, 300, 100, 100),
@@ -311,11 +311,7 @@ for(let i = 0; i < foodArray.length; i++) {
     }
 
 
-//on here
-function checkCollision() {
-    myAnimation.currentAnimation.rotationSpeed = 0;
-    myAnimation.currentAnimation.rotation = 0;
-}
+
 
 
 
