@@ -160,18 +160,18 @@ function draw() {
 
     //setCollider();
 
-    // Draw the border without affecting other objects
-    push(); // Save current style settings
-    stroke(0); // Black border
-    strokeWeight(10); // Thickness
-    noFill();
-    rect(0, 0, width, height);
-    pop(); // Restore previous style settings
+    
+    //Border 
+        push(); 
+        stroke(0); 
+        strokeWeight(10); 
+        noFill();
+        rect(0, 0, width, height);
+        pop(); 
 
 
-
-      // Display trees
-      for (let tree of trees) {
+    // Display trees
+    for (let tree of trees) {
         tree.display(img);
     }
 
@@ -180,7 +180,7 @@ function draw() {
         log.display(img2);
     }
  
-      //Health bar 
+  //Health bar 
       textSize(20);
       fill(255, 50, 100)
       text("Health bar", 600, 440); 
@@ -235,6 +235,7 @@ function foodArray(i) {
 //food array and collision
 for (let j = 0; j < foodArray.length; j++) {
     if (myAnimation.isColliding(foodArray[j].foodPiece)) {
+        
         if (foodArray[j].isGood) {
             score++;
         } else {
@@ -242,10 +243,10 @@ for (let j = 0; j < foodArray.length; j++) {
         }
 
         // why doesn't this work?
-        //myAnimation.currentAnimation.velocity.x = 0;
-        //myAnimation.currentAnimation.velocity.y = 0;
-        //myAnimation.currentAnimation.direction = 0;  // Reset direction
-        //myAnimation.currentAnimation.rotation = 0;   // Ensure rotation is reset
+        myAnimation.currentAnimation.velocity.x = 0;
+        myAnimation.currentAnimation.velocity.y = 0;
+        myAnimation.currentAnimation.direction = 0;  // Reset direction
+        myAnimation.currentAnimation.rotation = 0;   // Ensure rotation is reset
 
         foodArray[j].foodPiece.remove();
     }
@@ -267,7 +268,7 @@ function moveCharacter() {
     if (kb.pressing('w')) newY -= speed;
     if (kb.pressing('s')) newY += speed;
 
-    
+   
     // Create a temporary object to represent the character's future position
     let futurePosition = {
         x: newX,
@@ -286,7 +287,7 @@ function moveCharacter() {
     }
 
     myAnimation.draw(moving ? 'run' : 'idle');
-    //console.log("New X:", newX, "New Y:", newY, "Collision:", collision);
+    console.log("New X:", newX, "New Y:", newY, "Collision:", collision);
 }
 
 for(let i = 0; i < foodArray.length; i++) {
@@ -342,6 +343,9 @@ function updateRunIndex() {
         k = (k + 1) % run.length;
     }
 }
+
+
+
 function loadFood() {
     for (let i = 0; i < foodArray.length -1; i++) {
 
@@ -352,7 +356,7 @@ function foodFight() {
         foodArray[i].x = random(100,200);
         foodArray[i].y = random(300,400);
     } 
-
-    myAnimation.draw();
+    
+   
 }
 }
