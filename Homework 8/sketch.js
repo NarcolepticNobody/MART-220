@@ -39,7 +39,19 @@ function setup() {
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings);
 
+//create idle animation
+for (let i = 0; i < idleStrings.length; i++) {
 
+    let mycharacter = new character(idleStrings[0], this.x, this.y);
+    animation.push(mycharacter);
+}
+
+//create run animation
+for (let j = 0; j < runStrings.length; j++) {
+
+    let mycharacter = new character(runStrings[0], this.x, this.y);
+    animation.push(mycharacter);
+}
 
 
 
