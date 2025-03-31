@@ -38,7 +38,7 @@ function setup() {
     myAnimation = new Character(100, 100);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings);
-
+/*
 //create idle animation
 for (let i = 0; i < idleStrings.length; i++) {
 
@@ -49,11 +49,11 @@ for (let i = 0; i < idleStrings.length; i++) {
 //create run animation
 for (let j = 0; j < runStrings.length; j++) {
 
-    let mycharacter = new character(runStrings[0], this.x, this.y);
+    let mycharacter = new character(runStrings[i], this.x, this.y);
     animation.push(mycharacter);
 }
 
-
+*/
 
     // Create food objects
     for (let i = 0; i < 20; i++) {
