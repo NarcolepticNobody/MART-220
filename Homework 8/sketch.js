@@ -20,6 +20,7 @@ var myAnimation;
 
 // Preload assets
 function preload() {
+
     soundFormats('mp3', 'ogg', 'wav');
     song = loadSound("assets/melody.mp3");
     good = loadSound("assets/yes.mp3");
@@ -29,6 +30,7 @@ function preload() {
     runStrings = loadStrings('run.txt');
     img = loadImage('trees/PineTree 01.png');
     img2 = loadImage('assets/log.png');
+
 }
 
 // Setup function
@@ -66,12 +68,12 @@ for (let j = 0; j < runStrings.length; j++) {
 
    // Create static trees
    trees = [
-    new Tree(300, 40, 50, 100),
-    new Tree(400, 200, 60, 110),
-    new Tree(650, 100, 50, 100),
-    new Tree(900, 200, 70, 120),
-    new Tree(1000, 1, 80, 130),
-    new Tree(1070, 40, 90, 140)
+    new tree(300, 40, 120, 100),
+    new tree(400, 200, 60, 110),
+    new tree(650, 100, 120, 100),
+    new tree(900, 200, 70, 120),
+    new tree(1000, 1, 80, 130),
+    new tree(1070, 40, 120, 140)
 ];
 }
 

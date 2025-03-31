@@ -10,11 +10,11 @@ class tree {
       image(img, this.x, this.y, this.w, this.h);
   }
 
-  /*collidesWith(character) {
+  collidesWith(character) {
       return (character.x < this.x + this.w &&
               character.x + character.width > this.x &&
               character.y < this.y + this.h &&
               character.y + character.height > this.y);
   }
-              */
+              
 }
