@@ -11,7 +11,7 @@ var moving = false;
 var score = 0;
 var countdown = 20;
 var timeLeft = 20;
-var health = 50;
+var health = 100;
 var maxHealth = 100;
 var startTime;
 var img, img2;
@@ -37,50 +37,35 @@ function preload() {
 function setup() {
     createCanvas(1280, 450);
     startTime = millis();
-    myAnimation = new Character(100, 100);
+    myAnimation = new character(150, 200);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings);
-/*
-//create idle animation
-for (let i = 0; i < idleStrings.length; i++) {
 
-    let mycharacter = new character(idleStrings[0], this.x, this.y);
-    animation.push(mycharacter);
-}
 
-//create run animation
-for (let j = 0; j < runStrings.length; j++) {
-
-    let mycharacter = new character(runStrings[i], this.x, this.y);
-    animation.push(mycharacter);
-}
-
-*/
 
     // Create food objects
     for (let i = 0; i < 20; i++) {
         let isGood = random([true, false]);
-        let myFood = new Food(random(50, width - 50), random(50, height - 50), isGood);
+        let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
         foodArray.push(myFood);
     }
+    /*
+    //why no work
+     // Create food objects
+     for (let i = 0; i < 20; i++) {
+        let tree = random([true, false]);
+        let this.img2 = new tree(random(50, width - 50), random(50, height - 50), isGood);
+        foodArray.push(myFood);
+    }
+        */
 
-
-
-   // Create static trees
-   trees = [
-    new tree(300, 40, 120, 100),
-    new tree(400, 200, 60, 110),
-    new tree(650, 100, 120, 100),
-    new tree(900, 200, 70, 120),
-    new tree(1000, 1, 80, 130),
-    new tree(1070, 40, 120, 140)
-];
 }
 
 
 
 // Draw function
 function draw() {
+
     background(40, 100, 10);
     updateHealth(health, maxHealth);
     collidesWithTree();
@@ -88,15 +73,20 @@ function draw() {
     // Border
     push();
     stroke(0);
-    strokeWeight(10);
+    strokeWeight(20);
     noFill();
     rect(0, 0, width, height);
     pop();
 
-    // Display trees
-    for (let tree of trees) {
-        tree.display(img);
-    }
+    //Health Bar
+    textSize(20);
+    fill(255, 215, 0);
+    text("Health Bar", width / 2 - 40, height / 1.04);
+
+ // Display trees
+ for (let i = 0; i < trees.length; i++) {
+   trees[i].draw();
+ }
 
     // Display food
     for (let i = 0; i < foodArray.length; i++) {
@@ -106,7 +96,7 @@ function draw() {
         if (myAnimation.isColliding(foodArray[i])) {
             if (foodArray[i].isGood) {
                 score++;
-                health = min(health + 10, maxHealth);
+                health = min(health + 5, maxHealth);
                 good.play();
             } else {
                 score--;
@@ -133,6 +123,7 @@ function draw() {
     } else {
         myAnimation.draw('idle');
     }
+//how to make this work
     function collidesWithTree(newX, newY) {
         for (let tree of trees) {
             if (newX + 40 > tree.x && newX < tree.x + tree.w &&
@@ -146,7 +137,7 @@ function draw() {
 
     // Display UI
     textSize(20);
-    fill(255);
+    fill(255, 215, 0);
     text("Score: " + score, 400, 30);
     text("Time Left: " + timeLeft + "s", width - 500, 30);
 
@@ -168,6 +159,7 @@ function draw() {
         text("You Big Lose!", width / 2 - 125, height / 2);
         noLoop();
     }
+   
 }
 
 // Update health bar
@@ -181,8 +173,9 @@ function updateHealth(health, maxHealth) {
     rect(500, 400, map(health, 0, maxHealth, 0, 300), 10);
 }
 
+/*
 // Character Class
-class Character {
+class character {
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -240,4 +233,6 @@ class Tree {
     display(img) {
         image(img, this.x, this.y, this.w, this.h);
     }
+
 }
+    */
