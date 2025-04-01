@@ -1,21 +1,27 @@
-class food {
-    constructor(x, y, type) {
+class food
+{
+    constructor(x, y, isGood)
+    {
         this.x = x;
         this.y = y;
-        this.type = type; // Add a type property
-    } 
+        this.isGood = isGood;
+        this.foodPiece = new Sprite(x, y, 20);
+    }
 
-    draw() {
-        if (this.type === "blueberry") {
-            fill(22, 1, 120); // Blue
-            circle(this.x, this.y, 15);
-        } 
-        else if (this.type === "cherry") {
-            fill(255, 0, 0); // Red
-            circle(this.x, this.y, 15);
+    draw()
+    {
+        if(this.isGood)
+        {
+          
+        this.foodPiece.color = "green"
         }
-                // Optional: Add a small detail on top
-                fill(255, 0, 0);
-                circle(this.x, this.y, 4);
-            }
+        else
+        {
+           
+        this.foodPiece.color = "red"
+        
         }
+       
+    }
+      
+}

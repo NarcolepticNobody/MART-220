@@ -18,8 +18,8 @@ let countdown = 15;
 
 
 function preload() {
-    idlestring = loadStrings('characteridle.txt');
-    runstring = loadStrings('characterrun.txt');
+    idlestring = loadStrings('txt files/characteridle.txt');
+    runstring = loadStrings('txt files/characterrun.txt');
    
 }
 
@@ -178,3 +178,4 @@ function keyReleased() {
     keys[key] = false;
 
 }
+
