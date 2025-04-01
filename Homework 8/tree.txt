@@ -3,4 +3,8 @@ tree/Pinetree 02.png
 tree/Pinetree 03.png
 tree/Pinetree 04.png
 tree/Pinetree 05.png
-tree/Pinetree 06.png
+tree/Pinetree 07.png
+tree/Pinetree 08.png
+tree/Pinetree 09.png
+tree/Pinetree 10.png
+tree/Pinetree 11.png

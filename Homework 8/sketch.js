@@ -4,14 +4,14 @@ var run = [];
 var idleStrings = [];
 var runStrings = [];
 var foodArray = [];
-var trees = [];
-var logs = [];
+var treeArray = [];
+var logArray = [];
 var flipX = false;
 var moving = false;
 var score = 0;
 var countdown = 20;
 var timeLeft = 20;
-var health = 100;
+var health = 50;
 var maxHealth = 100;
 var startTime;
 var img, img2;
@@ -28,18 +28,22 @@ function preload() {
     end = loadSound("assets/wampp.mp3");
     idleStrings = loadStrings('idle.txt');
     runStrings = loadStrings('run.txt');
-    img = loadImage('trees/PineTree 01.png');
-    img2 = loadImage('assets/log.png');
+    treeStrings = loadStrings('tree.txt');
+    logStrings = loadStrings('log.txt')
+    //img = loadImage('trees/PineTree 01.png');
+    //img2 = loadImage('assets/log.png');
 
 }
 
 // Setup function
 function setup() {
-    createCanvas(1280, 450);
+    createCanvas(1280, 600);
+
     startTime = millis();
     myAnimation = new character(150, 200);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings);
+    
 
 
 
@@ -49,15 +53,23 @@ function setup() {
         let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
         foodArray.push(myFood);
     }
-    /*
-    //why no work
-     // Create food objects
-     for (let i = 0; i < 20; i++) {
-        let tree = random([true, false]);
-        let this.img2 = new tree(random(50, width - 50), random(50, height - 50), isGood);
-        foodArray.push(myFood);
+    
+    
+     // Create tree objects
+     for (let i = 0; i < treeStrings.length; i++) {
+        
+        let myTree = new tree(random(50, width - 50), random(50, height - 50), 40,40);
+        treeArray.push(myTree);
     }
-        */
+
+     // Create log objects
+     for (let i = 0; i < logStrings.length; i++) {
+        
+        let myLog = new log(random(50, width - 50), random(50, height - 50), 40 ,40);
+        logArray.push(myLog);
+    }
+        
+    
 
 }
 
@@ -84,16 +96,16 @@ function draw() {
     text("Health Bar", width / 2 - 40, height / 1.04);
 
  // Display trees
- for (let i = 0; i < trees.length; i++) {
-   trees[i].draw();
- }
+ //for (let i = 0; i < treeArray.length; i++) {
+   //treeArray[i].draw();
+ //}
 
     // Display food
     for (let i = 0; i < foodArray.length; i++) {
         foodArray[i].draw();
 
         // Check collision with character
-        if (myAnimation.isColliding(foodArray[i])) {
+        if (myAnimation.isColliding(foodArray[i].foodPiece)) {
             if (foodArray[i].isGood) {
                 score++;
                 health = min(health + 5, maxHealth);
@@ -103,7 +115,7 @@ function draw() {
                 health = max(health - 10, 0);
                 bad.play();
             }
-            foodArray.splice(i, 1);
+            foodArray[i].foodPiece.remove();
         }
     }
 
@@ -123,16 +135,7 @@ function draw() {
     } else {
         myAnimation.draw('idle');
     }
-//how to make this work
-    function collidesWithTree(newX, newY) {
-        for (let tree of trees) {
-            if (newX + 40 > tree.x && newX < tree.x + tree.w &&
-                newY + 50 > tree.y && newY < tree.y + tree.h) {
-                return true; // Collision detected
-            }
-        }
-        return false;
-     }
+
      
 
     // Display UI
@@ -142,7 +145,7 @@ function draw() {
     text("Time Left: " + timeLeft + "s", width - 500, 30);
 
     // Check win condition
-    if (score >= 20) {
+    if (score >= 5) {
         textSize(60);
         fill(255, 215, 0);
         text("YOU WIN!", width / 2 - 125, height / 2);
@@ -153,14 +156,25 @@ function draw() {
     let timePassed = int((millis() - startTime) / 1000);
     timeLeft = max(countdown - timePassed, 0);
 
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0 || health <= 0)  {
         textSize(50);
         fill(255, 0, 0);
         text("You Big Lose!", width / 2 - 125, height / 2);
         noLoop();
     }
    
-}
+}//end of draw
+
+//how to make this work
+function collidesWithTree(newX, newY) {
+    for (let tree of treeArray) {
+        if (newX + 40 > tree.x && newX < tree.x + tree.w &&
+            newY + 50 > tree.y && newY < tree.y + tree.h) {
+            return true; // Collision detected
+        }
+    }
+    return false;
+ }
 
 // Update health bar
 function updateHealth(health, maxHealth) {

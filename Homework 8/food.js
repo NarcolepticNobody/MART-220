@@ -8,10 +8,6 @@ class food
         this.foodPiece = new Sprite(x, y, 20);
     }
 
-     // this creates the initial sprite
-   createAnimation() {
-    this.currentAnimation = createSprite(this.x, this.y);
-  }
     draw()
     {
         if(this.isGood)
