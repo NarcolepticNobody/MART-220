@@ -1,4 +1,4 @@
-// Global Variables
+
 var animation = [];
 var run = [];
 var idleStrings = [];
@@ -6,6 +6,8 @@ var runStrings = [];
 var foodArray = [];
 var treeArray = [];
 var logArray = [];
+var attackArray = [];
+var particles = [];
 var flipX = false;
 var moving = false;
 var score = 0;
@@ -30,6 +32,7 @@ function preload() {
     runStrings = loadStrings('txtfiles/run.txt');
     treeStrings = loadStrings('txtfiles/tree.txt');
     logStrings = loadStrings('txtfiles/log.txt')
+    attackStrings = loadStrings('txtfiles/attack2.txt')
     //img = loadImage('trees/PineTree 01.png');
     //img2 = loadImage('assets/log.png');
 
@@ -43,33 +46,29 @@ function setup() {
     myAnimation = new character(150, 200);
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings);
-    
-
-
+    myAnimation.loadAnimation('attack', attackStrings);
 
     // Create food objects
     for (let i = 0; i < 30; i++) {
+
         let isGood = random([true, false]);
         let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
         foodArray.push(myFood);
     }
     
-    
      // Create tree objects
      for (let i = 0; i < treeStrings.length; i++) {
         
-        let myTree = new tree(random(50, width - 50), random(50, height - 50), 40,40);
+        let myTree = new tree(random(50, width - 50), random(50, height - 50), 40, 40);
         treeArray.push(myTree);
     }
 
      // Create log objects
      for (let i = 0; i < logStrings.length; i++) {
         
-        let myLog = new log(random(50, width - 50), random(50, height - 50), 40 ,40);
+        let myLog = new log(random(50, width - 50), random(50, height - 50), 40, 40);
         logArray.push(myLog);
     }
-        
-    
 
 }
 
@@ -81,6 +80,23 @@ function draw() {
     background(40, 100, 10);
     updateHealth(health, maxHealth);
     collidesWithTree();
+
+//particles
+    for (let i = 0; i < 1; i++) {
+        let p = new Particle();
+        particles.push(p);
+
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].show();
+        if (particles[i].finished()) {
+
+          // remove this particle
+          //particleArray[i].particlePiece.remove();
+        }
+      }
 
     // Border
     push();
@@ -94,8 +110,6 @@ function draw() {
     textSize(20);
     fill(255, 215, 0);
     text("Health Bar", width / 2 - 40, height / 1.04);
-
- 
 
     // Display food
     for (let i = 0; i < foodArray.length; i++) {
@@ -129,11 +143,13 @@ function draw() {
     } else if (keyIsDown(83)) { // 'S' key
         myAnimation.updatePosition('down');
         myAnimation.draw('run');
+
+    } else if (kb.pressing('x')) { // 'Shift' key
+        myAnimation.updatePosition('attack');
+        myAnimation.draw('attack');
     } else {
         myAnimation.draw('idle');
     }
-
-     
 
     // Display UI
     textSize(20);
@@ -179,7 +195,6 @@ function collidesWithTree(newX, newY) {
 // Update health bar
 function updateHealth(health, maxHealth) {
     
-   
     noStroke();
     fill(233, 0, 0);
     rect(500, 500, map(health, 0, maxHealth, 0, 300), 8);

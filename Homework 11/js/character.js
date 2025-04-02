@@ -19,7 +19,7 @@ class character {
   
     // fill the animation frames into the current animation object
     loadAnimation(animationType, fileNames) {
-  
+  console.log(fileNames[0]);
       this.currentAnimation.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
       // set the hit box
       this.currentAnimation.width = 300;
@@ -35,6 +35,7 @@ class character {
       this.currentAnimation.scale = .19;
       this.currentAnimation.rotationLock = true;
       this.currentAnimation.changeAnimation(animationType);
+      
       if (animationType == 'run' && this.direction == 'forward') {
         this.currentAnimation.direction = 0;
         this.currentAnimation.mirror.x = false;
