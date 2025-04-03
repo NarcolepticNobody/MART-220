@@ -8,6 +8,7 @@ class character {
       this.currentAnimation;
       this.createAnimation();
       this.speed = 3;
+      
   
     }
   

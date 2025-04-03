@@ -149,9 +149,9 @@ function draw() {
         myAnimation.draw('attack');
         
     } 
-    if (dist(myAnimation.currentAnimation().position.x, myAnimation.currentAnimation().position.y, log.position.x, log.position.y) < 200) {
-        console.log("destroy");
-    }
+   // if (dist(myAnimation.getCurrentAnimation().position.x, myAnimation.getCurrentAnimation().position.y, logArray.position.x, logArray.position.y) < 200) {
+        //console.log("destroy");
+   // }
     else {
         myAnimation.draw('idle');
     }
