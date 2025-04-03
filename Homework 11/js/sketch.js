@@ -49,7 +49,7 @@ function setup() {
     myAnimation.loadAnimation('attack', attackStrings);
 
     // Create food objects
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
 
         let isGood = random([true, false]);
         let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
@@ -81,7 +81,7 @@ function draw() {
     updateHealth(health, maxHealth);
     collidesWithTree();
 
-//particles
+//Particles
     for (let i = 0; i < 1; i++) {
         let p = new Particle();
         particles.push(p);
@@ -131,16 +131,16 @@ function draw() {
     }
 
     // Keyboard controls
-    if (keyIsDown(68)) { // 'D' key
+    if (kb.pressing('d')) { // 'D' key
         myAnimation.updatePosition('forward');
         myAnimation.draw('run');
-    } else if (keyIsDown(65)) { // 'A' key
+    } else if (kb.pressing('a')) { // 'A' key
         myAnimation.updatePosition('reverse');
         myAnimation.draw('run');
-    } else if (keyIsDown(87)) { // 'W' key
+    } else if (kb.pressing('w')) { // 'W' key
         myAnimation.updatePosition('up');
         myAnimation.draw('run');
-    } else if (keyIsDown(83)) { // 'S' key
+    } else if (kb.pressing('s')) { // 'S' key
         myAnimation.updatePosition('down');
         myAnimation.draw('run');
 
@@ -149,9 +149,11 @@ function draw() {
         myAnimation.draw('attack');
         
     } 
+  
    // if (dist(myAnimation.getCurrentAnimation().position.x, myAnimation.getCurrentAnimation().position.y, logArray.position.x, logArray.position.y) < 200) {
         //console.log("destroy");
    // }
+
     else {
         myAnimation.draw('idle');
     }
