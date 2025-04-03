@@ -23,5 +23,6 @@ class Particle {
       //stroke(255);
       fill(255, this.alpha);
       ellipse(this.x, this.y, 10);
+      //particleArray[i].particlePiece.remove();
     }
 }

@@ -147,7 +147,12 @@ function draw() {
     } else if (kb.pressing('x')) { // 'Shift' key
         myAnimation.updatePosition('attack');
         myAnimation.draw('attack');
-    } else {
+        
+    } 
+    if (dist(myAnimation.currentAnimation().position.x, myAnimation.currentAnimation().position.y, log.position.x, log.position.y) < 200) {
+        console.log("destroy");
+    }
+    else {
         myAnimation.draw('idle');
     }
 
@@ -181,7 +186,7 @@ function draw() {
    
 }//end of draw
 
-//how to make this work
+
 function collidesWithTree(newX, newY) {
     for (let tree of treeArray) {
         if (newX + 40 > tree.x && newX < tree.x + tree.w &&
