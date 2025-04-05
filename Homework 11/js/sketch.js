@@ -164,6 +164,40 @@ for (let i = logArray.length - 1; i >= 0; i--) {
         attack.play();
         attack.setVolume(0.7);
         //attack.rate(1);
+    } else if (kb.pressing('shift')) {
+        myAnimation.updatePosition('attack');
+        myAnimation.draw('attack');
+        attack.play();
+        attack.setVolume(0.7);
+    
+        // Check for nearby logs to destroy
+        for (let i = logArray.length - 1; i >= 0; i--) {
+            let d = dist(
+                myAnimation.getCurrentAnimation().position.x,
+                myAnimation.getCurrentAnimation().position.y,
+                logArray[i].currentAnimation.position.x,
+                logArray[i].currentAnimation.position.y
+            );
+    
+            if (d < 10) { // adjust range to your liking
+                for (let j = 0; j < 20; j++) {
+                    let p = new Particle(
+                        logArray[i].currentAnimation.position.x,
+                        logArray[i].currentAnimation.position.y
+                    );
+                    particles.push(p);
+                }
+    
+                logArray[i].currentAnimation.remove();
+                logArray.splice(i, 1);
+    
+                if (stomp) {
+                    stomp.play(); // log breaking sound
+                }
+            }
+        }
+    
+    
 
         
     } 
