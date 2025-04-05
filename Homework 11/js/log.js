@@ -6,6 +6,7 @@ class log {
       this.h = h;
       this.currentAnimation;
       this.createAnimation();
+      this.health = 100;
       
       
     }
