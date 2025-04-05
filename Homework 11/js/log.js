@@ -7,6 +7,7 @@ class log {
       this.currentAnimation;
       this.createAnimation();
       
+      
     }
   
     // this creates the initial sprite
@@ -15,8 +16,8 @@ class log {
       this.currentAnimation.img = 'log/log01.png';
       this.currentAnimation.scale = .14;
       //hit box//Needs particles
-      //this.currentAnimation.width = 12;
-      //this.currentAnimation.height = 12;
+      this.currentAnimation.width = 12;
+      this.currentAnimation.height = 12;
       
      
     }

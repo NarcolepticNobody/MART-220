@@ -17,17 +17,21 @@ var health = 50;
 var maxHealth = 100;
 var startTime;
 var img, img2;
-let good, bad, end, song;
+let good, bad, end, attack;
+var mySound;
 var myAnimation;
+var stomp; //log destroy
+let gameOver = false;
 
 // Preload assets
 function preload() {
 
     soundFormats('mp3', 'ogg', 'wav');
-    song = loadSound("assets/melody.mp3");
+    mySound = loadSound("assets/melody.mp3");
     good = loadSound("assets/yes.mp3");
     bad = loadSound("assets/442602__topschool__ow-sound.mp3");
     end = loadSound("assets/wampp.mp3");
+    attack = loadSound('assets/crunch.wav')
     idleStrings = loadStrings('txtfiles/idle.txt');
     runStrings = loadStrings('txtfiles/run.txt');
     treeStrings = loadStrings('txtfiles/tree.txt');
@@ -72,6 +76,13 @@ function setup() {
 
 }
 
+function mousePressed() {
+    if (mySound.isPlaying()) {
+      mySound.stop();
+    } else {
+      mySound.loop(); 
+    }
+  } 
 
 
 // Draw function
@@ -129,6 +140,8 @@ function draw() {
             foodArray[i].foodPiece.remove();
         }
     }
+   
+   
 
     // Keyboard controls
     if (kb.pressing('d')) { // 'D' key
@@ -144,9 +157,13 @@ function draw() {
         myAnimation.updatePosition('down');
         myAnimation.draw('run');
 
-    } else if (kb.pressing('x')) { // 'Shift' key
+    } else if (kb.pressing('shift')) { // 'Shift' key
         myAnimation.updatePosition('attack');
         myAnimation.draw('attack');
+        attack.play();
+        attack.setVolume(0.7);
+        //attack.rate(1);
+
         
     } 
   
@@ -175,16 +192,20 @@ function draw() {
         noLoop();
     }
 
-    // Check time left
-    let timePassed = int((millis() - startTime) / 1000);
-    timeLeft = max(countdown - timePassed, 0);
+// Check time left
+let timePassed = int((millis() - startTime) / 1000);
+timeLeft = max(countdown - timePassed, 0);
 
-    if (timeLeft <= 0 || health <= 0)  {
-        textSize(50);
-        fill(255, 0, 0);
-        text("You Big Lose!", width / 2 - 125, height / 2);
-        noLoop();
-    }
+if ((timeLeft <= 0 || health <= 0) && !gameOver) {
+    textSize(50);
+    fill(255, 0, 0);
+    text("You Big Lose!", width / 2 - 125, height / 2);
+    end.play();
+    end.setVolume(2);
+    noLoop();
+    gameOver = true; 
+    mySound.stop();
+}
    
 }//end of draw
 
