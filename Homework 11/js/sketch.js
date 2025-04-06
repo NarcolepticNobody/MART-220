@@ -6,6 +6,7 @@ var runStrings = [];
 var foodArray = [];
 var treeArray = [];
 var logArray = [];
+var grassArray = [];
 var attackArray = [];
 let particles = [];
 var flipX = false;
@@ -36,6 +37,7 @@ function preload() {
     runStrings = loadStrings('txtfiles/run.txt');
     treeStrings = loadStrings('txtfiles/tree.txt');
     logStrings = loadStrings('txtfiles/log.txt')
+    grassStrings = loadStrings('txtfiles/grass.txt')
     attackStrings = loadStrings('txtfiles/attack2.txt')
     //img = loadImage('trees/PineTree 01.png');
     //img2 = loadImage('assets/log.png');
@@ -73,6 +75,13 @@ function setup() {
         let myLog = new log(random(50, width - 50), random(50, height - 50), 40, 40);
         logArray.push(myLog);
     }
+     /* // Create grass objects
+      for (let i = 0; i < grassStrings.length; i++) {
+        
+        let myGrass = new grass(random(50, width - 50), random(50, height - 50), 40, 40);
+        grassArray.push(myGrass);
+    }
+        */
 
 }
 
