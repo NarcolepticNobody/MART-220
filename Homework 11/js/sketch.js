@@ -217,7 +217,6 @@ if ((timeLeft <= 0 || health <= 0) && !gameOver) {
     mySound.stop();
 }
   }
-  
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].show();
@@ -260,12 +259,12 @@ function updateHealth(health, maxHealth) {
     
     noStroke();
     fill(233, 0, 0);
-    rect(500, 500, map(health, 0, maxHealth, 0, 600), 50);
+    rect(500, 500, map(health, 0, maxHealth, 0, 300), 8);
 
     stroke(0);
     strokeWeight(5);
     noFill();
-    rect(500, 500, 300, 50);
+    rect(500, 500, 300, 10);
     noStroke();
 }
 
