@@ -75,13 +75,13 @@ function setup() {
         let myLog = new log(random(50, width - 50), random(50, height - 50), 40, 40);
         logArray.push(myLog);
     }
-     /* // Create grass objects
+    /*  // Create grass objects
       for (let i = 0; i < grassStrings.length; i++) {
         
         let myGrass = new grass(random(50, width - 50), random(50, height - 50), 40, 40);
         grassArray.push(myGrass);
     }
-        */
+      */  
 
 }
 
@@ -93,31 +93,11 @@ function mousePressed() {
     }
   } 
 
-
 // Draw function
 function draw() {
-
     background(40, 100, 10);
     updateHealth(health, maxHealth);
     collidesWithTree();
-
-//Particles
-for (let i = logArray.length - 1; i >= 0; i--) {
-    if (logArray[i].health <= 0) {
-      // Spawn particles at the sprite's position
-      let logSprite = logArray[i].currentAnimation;
-      for (let j = 0; j < 20; j++) {
-        let p = new Particle(logSprite.position.x, logSprite.position.y);
-        particles.push(p);
-      }
-  
-      // Destroy the sprite and remove the log
-      logArray[i].currentAnimation.remove();
-      logArray.splice(i, 1);
-    }
-  }
-  
-  
 
     // Border
     push();
@@ -151,8 +131,6 @@ for (let i = logArray.length - 1; i >= 0; i--) {
         }
     }
    
-   
-
     // Keyboard controls
     if (kb.pressing('d')) { // 'D' key
         myAnimation.updatePosition('forward');
@@ -176,16 +154,13 @@ for (let i = logArray.length - 1; i >= 0; i--) {
     } else if (kb.pressing('shift')) {
         myAnimation.updatePosition('attack');
         myAnimation.draw('attack');
+        health = max(health - 10, 0);
         attack.play();
         attack.setVolume(0.7);
     
         // Check for nearby logs to destroy
         for (let i = logArray.length - 1; i >= 0; i--) {
-            let d = dist(
-                myAnimation.getCurrentAnimation().position.x,
-                myAnimation.getCurrentAnimation().position.y,
-                logArray[i].currentAnimation.position.x,
-                logArray[i].currentAnimation.position.y
+            let d = dist(myAnimation.getCurrentAnimation().position.x, myAnimation.getCurrentAnimation().position.y, logArray[i].currentAnimation.position.x, logArray[i].currentAnimation.position.y
             );
     
             if (d < 10) { // adjust range to your liking
@@ -204,17 +179,8 @@ for (let i = logArray.length - 1; i >= 0; i--) {
                     stomp.play(); // log breaking sound
                 }
             }
-        }
-    
-    
-
-        
+        } 
     } 
-  
-   // if (dist(myAnimation.getCurrentAnimation().position.x, myAnimation.getCurrentAnimation().position.y, logArray.position.x, logArray.position.y) < 200) {
-        //console.log("destroy");
-   // }
-
     else {
         myAnimation.draw('idle');
     }
@@ -250,8 +216,8 @@ if ((timeLeft <= 0 || health <= 0) && !gameOver) {
     gameOver = true; 
     mySound.stop();
 }
-
   }
+  
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].show();
@@ -259,10 +225,25 @@ if ((timeLeft <= 0 || health <= 0) && !gameOver) {
     if (particles[i].finished()) {
       particles.splice(i, 1); // remove when done
     }
-  
-  
-}//end of draw
 
+//Particles
+for (let i = logArray.length - 1; i >= 0; i--) {
+    if (logArray[i].health <= 0) {
+
+      // Spawn particles at the sprite's position
+      let logSprite = logArray[i].currentAnimation;
+      for (let j = 0; j < 20; j++) {
+        let p = new Particle(logSprite.position.x, logSprite.position.y);
+        particles.push(p);
+      }
+
+      // Destroy the sprite and remove the log
+      logArray[i].currentAnimation.remove();
+      logArray.splice(i, 1);
+    }
+  }    
+
+}//end of draw
 
 function collidesWithTree(newX, newY) {
     for (let tree of treeArray) {
