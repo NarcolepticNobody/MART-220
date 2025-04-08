@@ -1,4 +1,0 @@
-attack/attack 00.png
-attack/attack 01.png
-attack/attack 02.png
-attack/attack 03.png
