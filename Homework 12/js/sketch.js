@@ -1,6 +1,8 @@
 var shape1, shape2, shape3, shape4, shape5;
 var shapes = [];
 var currentNumber = 0;
+let button;
+let particles;
 function setup()
 {
     createCanvas(800,800, WEBGL);
@@ -24,16 +26,13 @@ function setup()
 function draw()
 {
     background(120,100, 40);
-   // console.log(round(random(0,2)));
+  
     
    shapes[currentNumber].draw();
-      // Enable orbiting with the mouse.
+     
   orbitControl();
 
-  // Draw the cone.
-  // Set its radius to 30 and height to 50.
-  // Set its detailX to 24 and detailY to 2.
-  cone(30, 50, 24, 2);
+  cone(30);
 }
 
 
