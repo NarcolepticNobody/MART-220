@@ -212,29 +212,16 @@ if ((timeLeft <= 0 || health <= 0) && !gameOver) {
     gameOver = true; 
     mySound.stop();
 }
-  }
-  for (let i = particles.length - 1; i >= 0; i--) {
+  
+  
+
+// At the bottom of draw()
+for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].show();
   
     if (particles[i].finished()) {
       particles.splice(i, 1); // remove when done
-    }
-
-//Particles
-for (let i = logArray.length - 1; i >= 0; i--) {
-    if (logArray[i].health <= 0) {
-
-      // Spawn particles at the sprite's position
-      let logSprite = logArray[i].currentAnimation;
-      for (let j = 0; j < 20; j++) {
-        let p = new Particle(logSprite.position.x, logSprite.position.y);
-        particles.push(p);
-      }
-
-      // Destroy the sprite and remove the log
-      logArray[i].currentAnimation.remove();
-      logArray.splice(i, 1);
     }
   }    
 
