@@ -7,4 +7,4 @@ images1/Idle(6).png
 images1/Idle(7).png 
 images1/Idle(8).png 
 images1/Idle(9).png 
-images1/Idle (10).png
+images1/Idle(10).png

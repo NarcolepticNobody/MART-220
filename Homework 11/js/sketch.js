@@ -32,8 +32,8 @@ function preload() {
     good = loadSound("assets/yes.mp3");
     bad = loadSound("assets/442602__topschool__ow-sound.mp3");
     end = loadSound("assets/wampp.mp3");
-    //wahoo = loadSound('assets/wahoo')
-    attack = loadSound('assets/crunch.wav')
+    wahoo = loadSound('assets/wahoo.wav')
+    
     idleStrings = loadStrings('txtfiles/idle.txt');
     runStrings = loadStrings('txtfiles/run.txt');
     treeStrings = loadStrings('txtfiles/tree.txt');
@@ -150,8 +150,8 @@ function draw() {
         myAnimation.updatePosition('attack');
         myAnimation.draw('attack');
         //health = max(health - 10, 0);
-        attack.play();
-        attack.setVolume(0.7);
+        //attack.play();
+        //attack.setVolume(0.7);
         //attack.setSpeed(0.1);
     
         // Check for nearby logs to destroy
@@ -173,8 +173,8 @@ function draw() {
                 logArray[i].currentAnimation.remove();
                 logArray.splice(i, 1);
     
-                if (stomp) {
-                    stomp.play(); // log breaking sound
+                if (!wahoo.isPlaying()) {
+                    wahoo.play(); // log breaking sound
                 }
             }
         } 
@@ -215,8 +215,6 @@ if ((timeLeft <= 0 || health <= 0) && !gameOver) {
     mySound.stop();
 }
   
-  
-
 // At the bottom of draw()
 for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
