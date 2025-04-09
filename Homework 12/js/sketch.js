@@ -5,7 +5,7 @@ let button;
 let particles;
 function setup()
 {
-    createCanvas(800,800, WEBGL);
+    createCanvas(800, 800, WEBGL);
     shape1 = new Box(random(100,200),random(100,200), .02, .05, 50, 25);
     shape2 = new Torus(random(-50,-200),random(-10,-200), .01, .1, 30, 20);
     shape3 = new Torus(random(-50,-200),random(80,300), .08, .03, 80, 40);
@@ -18,8 +18,6 @@ function setup()
     shapes[3] = shape4;
     shapes[4] = shape5;
 
-
-
     setInterval(changeShape, 1000);
 }
 
@@ -28,11 +26,11 @@ function draw()
     background(120,100, 40);
   
     
-   shapes[currentNumber].draw();
+    shapes[currentNumber].draw();
      
-  orbitControl();
+    orbitControl();
 
-  cone(30);
+    cone(30);
 }
 
 

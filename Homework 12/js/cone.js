@@ -11,7 +11,7 @@ class Cone extends threedshape{
     draw()
     {
         push();
-        super.moveShape();
+        //super.moveShape();
         torus(this.radius, this.coneRadius);
         pop();
     }

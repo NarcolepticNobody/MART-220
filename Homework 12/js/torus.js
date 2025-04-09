@@ -11,7 +11,7 @@ class Torus extends threedshape{
     draw()
     {
         push();
-        super.moveShape();
+        //super.moveShape();
         torus(this.radius, this.tubeRadius);
         pop();
     }

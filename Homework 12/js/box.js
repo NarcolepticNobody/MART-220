@@ -11,7 +11,7 @@ class Box extends threedshape
     draw()
     {
         push();
-        super.moveShape();
+        //super.moveShape();
         
         box(this.width, this.height);
         pop();

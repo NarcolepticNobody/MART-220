@@ -10,9 +10,9 @@ class threedshape{
 
     moveShape()
     {
-        translate(this.x, this.y);
+        //translate(this.x, this.y);
         rotateX(frameCount * this.speedX);
-        rotateY(frameCount * this.speedY);
+        //rotateY(frameCount * this.speedY);
         
     }
 }
