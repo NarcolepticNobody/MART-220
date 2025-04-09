@@ -145,25 +145,21 @@ function draw() {
         myAnimation.updatePosition('down');
         myAnimation.draw('run');
 
-    } else if (kb.pressing('shift')) { // 'Shift' key
-        myAnimation.updatePosition('attack');
-        myAnimation.draw('attack');
-        attack.play();
-        attack.setVolume(0.7);
-        //attack.rate(1);
     } else if (kb.pressing('shift')) {
         myAnimation.updatePosition('attack');
         myAnimation.draw('attack');
-        health = max(health - 10, 0);
+        //health = max(health - 10, 0);
         attack.play();
         attack.setVolume(0.7);
     
         // Check for nearby logs to destroy
         for (let i = logArray.length - 1; i >= 0; i--) {
-            let d = dist(myAnimation.getCurrentAnimation().position.x, myAnimation.getCurrentAnimation().position.y, logArray[i].currentAnimation.position.x, logArray[i].currentAnimation.position.y
+           
+            // want to check for "currentAnimation" since getCurrentAnimation() doesn't exist in your character.js file
+            let d = dist(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y, logArray[i].currentAnimation.position.x, logArray[i].currentAnimation.position.y
             );
-    
-            if (d < 10) { // adjust range to your liking
+            // needed a larger distance
+            if (d < 80) { 
                 for (let j = 0; j < 20; j++) {
                     let p = new Particle(
                         logArray[i].currentAnimation.position.x,
@@ -267,5 +263,4 @@ function updateHealth(health, maxHealth) {
     rect(500, 500, 300, 10);
     noStroke();
 }
-
 
