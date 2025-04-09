@@ -18,7 +18,7 @@ var health = 50;
 var maxHealth = 100;
 var startTime;
 var img, img2;
-let good, bad, end, attack;
+let good, bad, end, attack, wahoo;
 var mySound;
 var myAnimation;
 var stomp; //log destroy
@@ -32,6 +32,7 @@ function preload() {
     good = loadSound("assets/yes.mp3");
     bad = loadSound("assets/442602__topschool__ow-sound.mp3");
     end = loadSound("assets/wampp.mp3");
+    //wahoo = loadSound('assets/wahoo')
     attack = loadSound('assets/crunch.wav')
     idleStrings = loadStrings('txtfiles/idle.txt');
     runStrings = loadStrings('txtfiles/run.txt');
@@ -151,6 +152,7 @@ function draw() {
         //health = max(health - 10, 0);
         attack.play();
         attack.setVolume(0.7);
+        //attack.setSpeed(0.1);
     
         // Check for nearby logs to destroy
         for (let i = logArray.length - 1; i >= 0; i--) {
