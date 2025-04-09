@@ -1,4 +1,4 @@
-class SpinningBox {
+class SpinningTorus {
     constructor(x, y, z, axis = 'y') {
       this.x = x;
       this.y = y;
@@ -8,14 +8,14 @@ class SpinningBox {
     }
   
     update() {
-      this.angle += 1;
+      this.angle += 1; // spin speed
     }
   
     display() {
       push();
       translate(this.x, this.y, this.z);
   
-      // Rotate around one axis
+      // Spin on selected axis
       if (this.axis === 'x') {
         rotateX(this.angle);
       } else if (this.axis === 'y') {
@@ -24,8 +24,8 @@ class SpinningBox {
         rotateZ(this.angle);
       }
   
-      ambientMaterial(0, 200, 255); // blue-ish color
-      box(60);
+      ambientMaterial(255, 150, 0);
+      torus(50, 15, 24, 16);
       pop();
     }
   }

@@ -1,41 +1,41 @@
-var shape1, shape2, shape3, shape4, shape5;
-var shapes = [];
-var currentNumber = 0;
-let button;
-let particles;
-function setup()
-{
-    createCanvas(800, 800, WEBGL);
-    shape1 = new Box(random(100,200),random(100,200), .02, .05, 50, 25);
-    shape2 = new Torus(random(-50,-200),random(-10,-200), .01, .1, 30, 20);
-    shape3 = new Torus(random(-50,-200),random(80,300), .08, .03, 80, 40);
-    shape4 = new Torus(random(-20,-10),random(80,600), .09, .03, 70, 40);
-    shape5 = new Torus(random(-10,-100),random(800,300), .08, .03, 80, 90);
-    
-    shapes[0] = shape1;
-    shapes[1] = shape2;
-    shapes[2] = shape3;
-    shapes[3] = shape4;
-    shapes[4] = shape5;
+let toruses = [];
+let boxes = []; // ✅ Don't use 'box'
 
-    setInterval(changeShape, 1000);
+function setup() {
+  createCanvas(800, 600, WEBGL);
+  angleMode(DEGREES);
+
+  let numTorus = int(random(3, 7));
+  let numBox = int(random(3, 7));
+
+  for (let i = 0; i < numTorus; i++) {
+    let x = random(-300, 300);
+    let y = random(-200, 0);
+    let z = random(-200, 200);
+    let axis = random(['x', 'y', 'z']);
+    toruses.push(new SpinningTorus(x, y, z, axis));
+  }
+
+  for (let i = 0; i < numBox; i++) {
+    let x = random(-300, 300);
+    let y = random(0, 200);
+    let z = random(-200, 200);
+    let axis = random(['x', 'y', 'z']);
+    boxes.push(new SpinningBox(x, y, z, axis)); // ✅ Use new name
+  }
 }
 
-function draw()
-{
-    background(120,100, 40);
-  
-    
-    shapes[currentNumber].draw();
-     
-    orbitControl();
+function draw() {
+  background(30);
+  lights();
 
-    cone(30);
-}
+  for (let t of toruses) {
+    t.update();
+    t.display();
+  }
 
-
-
-function changeShape()
-{
-    currentNumber = round(random(0,2));
+  for (let b of boxes) {
+    b.update();
+    b.display();
+  }
 }
