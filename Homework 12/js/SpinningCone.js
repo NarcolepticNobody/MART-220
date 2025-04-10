@@ -10,35 +10,38 @@ class SpinningCone {
     this.baseY = y;
     this.axis = axis;
     this.rotation = 0;
-    this.hue = random(360);
-    this.targetHue = random(360);
+    this.hue = random(360);          // starting hue
+    this.targetHue = random(360);    // color shifting
   }
 
   update() {
     this.rotation += 3;
-    this.hue = lerp(this.hue, this.targetHue, 0.02);
+    this.hue = lerp(this.hue, this.targetHue, 0.02); // smooth color transition
 
     if (frameCount % 180 === 0) {
-      this.targetHue = random(360);
+      this.targetHue = random(360); // new target color every 3 seconds
     }
   }
 
   display() {
-    let bounceY = this.baseY + sin(frameCount * 2) * 200;
+    let bounceY = this.baseY + sin(frameCount * 2) * 400;
 
     push();
     translate(this.position.x, bounceY, this.position.z);
     rotateAxis(this.axis, this.rotation);
-    ambientMaterial(this.hue, 80, 100);
+    
+    ambientMaterial(this.hue, 80, 100); // colorMode(HSB) must be set in setup()
+    
     noStroke();
     cone(30, 60);
     pop();
   }
 
   get pos() {
+    // Match bounce height to display()
     return createVector(
       this.position.x,
-      this.baseY + sin(frameCount * 2) * 20,
+      this.baseY + sin(frameCount * 2) * 200,
       this.position.z
     );
   }
