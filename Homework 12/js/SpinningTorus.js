@@ -20,7 +20,7 @@ class SpinningTorus {
   display() {
     let x = cos(this.angle) * this.radius;
     let z = sin(this.angle) * this.radius;
-    let y = sin(this.angle * 2) * 50;
+    let y = sin(this.angle * 2) * 400;
   
     let col = color(this.hue, 80, 100); // Convert from HSB
   
