@@ -45,6 +45,9 @@ function draw() {
   
     angle += 1;
   
+ 
+ 
+
     for (let t of toruses) {
       t.update(angle);
       t.display();
