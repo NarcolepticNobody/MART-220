@@ -1,29 +1,35 @@
 class SpinningBox {
-    constructor(x, y, z, axis = 'y') {
-      this.x = x;
-      this.y = y;
-      this.z = z;
-      this.axis = axis;
-      this.angle = 0;
-      this.speed = random(0.5, 3); 
-      this.col = color(random(255), random(255), random(255));
+    constructor(radius, angleOffset) {
+      this.radius = radius;
+      this.angleOffset = angleOffset;
+      this.rotation = 0;
+      this.hue = random(360);
+      this.targetHue = random(360);
     }
   
-    update() {
-      this.angle += this.speed; 
-    }
+    update(globalAngle) {
+      this.rotation += 2;
+      this.angle = -globalAngle + this.angleOffset; // Opposite direction!
   
+      this.hue = lerp(this.hue, this.targetHue, 0.02);
+      if (frameCount % 150 === 0) {
+        this.targetHue = random(360);
+      }
+    }
     display() {
-      push();
-      translate(this.x, this.y, this.z);
-  
-      if (this.axis === 'x') rotateX(this.angle);
-      else if (this.axis === 'y') rotateY(this.angle);
-      else if (this.axis === 'z') rotateZ(this.angle);
-  
-      ambientMaterial(this.col);
-      box(60);
-      pop();
-    }
+        let x = cos(this.angle) * this.radius;
+        let z = sin(this.angle) * this.radius;
+        let y = cos(this.angle * 2) * 50;
+      
+        let col = color(this.hue, 80, 100); // Convert from HSB
+      
+        push();
+        translate(x, y, z);
+        rotateX(this.rotation);
+        ambientMaterial(red(col), green(col), blue(col)); // Use RGB here too
+        noStroke();
+        box(50);
+        pop();
+      }
+      
   }
-  
