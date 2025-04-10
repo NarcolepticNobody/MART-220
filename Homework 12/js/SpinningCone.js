@@ -11,7 +11,7 @@ class SpinningCone {
     this.axis = axis;
     this.rotation = 0;
     this.hue = random(360);          // starting hue
-    this.targetHue = random(360);    // color shifting
+    this.targetHue = random(200, 100, 30);    // color shifting
   }
 
   update() {
@@ -30,7 +30,9 @@ class SpinningCone {
     translate(this.position.x, bounceY, this.position.z);
     rotateAxis(this.axis, this.rotation);
     
-    ambientMaterial(this.hue, 80, 100); // colorMode(HSB) must be set in setup()
+   
+    
+    shininess(50); // optional
     
     noStroke();
     cone(30, 60);

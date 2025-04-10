@@ -21,8 +21,10 @@ class SpinningBox {
         let z = sin(this.angle) * this.radius;
         let y = cos(this.angle * 2) * 50;
       
-        let col = color(this.hue, 80, 100); // Convert from HSB
-      
+        //let col = color(this.hue, 80, 100); // Convert from HSB
+        let col = color(this.hue, 100, 80); // Unique box coloring
+ambientMaterial(red(col), green(col), blue(col));
+        
         push();
         translate(x, y, z);
         rotateX(this.rotation);

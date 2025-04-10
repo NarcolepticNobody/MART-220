@@ -20,8 +20,8 @@ function setup() {
   let numTorus = int(random(3, 7));
   let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 40; i++) {
-    let radius = random(200, 400);
+  for (let i = 0; i < 10; i++) {
+    let radius = (100, 100);
     let angleOffset = map(i, 0, numTorus, 0, 900);
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
@@ -48,13 +48,13 @@ function setup() {
 
 function draw() {
     background(30);
-    //orbitControl();
+    orbitControl();
   
     
     pointLight(255, 100, 0, 100, 50, 0);   // red from right
     pointLight(255, 255, 255, -200, 255, 255);  // green from left
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
-    spotLight(255, 255, 200, 300, -300, 300, 300, 100, -1, PI / 600, 500);
+    spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
 
   /*
    ambientLight(299, 0, 100);
