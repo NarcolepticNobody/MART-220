@@ -2,7 +2,7 @@ let toruses = [];
 let boxes = [];
 let cones = [];
 let angle = 0;
-
+let myFont;
 
 function setup() {
   createCanvas(800, 600, WEBGL);
@@ -38,6 +38,7 @@ function draw() {
     background(30);
     orbitControl();
   
+    
     // Good lighting setup
     ambientLight(299, 0, 100);
     directionalLight(255, 255, 255, 0.25, 0.25, -1);
@@ -62,5 +63,8 @@ function draw() {
       cone.update();
       cone.display();
     }
+
+
+
   }
   
