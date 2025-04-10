@@ -3,6 +3,7 @@ let boxes = [];
 let cones = [];
 let angle = 0;
 
+
 function setup() {
   createCanvas(800, 600, WEBGL);
   angleMode(DEGREES);
