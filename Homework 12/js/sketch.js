@@ -17,12 +17,12 @@ function setup() {
     cam.lookAt(100, 50, 10);         // point the camera looks at
   
 
-  let numTorus = int(random(3, 7));
+  let numTorus = int(random(100, 70));
   let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 10; i++) {
-    let radius = (100, 100);
-    let angleOffset = map(i, 0, numTorus, 0, 900);
+  for (let i = 0; i < 40; i++) {
+    let radius = (200, 200);
+    let angleOffset = map(i, 0, numTorus, 0, 900); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
   /*for (let i = 0; i < 6; i++) {
@@ -30,17 +30,18 @@ function setup() {
     let angleOffset = map(i, 0, numTorus, 70, 200);
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
-*/
+  */
+ 
   for (let i = 0; i < 30; i++) {
-    let radius = random(150, 250);
+    let radius = (300, 300);
     let angleOffset = map(i, 0, numBox, 0, 360);
     boxes.push(new SpinningBox(radius, angleOffset));
   }
 
-  for (let i = 0; i < 9; i++) {
-    let x = random(-100, 100);
-    let y = random(-100, 100);
-    let z = random(-100, 100);
+  for (let i = 0; i < 1; i++) {
+    let x = (100, 100);
+    let y = (100, 100);
+    let z = (100, 100);
     let axis = (['x', 'y', 'z']);
     cones.push(new SpinningCone(x, y, z, axis));
   }
@@ -56,8 +57,8 @@ function draw() {
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
     spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
 
-  /*
-   ambientLight(299, 0, 100);
+  
+ /*  ambientLight(299, 0, 100);
    directionalLight(255, 255, 255, 0.25, 0.25, -1);
    pointLight(-1, 100, 5, 0, 0, 300);
   */
@@ -82,9 +83,6 @@ function draw() {
       cone.update();
       cone.display();
     }
-   
-
-
-
+  
   }
   
