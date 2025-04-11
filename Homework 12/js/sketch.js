@@ -11,20 +11,21 @@ function setup() {
   colorMode(HSB, 360, 100, 100);
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
   angleMode(DEGREES);
+
     // Create and set up the camera
     cam = createCamera();
     cam.setPosition(700, 200, 900);  // camera x, y, z
     cam.lookAt(100, 50, 10);         // point the camera looks at
-  
 
   let numTorus = int(random(100, 70));
   let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 100; i++) {
     let radius = (200, 200);
-    let angleOffset = map(i, 0, numTorus, 0, 900); //change to 100 for a noodle!
+    let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
+
   /*for (let i = 0; i < 6; i++) {
     let radius = random(150, 250);
     let angleOffset = map(i, 0, numTorus, 70, 200);
@@ -51,7 +52,7 @@ function draw() {
     background(30);
     orbitControl();
   
-    
+    ambientLight(255); // bright white ambient light
     pointLight(255, 100, 0, 100, 50, 0);   // red from right
     pointLight(255, 255, 255, -200, 255, 255);  // green from left
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
