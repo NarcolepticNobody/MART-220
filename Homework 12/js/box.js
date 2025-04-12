@@ -30,7 +30,7 @@ class SpinningBox {
         rotateX(this.rotation);
         ambientMaterial(red(col), green(col), blue(col)); // Use RGB here too
         noStroke();
-        box(50);
+        box(20);
         pop();
       }
       

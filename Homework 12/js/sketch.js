@@ -50,13 +50,13 @@ function setup() {
  
   for (let i = 0; i < 30; i++) {
     let radius = (300, 300);
-    let angleOffset = map(i, 0, numBox, 0, 360);
+    let angleOffset = map(i, 0, numBox, 0, 700);
     boxes.push(new SpinningBox(radius, angleOffset));
   }
 
   for (let i = 0; i < 1; i++) {
-    let x = (100, 100);
-    let y = (100, 100);
+    let x = (-10, -10);
+    let y = (-100, -100);
     let z = (100, 100);
     let axis = (['x', 'y', 'z']);
     cones.push(new SpinningCone(x, y, z, axis));

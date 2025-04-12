@@ -24,18 +24,16 @@ class SpinningCone {
   }
 
   display() {
-    let bounceY = this.baseY + sin(frameCount * 2) * 400;
+    let bounceY = this.baseY + sin(frameCount * 2) * 300;
 
     push();
     translate(this.position.x, bounceY, this.position.z);
     rotateAxis(this.axis, this.rotation);
     
-   
-    
-    shininess(50); // optional
+    shininess(50); 
     
     noStroke();
-    cone(50, 70);
+    cone(50, 90);
     pop();
   }
 
