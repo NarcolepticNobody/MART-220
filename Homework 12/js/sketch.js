@@ -70,26 +70,22 @@ function draw() {
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
     spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
 
-push();
-translate(0, -200, 0); // Move text in 3D space
-rotateX(PI);           // Flip if needed (WEBGL flips Y axis)
-textFont(font);
-textSize(59);
-fill(320, 80, 100);    // HSB color if colorMode is HSB
-text("Alexis Huotte", 0, 0); // Render at center
-pop();
-  
- /*  ambientLight(299, 0, 100);
+    //text
+    push();
+    translate(0, -200, 0); // Move text in 3D space
+    rotateX(PI);           // Flip if needed (WEBGL flips Y axis)
+    textFont(font);
+    textSize(59);
+    fill(320, 80, 100);    // HSB color if colorMode is HSB
+    text("Alexis Huotte", 0, 0); // Render at center
+    pop();
+    
+/*ambientLight(299, 0, 100);
    directionalLight(255, 255, 255, 0.25, 0.25, -1);
    pointLight(-1, 100, 5, 0, 0, 300);
   */
-
-   
     angle += 1;
   
- 
- 
-
     for (let t of toruses) {
       t.update(angle);
       t.display();
