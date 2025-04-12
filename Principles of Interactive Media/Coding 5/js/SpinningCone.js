@@ -33,7 +33,7 @@ class SpinningCone {
     shininess(50); 
     
     noStroke();
-    cone(50, 90);
+    cone(70, 150);
     pop();
   }
 
