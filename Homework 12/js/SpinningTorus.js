@@ -30,7 +30,7 @@ class SpinningTorus {
     rotateY(this.rotation);
     ambientMaterial(red(col), green(col), blue(col)); // Use RGB here
     noStroke();
-    torus(42, 15);
+    torus(15, 15);
     pop();
   }
   

@@ -11,7 +11,7 @@ class SpinningCone {
     this.axis = axis;
     this.rotation = 0;
     this.hue = random(360);          // starting hue
-    this.targetHue = random(200, 100, 30);    // color shifting
+    this.targetHue = random(200, 255, 255);    // color shifting
   }
 
   update() {
@@ -35,7 +35,7 @@ class SpinningCone {
     shininess(50); // optional
     
     noStroke();
-    cone(30, 60);
+    cone(50, 70);
     pop();
   }
 
