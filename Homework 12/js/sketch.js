@@ -19,9 +19,12 @@ function setup() {
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
   angleMode(DEGREES);
 
+  cam = createCamera(); // hmmmmmm
+
   fill('deeppink');
   textFont(font);
   textSize(36);
+  
   
 
     // Create and set up the camera
@@ -79,6 +82,16 @@ function draw() {
     fill(320, 80, 100);    // HSB color if colorMode is HSB
     text("Alexis Huotte", 0, 0); // Render at center
     pop();
+
+        //text
+        push();
+        translate(-450, 300, 50); // Move text in 3D space
+        rotateX(PI);           
+        textFont(font);
+        textSize(59);
+        fill(320, 80, 100);    
+        text("Can't stop staring", 0, 0); 
+        pop();
     
 /*ambientLight(299, 0, 100);
    directionalLight(255, 255, 255, 0.25, 0.25, -1);
