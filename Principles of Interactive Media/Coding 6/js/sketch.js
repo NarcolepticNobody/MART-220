@@ -35,9 +35,9 @@ function setup() {
   let numTorus = int(random(100, 70));
   let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < 40; i++) {
     let radius = (200, 200);
-    let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
+    let angleOffset = map(i, 0, numTorus, 0, 900); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
 
@@ -48,9 +48,9 @@ function setup() {
   }
   */
  
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 700; i++) {
     let radius = (300, 300);
-    let angleOffset = map(i, 0, numBox, 0, 700);
+    let angleOffset = map(i, 0, numBox, 0, 50);
     boxes.push(new SpinningBox(radius, angleOffset));
   }
 
