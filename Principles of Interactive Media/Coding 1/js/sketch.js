@@ -90,7 +90,7 @@ function draw() {
         textFont(font);
         textSize(59);
         fill(320, 80, 100);    
-        text("Can't stop staring", 0, 0); 
+        text("how do you feel?", 0, 0); 
         pop();
     
 /*ambientLight(299, 0, 100);
