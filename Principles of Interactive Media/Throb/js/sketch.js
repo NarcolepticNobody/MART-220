@@ -33,9 +33,9 @@ function setup() {
     cam.lookAt(100, 50, 190);         // point the camera looks at
 
   let numTorus = int(random(100, 70));
-  let numBox = int(random(70, 70));
+  let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 400; i++) {
     let radius = (200, 200);
     let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
@@ -54,7 +54,7 @@ function setup() {
     boxes.push(new SpinningBox(radius, angleOffset));
   }
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 1; i++) {
     let x = (-10, -10);
     let y = (-100, -100);
     let z = (100, 100);
@@ -80,7 +80,7 @@ function draw() {
     textFont(font);
     textSize(59);
     fill(320, 80, 100);    // HSB color if colorMode is HSB
-    text("Noodle", 0, 0); // Render at center
+    text("Throb", 0, 0); // Render at center
     pop();
 
         //text
