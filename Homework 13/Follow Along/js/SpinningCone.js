@@ -10,7 +10,7 @@ class SpinningCone {
     this.baseY = y;
     this.axis = axis;
     this.rotation = 0;
-    this.hue = random(360);          // starting hue
+    this.hue = random(360); // starting hue
     this.targetHue = random(200, 255, 255);    // color shifting
   }
 
@@ -24,7 +24,7 @@ class SpinningCone {
   }
 
   display() {
-    let bounceY = this.baseY + sin(frameCount * 2) * 300;
+    let bounceY = this.baseY + sin(frameCount * 30) * 30;
 
     push();
     translate(this.position.x, bounceY, this.position.z);

@@ -8,7 +8,7 @@ class SpinningTorus {
   }
 
   update(globalAngle) {
-    this.rotation += 90;
+    this.rotation += 0;
     this.angle = globalAngle + this.angleOffset;
 
     this.hue = lerp(this.hue, this.targetHue, 0.09);
@@ -20,7 +20,7 @@ class SpinningTorus {
   display() {
     let x = cos(this.angle) * this.radius;
     let z = sin(this.angle) * this.radius;
-    let y = sin(this.angle * 9) * 100;
+    let y = sin(this.angle * 1) * 100;
   
     let col = color(this.hue, 255, 100); // Convert from HSB
   
