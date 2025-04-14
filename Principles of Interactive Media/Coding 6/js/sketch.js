@@ -76,7 +76,7 @@ function draw() {
     //text
     push();
     translate(0, -200, 0); // Move text in 3D space
-    rotateX(PI);           // Flip if needed (WEBGL flips Y axis)
+    rotateX(PI); // Flip if needed (WEBGL flips Y axis)
     textFont(font);
     textSize(59);
     fill(320, 80, 100);    // HSB color if colorMode is HSB

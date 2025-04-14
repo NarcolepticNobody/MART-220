@@ -6,7 +6,7 @@ class log {
       this.h = h;
       this.currentAnimation;
       this.createAnimation();
-      this.health = 10;
+      this.health = 100; //why doesn't this take more hits?
       
       
     }

@@ -15,7 +15,7 @@ function preload() {
 function setup() {
   createCanvas(800, 600, WEBGL);
   angleMode(DEGREES);
-  colorMode(HSB, 360, 100, 100);
+  
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
   angleMode(DEGREES);
 
@@ -35,9 +35,9 @@ function setup() {
   let numTorus = int(random(100, 70));
   let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 10; i++) {
     let radius = (200, 200);
-    let angleOffset = map(i, 0, numTorus, 0, 800); //change to 100 for a noodle!
+    let angleOffset = map(i, 0, numTorus, 90, 800); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
 

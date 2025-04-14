@@ -23,6 +23,7 @@ var mySound;
 var myAnimation;
 var stomp; //log destroy
 let gameOver = false;
+var bites = 50;
 
 // Preload assets
 function preload() {
@@ -33,7 +34,7 @@ function preload() {
     bad = loadSound("assets/442602__topschool__ow-sound.mp3");
     end = loadSound("assets/wampp.mp3");
     wahoo = loadSound('assets/wahoo.wav')
-    
+
     idleStrings = loadStrings('txtfiles/idle.txt');
     runStrings = loadStrings('txtfiles/run.txt');
     treeStrings = loadStrings('txtfiles/tree.txt');
@@ -62,17 +63,17 @@ function setup() {
         let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
         foodArray.push(myFood);
     }
-    
-     // Create tree objects
-     for (let i = 0; i < treeStrings.length; i++) {
-        
+
+    // Create tree objects
+    for (let i = 0; i < treeStrings.length; i++) {
+
         let myTree = new tree(random(50, width - 50), random(50, height - 50), 40, 40);
         treeArray.push(myTree);
     }
 
-     // Create log objects
-     for (let i = 0; i < logStrings.length; i++) {
-        
+    // Create log objects
+    for (let i = 0; i < logStrings.length; i++) {
+
         let myLog = new log(random(50, width - 50), random(50, height - 50), 40, 40);
         logArray.push(myLog);
     }
@@ -82,17 +83,17 @@ function setup() {
         let myGrass = new grass(random(50, width - 50), random(50, height - 50), 40, 40);
         grassArray.push(myGrass);
     }
-      */  
+      */
 
 }
 
 function mousePressed() {
     if (mySound.isPlaying()) {
-      mySound.stop();
+        mySound.stop();
     } else {
-      mySound.loop(); 
+        mySound.loop();
     }
-  } 
+}
 
 // Draw function
 function draw() {
@@ -113,9 +114,12 @@ function draw() {
     fill(255, 215, 0);
     text("Health Bar", width / 2 - 40, height / 1.04);
 
+
     // Display food
     for (let i = 0; i < foodArray.length; i++) {
         foodArray[i].draw();
+
+
 
         // Check collision with character
         if (myAnimation.isColliding(foodArray[i].foodPiece)) {
@@ -131,7 +135,7 @@ function draw() {
             foodArray[i].foodPiece.remove();
         }
     }
-   
+
     // Keyboard controls
     if (kb.pressing('d')) { // 'D' key
         myAnimation.updatePosition('forward');
@@ -153,32 +157,38 @@ function draw() {
         //attack.play();
         //attack.setVolume(0.7);
         //attack.setSpeed(0.1);
-    
+
         // Check for nearby logs to destroy
         for (let i = logArray.length - 1; i >= 0; i--) {
-           
+
             // want to check for "currentAnimation" since getCurrentAnimation() doesn't exist in your character.js file
             let d = dist(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y, logArray[i].currentAnimation.position.x, logArray[i].currentAnimation.position.y
             );
+           
             // needed a larger distance
-            if (d < 80) { 
+            if (d < 80) {
                 for (let j = 0; j < 20; j++) {
                     let p = new Particle(
                         logArray[i].currentAnimation.position.x,
                         logArray[i].currentAnimation.position.y
+                    
                     );
                     particles.push(p);
                 }
-    
-                logArray[i].currentAnimation.remove();
-                logArray.splice(i, 1);
-    
+
+                logArray[i].health -= 1;
+
+                if (logArray[i].health <= 0) {
+                    logArray[i].currentAnimation.remove();
+                    particles = [];
+                    //logArray.splice(i, 1);
+                }
                 if (!wahoo.isPlaying()) {
                     wahoo.play(); // log breaking sound
                 }
             }
-        } 
-    } 
+        }
+    }
     else {
         myAnimation.draw('idle');
     }
@@ -200,30 +210,30 @@ function draw() {
         noLoop();
     }
 
-// Check time left
-let timePassed = int((millis() - startTime) / 1000);
-timeLeft = max(countdown - timePassed, 0);
+    // Check time left
+    let timePassed = int((millis() - startTime) / 1000);
+    timeLeft = max(countdown - timePassed, 0);
 
-if ((timeLeft <= 0 || health <= 0) && !gameOver) {
-    textSize(50);
-    fill(255, 0, 0);
-    text("You Big Lose!", width / 2 - 125, height / 2);
-    end.play();
-    end.setVolume(2);
-    noLoop();
-    gameOver = true; 
-    mySound.stop();
-}
-  
-// At the bottom of draw()
-for (let i = particles.length - 1; i >= 0; i--) {
-    particles[i].update();
-    particles[i].show();
-  
-    if (particles[i].finished()) {
-      particles.splice(i, 1); // remove when done
+    if ((timeLeft <= 0 || health <= 0) && !gameOver) {
+        textSize(50);
+        fill(255, 0, 0);
+        text("You Big Lose!", width / 2 - 125, height / 2);
+        end.play();
+        end.setVolume(2);
+        noLoop();
+        gameOver = true;
+        mySound.stop();
     }
-  }    
+
+    // At the bottom of draw()
+    for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].show();
+
+        if (particles[i].finished()) {
+            particles.splice(i, 1); // remove when done
+        }
+    }
 
 }//end of draw
 
@@ -235,11 +245,11 @@ function collidesWithTree(newX, newY) {
         }
     }
     return false;
- }
+}
 
 // Update health bar
 function updateHealth(health, maxHealth) {
-    
+
     noStroke();
     fill(233, 0, 0);
     rect(500, 500, map(health, 0, maxHealth, 0, 300), 8);
