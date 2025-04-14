@@ -80,7 +80,7 @@ function draw() {
     textFont(font);
     textSize(59);
     fill(320, 80, 100);    // HSB color if colorMode is HSB
-    text("Noodle", 0, 0); // Render at center
+    text("Unchained", 0, 0); // Render at center
     pop();
 
         //text
