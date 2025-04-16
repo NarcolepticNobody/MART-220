@@ -7,7 +7,7 @@ let cam;
 let font;
 
 function preload() {
-    font = loadFont('assets/inconsolata.otf'); 
+    font = loadFont('assets/inconsolata.otf'); // No slash at the beginning
   }
 
 
@@ -27,32 +27,26 @@ function preload() {
     let numBox = int(random(3, 7));
   
     for (let i = 0; i < numTorus; i++) {
-      let radius = (200, 900);
+      let radius = random(200, 400);
       let angleOffset = map(i, 0, numTorus, 0, TWO_PI);
-      let speedX = random(1, 0.01); //changing this from a decimal made it yarn!
-      let speedY = random(0.001, 1);
+      let speedX = random(0.001, 0.01);
+      let speedY = random(0.001, 0.01);
       toruses.push(new SpinningTorus(0, 0, speedX, speedY, radius, angleOffset));
     }
   
-    for (let i = 0; i < 1; i++) {
-      let radius = (200, 300);
-      let angleOffset = map(i, 0, 700, 0, TWO_PI);
-      let speedX = random(1, 0.01);
-      let speedY = random(0.001, 1);
-      boxes.push(new SpinningBox(0, 0, speedX, speedY, radius, angleOffset));
+    for (let i = 0; i < 700; i++) {
+      let radius = random(200, 250);
+      let angleOffset = map(i, 0, numBox, 0, 50);
+      boxes.push(new SpinningBox(radius, angleOffset));
     }
-    
   
     for (let i = 0; i < 1; i++) {
       let x = 0;
       let y = 0;
       let z = 100;
-      let axis = random(['x', 'y', 'z']); // pick one axis at random
-      let speedX = random(0.001, 0.01);
-      let speedY = random(0.001, 0.01);
-      cones.push(new SpinningCone(x, y, z, axis, speedX, speedY));
+      let axis = (['x', 'y', 'z']);
+      cones.push(new SpinningCone(x, y, z, axis));
     }
-    
   }
   
 

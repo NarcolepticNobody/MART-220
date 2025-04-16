@@ -19,7 +19,7 @@ class SpinningTorus extends threedshape {
   }
 
   display() {
-    let x = cos(this.angle * 2) * 200;
+    let x = cos(this.angle) * this.radius;
     let z = sin(this.angle) * this.radius;
     let y = sin(this.angle * 2) * 200;
 
@@ -31,8 +31,7 @@ class SpinningTorus extends threedshape {
     rotateY(this.rotation); // Your original vibe
     ambientMaterial(col);
     noStroke();
-    torus(100, 1);//smaller number made it look like yarn!
-    scale(800);
+    torus(15, 10);
     pop();
   }
 }
