@@ -4,7 +4,7 @@ class Particle {
     this.y = y;
     this.vx = random(-2, 2);
     this.vy = random(-2, 2);
-    this.alpha = 255;
+    this.alpha = 170;
     this.r = random(5, 10); // radius
   }
 
@@ -20,7 +20,7 @@ class Particle {
 
   show() {
     noStroke();
-    fill(255, 150, 0, this.alpha);
+    fill(255, 0, 0, this.alpha);
     ellipse(this.x, this.y, this.r);
   }
 }

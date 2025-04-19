@@ -12,6 +12,7 @@ let particles = [];
 var flipX = false;
 var moving = false;
 var score = 0;
+var scoreMax = 5;
 var countdown = 30;
 var timeLeft = 20;
 var health = 50;
@@ -57,12 +58,13 @@ function setup() {
     myAnimation.loadAnimation('attack', attackStrings);
 
     // Create food objects
-    for (let i = 0; i < 40; i++) {
+  /*  for (let i = 0; i < 40; i++) {
 
         let isGood = random([true, false]);
         let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
         foodArray.push(myFood);
     }
+        */
 
     // Create tree objects
     for (let i = 0; i < treeStrings.length; i++) {
@@ -196,7 +198,8 @@ function draw() {
     // Display UI
     textSize(20);
     fill(255, 215, 0);
-    text("Score: " + score, 400, 30);
+    text("Score: " + score, 405, 30);
+    text("/" + scoreMax, 480, 30);
     text("Time Left: " + timeLeft + "s", width - 500, 30);
     textSize(40);
     fill(255, 215, 0);
