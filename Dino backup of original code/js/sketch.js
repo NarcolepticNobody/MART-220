@@ -61,13 +61,13 @@ function setup() {
     myAnimation.loadAnimation('attack', attackStrings);
 
     // Create food objects
-  /*  for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 40; i++) {
 
         let isGood = random([true, false]);
         let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
         foodArray.push(myFood);
     }
-        */
+        
 
     // Create tree objects
     for (let i = 0; i < treeStrings.length; i++) {
