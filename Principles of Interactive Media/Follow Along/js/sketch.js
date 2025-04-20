@@ -33,11 +33,11 @@ function setup() {
     cam.lookAt(100, 50, 190);         // point the camera looks at
 
   let numTorus = int(random(100, 70));
-  let numBox = int(random(3, 7));
+  let numBox = int(random(3, 4));
 
   for (let i = 0; i < 10; i++) {
-    let radius = (200, 200);
-    let angleOffset = map(i, 0, numTorus, 90, 800); //change to 100 for a noodle!
+    let radius = (700, 700);
+    let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
 
