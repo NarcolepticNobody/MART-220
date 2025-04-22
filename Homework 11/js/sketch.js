@@ -16,7 +16,7 @@ var score = 0;
 var scoreMax = 5;
 var countdown = 30;
 var timeLeft = 20;
-var health = 50;
+var health = 100;
 var redhealth = 50;
 var maxHealth = 100;
 var startTime;
