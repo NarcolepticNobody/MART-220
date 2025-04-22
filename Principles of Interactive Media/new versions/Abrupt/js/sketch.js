@@ -35,9 +35,9 @@ function setup() {
   let numTorus = int(random(100, 70));
   let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 200; i++) {
-    let radius = (100, 100);
-    let angleOffset = map(i, 0, numTorus, 0, 180); //change to 100 for a noodle!
+  for (let i = 0; i < 100; i++) {
+    let radius = (100, 300);
+    let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
 
@@ -80,7 +80,7 @@ function draw() {
     textFont(font);
     textSize(59);
     fill(320, 80, 100);    // HSB color if colorMode is HSB
-    text("Glide", 0, 0); // Render at center
+    text("Abrupt", 0, 0); // Render at center
     pop();
 
         //text
