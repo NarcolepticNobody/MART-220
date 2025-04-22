@@ -15,7 +15,7 @@ function preload() {
 function setup() {
   createCanvas(800, 600, WEBGL);
   angleMode(DEGREES);
-  
+  colorMode(HSB, 360, 100, 100);
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
   angleMode(DEGREES);
 
@@ -33,10 +33,10 @@ function setup() {
     cam.lookAt(100, 50, 190);         // point the camera looks at
 
   let numTorus = int(random(100, 70));
-  let numBox = int(random(3, 4));
+  let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 10; i++) {
-    let radius = (700, 700);
+  for (let i = 0; i < 40; i++) {
+    let radius = (200, 200);
     let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
@@ -48,9 +48,9 @@ function setup() {
   }
   */
  
-  for (let i = 0; i < 30; i++) {
-    let radius = (300, 300);
-    let angleOffset = map(i, 0, numBox, 0, 700);
+  for (let i = 0; i < 400; i++) {
+    let radius = (400, 300);
+    let angleOffset = map(i, 800, numBox, 70, 900);
     boxes.push(new SpinningBox(radius, angleOffset));
   }
 
@@ -72,7 +72,6 @@ function draw() {
     pointLight(255, 255, 255, -200, 255, 255);  // green from left
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
     spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
-    
 
     //text
     push();
@@ -81,7 +80,7 @@ function draw() {
     textFont(font);
     textSize(59);
     fill(320, 80, 100);    // HSB color if colorMode is HSB
-    text("Follow along", 0, 0); // Render at center
+    text("Glide", 0, 0); // Render at center
     pop();
 
         //text

@@ -73,6 +73,8 @@ function draw() {
     pointLight(255, 255, 255, -200, 255, 255);  // green from left
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
     spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+    
+    
 
     //text
     push();
