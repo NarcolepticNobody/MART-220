@@ -14,7 +14,7 @@ var moving = false;
 var score = 0;
 var countdown = 30;
 var timeLeft = 20;
-var health = 50;
+var health = 100;
 var maxHealth = 100;
 var startTime;
 var img, img2;
@@ -48,7 +48,7 @@ function preload() {
 
 // Setup function
 function setup() {
-    createCanvas(1280, 600);
+    createCanvas(1680, 900);
 
     startTime = millis();
     myAnimation = new character(150, 200);
