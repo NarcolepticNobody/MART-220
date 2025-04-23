@@ -6,15 +6,18 @@ var runStrings = [];
 var foodArray = [];
 var treeArray = [];
 var logArray = [];
+var logredArray = [];
 var grassArray = [];
 var attackArray = [];
 let particles = [];
 var flipX = false;
 var moving = false;
 var score = 0;
+var scoreMax = 5;
 var countdown = 30;
 var timeLeft = 20;
 var health = 100;
+var redhealth = 50;
 var maxHealth = 100;
 var startTime;
 var img, img2;
@@ -38,9 +41,10 @@ function preload() {
     idleStrings = loadStrings('txtfiles/idle.txt');
     runStrings = loadStrings('txtfiles/run.txt');
     treeStrings = loadStrings('txtfiles/tree.txt');
-    logStrings = loadStrings('txtfiles/log.txt')
-    grassStrings = loadStrings('txtfiles/grass.txt')
-    attackStrings = loadStrings('txtfiles/attack2.txt')
+    logStrings = loadStrings('txtfiles/log.txt');
+    logredStrings = loadStrings('txtfiles/logred.txt');
+    grassStrings = loadStrings('txtfiles/grass.txt');
+    attackStrings = loadStrings('txtfiles/attack2.txt');
     //img = loadImage('trees/PineTree 01.png');
     //img2 = loadImage('assets/log.png');
 
@@ -57,12 +61,13 @@ function setup() {
     myAnimation.loadAnimation('attack', attackStrings);
 
     // Create food objects
-    for (let i = 0; i < 40; i++) {
+  /*  for (let i = 0; i < 40; i++) {
 
         let isGood = random([true, false]);
         let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
         foodArray.push(myFood);
     }
+        */
 
     // Create tree objects
     for (let i = 0; i < treeStrings.length; i++) {
@@ -76,6 +81,13 @@ function setup() {
 
         let myLog = new log(random(50, width - 50), random(50, height - 50), 40, 40);
         logArray.push(myLog);
+    }
+
+     // Create badlog objects
+     for (let i = 0; i < logredStrings.length; i++) {
+
+        let myLog = new logred(random(50, width - 50), random(50, height - 50), 40, 40);
+        logredArray.push(myLog);
     }
     /*  // Create grass objects
       for (let i = 0; i < grassStrings.length; i++) {
@@ -186,6 +198,39 @@ function draw() {
                 if (!wahoo.isPlaying()) {
                     wahoo.play(); // log breaking sound
                 }
+////////////////////////////////
+
+        // Check for bad logs to destroy
+        for (let i = logredArray.length - 1; i >= 0; i--) {
+
+            // want to check for "currentAnimation" since getCurrentAnimation() doesn't exist in your character.js file
+            let d = dist(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y, logredArray[i].currentAnimation.position.x, logredArray[i].currentAnimation.position.y
+            );
+           
+            // needed a larger distance
+            if (d < 80) {
+                for (let j = 0; j < 20; j++) {
+                    let p = new Particle(
+                        logredArray[i].currentAnimation.position.x,
+                        logredArray[i].currentAnimation.position.y
+                    
+                    );
+                    particles.push(p);
+                }
+
+                logredArray[i].redhealth -= 1;
+
+                if (logredArray[i].redhealth <= 0) {
+                    logredArray[i].currentAnimation.remove();
+                    particles = [];
+                    //logArray.splice(i, 1);
+                }
+                if (!wahoo.isPlaying()) {
+                    wahoo.play(); // log breaking sound
+                }    
+
+            }}////
+
             }
         }
     }
@@ -196,7 +241,8 @@ function draw() {
     // Display UI
     textSize(20);
     fill(255, 215, 0);
-    text("Score: " + score, 400, 30);
+    text("Score: " + score, 405, 30);
+    text("/" + scoreMax, 480, 30);
     text("Time Left: " + timeLeft + "s", width - 500, 30);
     textSize(40);
     fill(255, 215, 0);

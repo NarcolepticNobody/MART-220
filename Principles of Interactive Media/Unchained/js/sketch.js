@@ -35,20 +35,21 @@ function setup() {
   let numTorus = int(random(100, 70));
   let numBox = int(random(70, 70));
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 42; i++) {
     let radius = (200, 200);
-    let angleOffset = map(i, 0, numTorus, 0, 700); //change to 100 for a noodle!
+    let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
 
-  /*for (let i = 0; i < 6; i++) {
-    let radius = random(150, 250);
-    let angleOffset = map(i, 0, numTorus, 70, 200);
-    toruses.push(new SpinningTorus(radius, angleOffset));
+
+  for (let i = 0; i < 50; i++) {
+    let radius = (700, 500);
+    let angleOffset = map(i, 0, 900, 0, 700);
+    boxes.push(new SpinningBox(radius, angleOffset));
   }
-  */
  
-  for (let i = 0; i < 30; i++) {
+ 
+  for (let i = 0; i < 50; i++) {
     let radius = (300, 300);
     let angleOffset = map(i, 0, numBox, 0, 700);
     boxes.push(new SpinningBox(radius, angleOffset));
@@ -72,6 +73,8 @@ function draw() {
     pointLight(255, 255, 255, -200, 255, 255);  // green from left
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
     spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+    
+    
 
     //text
     push();
