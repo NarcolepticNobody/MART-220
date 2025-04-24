@@ -8,11 +8,11 @@ class SpinningTorus {
   }
 
   update(globalAngle) {
-    this.rotation += 7;
+    this.rotation += 2;
     this.angle = globalAngle + this.angleOffset;
 
     this.hue = lerp(this.hue, this.targetHue, 0.09);
-    if (frameCount % 120 === 0) {
+    if (frameCount % 300 === 0) {
       this.targetHue = random(360);
     }
   }
