@@ -94,7 +94,7 @@ textFont(font);
 textSize(59);
 fill(320, 80, 100);
 textAlign(CENTER, CENTER);
-text("Flow", 0, 0);
+text("Glide", 0, 0);
 pop();
 
 // "how do you feel?" text
