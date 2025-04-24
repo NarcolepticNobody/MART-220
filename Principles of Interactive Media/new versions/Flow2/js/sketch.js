@@ -76,11 +76,11 @@ function draw() {
   cam.setPosition(camX, camY, camZ);
   cam.lookAt(0, 0, 0); // Always look at the center
 
-  // === Lighting ===
-  pointLight(255, 100, 0, 100, 50, 0);   // red from right
-  pointLight(255, 255, 255, -200, 255, 255);  // white from left
-  pointLight(0, 0, 255, 0, -200, 0);  // blue from top
-  spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+// === Lighting ===
+pointLight(255, 100, 0, 100, 50, 0);   // red from right
+pointLight(255, 255, 255, -200, 255, 255);  // white from left
+pointLight(0, 0, 255, 0, -200, 0);  // blue from top
+spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
 
 // "Flow" text
 push();
