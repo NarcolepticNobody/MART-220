@@ -65,69 +65,52 @@ function setup() {
 }
 
 function draw() {
-    background(30);
-    //orbitControl();
- //lights();
-  
-    //ambientLight(255); // bright white ambient light
-    pointLight(255, 100, 0, 100, 50, 0);   // red from right
-    pointLight(255, 255, 255, -200, 255, 255);  // green from left
-    pointLight(0, 0, 255, 0, -200, 0);  // blue from top
-    spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+  background(30);
+  //orbitControl();
 
-    //text
-    push();
-    translate(0, -200, 0); // Move text in 3D space
-    rotateX(PI);           // Flip if needed (WEBGL flips Y axis)
-    textFont(font);
-    textSize(59);
-    fill(320, 80, 100);    // HSB color if colorMode is HSB
-    text("Abrupt", 0, 0); // Render at center
-    pop();
+    // === Camera rotation logic ===
+let radius = 900; // Distance from center
+let camX = radius * cos(angle * 0.1);
+let camZ = radius * sin(angle * 0.1);
+let camY = 200; // Keep camera slightly above center
 
-        //text
-        push();
-        translate(-450, 300, 50); // Move text in 3D space
-        rotateX(PI);           
-        textFont(font);
-        textSize(59);
-        fill(320, 80, 100);    
-        text("how do you feel?", 0, 0); 
-        pop();
+cam.setPosition(camX, camY, camZ);
+cam.lookAt(0, 0, 0); // Always look at the center
 
+// === Lighting ===
+pointLight(255, 100, 0, 100, 50, 0);   // red from right
+pointLight(255, 255, 255, -200, 255, 255);  // white from left
+pointLight(0, 0, 255, 0, -200, 0);  // blue from top
+spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
 
+// "Flow" text
+push();
+let flowTextPos = createVector(0, -300, 0);
+let camPos = createVector(cam.eyeX, cam.eyeY, cam.eyeZ);
+let dir = p5.Vector.sub(camPos, flowTextPos);
+let thetaY = atan2(dir.x, dir.z);
+translate(flowTextPos.x, flowTextPos.y, flowTextPos.z);
+rotateY(thetaY);
+textFont(font);
+textSize(59);
+fill(320, 80, 100);
+textAlign(CENTER, CENTER);
+text("Abrupt", 0, 0);
+pop();
 
-   
-  // Calculate camera position
-  let radius = 400;
-  let camX = radius * cos(angle);
-  let camZ = radius * sin(angle);
-  let camY = 200 * sin(angle * 0.5); // Optional: slight vertical movement
-
-
-  // Set the camera position and orientation
-  camera(camX, camY, camZ, 0, 100, 100, 100, 100, 0);
-
-
-  // Increment the angle to rotate the camera
-  angle += 0.01;
-
-
-  // Draw objects at the center
-  push();
-  rotateY(frameCount * 0.02);
-  fill(255, 100, 100);
-  box(100);
-  pop();
-
-
-  // Optional: add orbiting objects
-  push();
-  rotateY(-frameCount * 0.02);
-  translate(150, 0, 0);
-  fill(100, 200, 255);
-  sphere(40);
-  pop();
+// "how do you feel?" text
+push();
+let feelTextPos = createVector(-200, 300, 50);
+dir = p5.Vector.sub(camPos, feelTextPos);
+thetaY = atan2(dir.x, dir.z);
+translate(feelTextPos.x, feelTextPos.y, feelTextPos.z);
+rotateY(thetaY);
+textFont(font);
+textSize(59);
+fill(320, 80, 100);
+textAlign(CENTER, CENTER);
+text("how do you feel?", 0, 0);
+pop();
         
     
 /*ambientLight(299, 0, 100);
