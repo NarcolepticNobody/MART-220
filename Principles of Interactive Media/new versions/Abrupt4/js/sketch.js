@@ -6,6 +6,7 @@ let myFont;
 let cam;
 let font;
 
+
 function preload() {
     font = loadFont('assets/inconsolata.otf'); // No slash at the beginning
   }
@@ -65,7 +66,8 @@ function setup() {
 
 function draw() {
     background(30);
-    orbitControl();
+    //orbitControl();
+ //lights();
   
     //ambientLight(255); // bright white ambient light
     pointLight(255, 100, 0, 100, 50, 0);   // red from right
@@ -92,6 +94,41 @@ function draw() {
         fill(320, 80, 100);    
         text("how do you feel?", 0, 0); 
         pop();
+
+
+
+   
+  // Calculate camera position
+  let radius = 400;
+  let camX = radius * cos(angle);
+  let camZ = radius * sin(angle);
+  let camY = 200 * sin(angle * 0.5); // Optional: slight vertical movement
+
+
+  // Set the camera position and orientation
+  camera(camX, camY, camZ, 0, 100, 100, 100, 100, 0);
+
+
+  // Increment the angle to rotate the camera
+  angle += 0.01;
+
+
+  // Draw objects at the center
+  push();
+  rotateY(frameCount * 0.02);
+  fill(255, 100, 100);
+  box(100);
+  pop();
+
+
+  // Optional: add orbiting objects
+  push();
+  rotateY(-frameCount * 0.02);
+  translate(150, 0, 0);
+  fill(100, 200, 255);
+  sphere(40);
+  pop();
+        
     
 /*ambientLight(299, 0, 100);
    directionalLight(255, 255, 255, 0.25, 0.25, -1);
