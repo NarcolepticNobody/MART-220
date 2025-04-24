@@ -14,7 +14,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(800, 600, WEBGL);
+  createCanvas(1920, 1080, WEBGL);
   angleMode(DEGREES);
   colorMode(HSB, 360, 100, 100);
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
