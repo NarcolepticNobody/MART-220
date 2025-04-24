@@ -84,7 +84,7 @@ function draw() {
 
 // "Flow" text
 push();
-let flowTextPos = createVector(0, -200, 0);
+let flowTextPos = createVector(0, -300, 0);
 let camPos = createVector(cam.eyeX, cam.eyeY, cam.eyeZ);
 let dir = p5.Vector.sub(camPos, flowTextPos);
 let thetaY = atan2(dir.x, dir.z);
