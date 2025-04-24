@@ -35,9 +35,9 @@ function setup() {
   let numTorus = int(random(100, 70));
   let numBox = int(random(3, 7));
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 45; i++) {
     let radius = (200, 200);
-    let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
+    let angleOffset = map(i, 0, numTorus, 0, 800); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
 
@@ -64,17 +64,17 @@ function setup() {
 }
 
 function draw() {
-  background(30);
-  //orbitControl();
+    background(30);
+    //orbitControl();
 
-    // === Camera rotation logic ===
-let radius = 900; // Distance from center
-let camX = radius * cos(angle * 0.1);
-let camZ = radius * sin(angle * 0.1);
-let camY = 200; // Keep camera slightly above center
+      // === Camera rotation logic ===
+  let radius = 900; // Distance from center
+  let camX = radius * cos(angle * 0.1);
+  let camZ = radius * sin(angle * 0.1);
+  let camY = 200; // Keep camera slightly above center
 
-cam.setPosition(camX, camY, camZ);
-cam.lookAt(0, 0, 0); // Always look at the center
+  cam.setPosition(camX, camY, camZ);
+  cam.lookAt(0, 0, 0); // Always look at the center
 
 // === Lighting ===
 pointLight(255, 100, 0, 100, 50, 0);   // red from right
@@ -94,7 +94,7 @@ textFont(font);
 textSize(59);
 fill(320, 80, 100);
 textAlign(CENTER, CENTER);
-text("Flow", 0, 0);
+text("Glide", 0, 0);
 pop();
 
 // "how do you feel?" text
@@ -110,12 +110,20 @@ fill(320, 80, 100);
 textAlign(CENTER, CENTER);
 text("how do you feel?", 0, 0);
 pop();
+  
+    //ambientLight(255); // bright white ambient light
+    pointLight(255, 100, 0, 100, 50, 0);   // red from right
+    pointLight(255, 255, 255, -200, 255, 255);  // green from left
+    pointLight(0, 0, 255, 0, -200, 0);  // blue from top
+    spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+
+
     
 /*ambientLight(299, 0, 100);
    directionalLight(255, 255, 255, 0.25, 0.25, -1);
    pointLight(-1, 100, 5, 0, 0, 300);
   */
-    angle += 1;
+    angle += 2;
   
     for (let t of toruses) {
       t.update(angle);
