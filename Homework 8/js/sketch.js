@@ -1,186 +1,194 @@
+// Global Variables
 var animation = [];
 var run = [];
-var i = 0;
-var k = 0;
-var x = 200;
-var y = 90;
+var idleStrings = [];
+var runStrings = [];
 var foodArray = [];
-var idlestring = [];
-var runstring = [];
+var treeArray = [];
+var logArray = [];
 var flipX = false;
 var moving = false;
-var keys = [];
-let score = 0;
-let startTime;
-let elapsedTime = 0;
-let countdown = 15;
-let foods = [];
+var score = 0;
+var countdown = 30;
+var timeLeft = 20;
+var health = 50;
+var maxHealth = 100;
+var startTime;
+var img, img2;
+let good, bad, end, song;
+var myAnimation;
 
-
+// Preload assets
 function preload() {
-    idlestring = loadStrings('idle.txt');
-    runstring = loadStrings('run.txt');
-   
+
+    soundFormats('mp3', 'ogg', 'wav');
+    song = loadSound("assets/melody.mp3");
+    good = loadSound("assets/yes.mp3");
+    bad = loadSound("assets/442602__topschool__ow-sound.mp3");
+    end = loadSound("assets/wampp.mp3");
+    idleStrings = loadStrings('txtfiles/idle.txt');
+    runStrings = loadStrings('txtfiles/run.txt');
+    treeStrings = loadStrings('txtfiles/tree.txt');
+    logStrings = loadStrings('txtfiles/log.txt')
+    //img = loadImage('trees/PineTree 01.png');
+    //img2 = loadImage('assets/log.png');
+
 }
 
+// Setup function
 function setup() {
-    createCanvas(500, 600);
+    createCanvas(1280, 600);
 
- /* foods.push(new food(100, 100, "blueberry"));
-    foods.push(new food(200, 100, "cherry"));
-*/
-    startTime = millis(); // Start time when the game begins
-    // Load idle animations
-    for (let j = 0; j < idlestring.length; j++) {
-        let mycharacter = new character(idlestring[j], x, y);
-        animation.push(mycharacter);
-    }
-    // Load run animations
-    for (let j = 0; j < runstring.length; j++) {
-        let mycharacter = new character(runstring[j], x, y);
-        run.push(mycharacter);
-    }
-/*// Create food objects
-    for (let i = 0; i < 9; i++) {
-        let myfood = new food(random(0, 490), random(0, 490), 25);
-        foodArray.push(myfood);
-    }
- */
+    startTime = millis();
+    myAnimation = new character(150, 200);
+    myAnimation.loadAnimation('idle', idleStrings);
+    myAnimation.loadAnimation('run', runStrings);
+    
 
-    setInterval(updateIdleIndex, 100); // Idle animation updates slower
-    setInterval(updateRunIndex, 50); // Run animation updates faster
+
+
+    // Create food objects
+    for (let i = 0; i < 30; i++) {
+        let isGood = random([true, false]);
+        let myFood = new food(random(50, width - 50), random(50, height - 50), isGood);
+        foodArray.push(myFood);
+    }
+    
+    
+     // Create tree objects
+     for (let i = 0; i < treeStrings.length; i++) {
+        
+        let myTree = new tree(random(50, width - 50), random(50, height - 50), 40,40);
+        treeArray.push(myTree);
+    }
+
+     // Create log objects
+     for (let i = 0; i < logStrings.length; i++) {
+        
+        let myLog = new log(random(50, width - 50), random(50, height - 50), 40 ,40);
+        logArray.push(myLog);
+    }
+        
+    
+
 }
 
+
+
+// Draw function
 function draw() {
+
     background(40, 100, 10);
+    updateHealth(health, maxHealth);
+    collidesWithTree();
 
-    for (let f of foods) 
-        f.draw();
+    // Border
+    push();
+    stroke(0);
+    strokeWeight(20);
+    noFill();
+    rect(0, 0, width, height);
+    pop();
+
+    //Health Bar
+    textSize(20);
+    fill(255, 215, 0);
+    text("Health Bar", width / 2 - 40, height / 1.04);
+
+ 
+
+    // Display food
+    for (let i = 0; i < foodArray.length; i++) {
+        foodArray[i].draw();
+
+        // Check collision with character
+        if (myAnimation.isColliding(foodArray[i].foodPiece)) {
+            if (foodArray[i].isGood) {
+                score++;
+                health = min(health + 5, maxHealth);
+                good.play();
+            } else {
+                score--;
+                health = max(health - 10, 0);
+                bad.play();
+            }
+            foodArray[i].foodPiece.remove();
+        }
+    }
+
+    // Keyboard controls
+    if (keyIsDown(68)) { // 'D' key
+        myAnimation.updatePosition('forward');
+        myAnimation.draw('run');
+    } else if (keyIsDown(65)) { // 'A' key
+        myAnimation.updatePosition('reverse');
+        myAnimation.draw('run');
+    } else if (keyIsDown(87)) { // 'W' key
+        myAnimation.updatePosition('up');
+        myAnimation.draw('run');
+    } else if (keyIsDown(83)) { // 'S' key
+        myAnimation.updatePosition('down');
+        myAnimation.draw('run');
+    } else {
+        myAnimation.draw('idle');
+    }
+
+     
+
+    // Display UI
+    textSize(20);
+    fill(255, 215, 0);
+    text("Score: " + score, 400, 30);
+    text("Time Left: " + timeLeft + "s", width - 500, 30);
+    textSize(40);
+    fill(255, 215, 0);
+    text("Feed the Dino!", width / 2 - 125, height / 10);
+
+    // Check win condition
+    if (score >= 10) {
+        textSize(60);
+        fill(255, 215, 0);
+        text("YOU WIN!", width / 2 - 125, height / 2);
+        noLoop();
+    }
+
+    // Check time left
     let timePassed = int((millis() - startTime) / 1000);
-    let timeLeft = max(countdown - timePassed, 0); // Prevents negative values
+    timeLeft = max(countdown - timePassed, 0);
 
-
-    // Draw food
-    for (let j = 0; j < foodArray.length; j++) {
-
-        foodArray[j].draw();
+    if (timeLeft <= 0 || health <= 0)  {
+        textSize(50);
+        fill(255, 0, 0);
+        text("You Big Lose!", width / 2 - 125, height / 2);
+        noLoop();
     }
+   
+}//end of draw
 
-    // Handle movement
-    handleMovement();
-
-    // Choose correct animation
-    let currentFrame = moving ? run[k] : animation[i];
-    currentFrame.x = x;
-    currentFrame.y = y;
-    currentFrame.flipX = flipX;
-    currentFrame.draw();
-
-
-    // Check for food collision
-    for (let j = 0; j < foodArray.length; j++) {
-        if (currentFrame.hasCollided(foodArray[j].x, foodArray[j].y, 25, 25)) {
-            foodArray.splice(j, 1);
-            score += 10;  // Increase score
+//how to make this work
+function collidesWithTree(newX, newY) {
+    for (let tree of treeArray) {
+        if (newX + 40 > tree.x && newX < tree.x + tree.w &&
+            newY + 50 > tree.y && newY < tree.y + tree.h) {
+            return true; // Collision detected
         }
-
-    textSize(30);
-    fill(255, 255, 255)
-    text("Feed the Dino!", width / 1 - 490, height / 20); 
     }
-      //trees   
-      fill(153, 95, 30);
-      //1
-      rect(119, 200, 10, 130);
-      //2
-      rect(300, 400, 10, 130);
-      //3
-      rect(400, 200, 10, 120);
-  
-      //green topper
-      fill(100, 150, 10);
-      //1
-      triangle(125, 150, 150, 300, 100, 300);
-      //2
-      triangle(270, 500, 300, 360, 340, 500);
-      //3
-      triangle(410, 150, 440, 300, 370, 300);
+    return false;
+ }
 
-      
+// Update health bar
+function updateHealth(health, maxHealth) {
+    
+   
+    noStroke();
+    fill(233, 0, 0);
+    rect(500, 500, map(health, 0, maxHealth, 0, 300), 8);
 
-      // Display countdown timer
-      fill(255);
-      textSize(20);
-      text("Score: " + score, 390, 60);
-      text("Time Left: " + timeLeft + "s", width - 150, 35);
-
-      // Check if time is up
-      if (timeLeft <= 0) {
-          textSize(50);
-          fill(255, 0, 0)
-          text("You Big Lose!", width / 2 - 150, height / 2);
-          noLoop(); // Stop the game when time runs out
-      }
-      // Check for win condition
-      if (score >= 90) {
-          textSize(60);
-          fill(255, 215, 0);
-          text("YOU WIN!", width / 2 - 125, height / 2);
-          noLoop(); // Stop the game
-          return;
-      }
+    stroke(0);
+    strokeWeight(5);
+    noFill();
+    rect(500, 500, 300, 10);
+    noStroke();
 }
 
-// Idle animation update
-function updateIdleIndex() {
-    if (moving) {
-        i = (i + 1) % animation.length;
-    }
-}
 
-// Running animation update
-function updateRunIndex() {
-    if (moving) {
-        k = (k + 1) % run.length;
-    }
-}
-
-// Handle movement using key states
-function handleMovement() {
-    moving = false;
-
-    if (keyIsPressed) {
-
-        if (keys["a"]) {
-            x -= 3;
-            flipX = true;
-            moving = true;
-        }
-        if (keys["d"]) {
-            x += 3;
-            flipX = false;
-            moving = true;
-        }
-        if (keys["w"]) {
-            y -= 3;
-            moving = true;
-        }
-        if (keys["s"]) {
-            y += 3;
-            moving = true;
-        }
-
-    }
-  
-}
-
-// Detect when a key is pressed
-function keyPressed() {
-    keys[key] = true;
-}
-
-// Detect when a key is released
-function keyReleased() {
-    keys[key] = false;
-
-}
