@@ -94,7 +94,7 @@ cam.lookAt(0, 0, 0); // Always look at the center
 
 
 // === Lighting ===
-    //ambientLight(255); // bright white ambient light
+    //ambientLight(255); // bright white ambient light // *IMPORTANT* This is what messed up the colors in the first place
     pointLight(255, 100, 0, 100, 50, 0);   // red from right
     pointLight(255, 255, 255, -200, 255, 255);  // green from left
     pointLight(0, 0, 255, 0, -200, 0);  // blue from top
