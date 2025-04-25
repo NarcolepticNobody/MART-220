@@ -28,7 +28,7 @@ class SpinningTorus {
     translate(x, y, z);
     rotateX(this.rotation);
     rotateY(this.rotation);
-    //ambientMaterial(red(col), green(col), blue(col)); // Use RGB here
+    ambientMaterial(red(col), green(col), blue(col)); // Use RGB here
     noStroke();
     torus(5, 8);
     pop();

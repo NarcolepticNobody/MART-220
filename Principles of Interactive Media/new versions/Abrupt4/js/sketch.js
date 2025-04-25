@@ -7,9 +7,14 @@ let cam;
 let font;
 
 
+
+
 function preload() {
     font = loadFont('assets/inconsolata.otf'); // No slash at the beginning
   }
+
+
+
 
 
 
@@ -20,27 +25,33 @@ function setup() {
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
   angleMode(DEGREES);
 
+
   cam = createCamera(); // hmmmmmm
+
 
   fill('deeppink');
   textFont(font);
   textSize(36);
-  
-  
+ 
+ 
+
 
     // Create and set up the camera
     cam = createCamera();
     cam.setPosition(600, 200, 900);  // camera x, y, z
     cam.lookAt(100, 50, 190);         // point the camera looks at
 
+
   let numTorus = int(random(100, 70));
   let numBox = int(random(3, 7));
+
 
   for (let i = 0; i < 100; i++) {
     let radius = (100, 300);
     let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
+
 
   /*for (let i = 0; i < 6; i++) {
     let radius = random(150, 250);
@@ -55,6 +66,7 @@ function setup() {
     boxes.push(new SpinningBox(radius, angleOffset));
   }
 
+
   for (let i = 0; i < 1; i++) {
     let x = (-10, -10);
     let y = (-100, -100);
@@ -64,9 +76,11 @@ function setup() {
   }
 }
 
+
 function draw() {
   background(30);
   //orbitControl();
+
 
     // === Camera rotation logic ===
 let radius = 900; // Distance from center
@@ -74,14 +88,18 @@ let camX = radius * cos(angle * 0.1);
 let camZ = radius * sin(angle * 0.1);
 let camY = 200; // Keep camera slightly above center
 
+
 cam.setPosition(camX, camY, camZ);
 cam.lookAt(0, 0, 0); // Always look at the center
 
+
 // === Lighting ===
-pointLight(255, 100, 0, 100, 50, 0);   // red from right
-pointLight(255, 255, 255, -200, 255, 255);  // white from left
-pointLight(0, 0, 255, 0, -200, 0);  // blue from top
-spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+    //ambientLight(255); // bright white ambient light
+    pointLight(255, 100, 0, 100, 50, 0);   // red from right
+    pointLight(255, 255, 255, -200, 255, 255);  // green from left
+    pointLight(0, 0, 255, 0, -200, 0);  // blue from top
+    spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+
 
 // "Flow" text
 push();
@@ -98,6 +116,7 @@ textAlign(CENTER, CENTER);
 text("Abrupt", 0, 0);
 pop();
 
+
 // "how do you feel?" text
 push();
 let feelTextPos = createVector(-200, 300, 50);
@@ -111,8 +130,8 @@ fill(320, 80, 100);
 textAlign(CENTER, CENTER);
 text("how do you feel?", 0, 0);
 pop();
-        
-    
+       
+   
 /*ambientLight(299, 0, 100);
    directionalLight(255, 255, 255, 0.25, 0.25, -1);
    pointLight(-1, 100, 5, 0, 0, 300);
