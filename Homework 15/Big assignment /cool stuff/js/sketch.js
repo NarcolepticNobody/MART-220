@@ -63,8 +63,8 @@ function setup() {
   }
 
 
-  for (let i = 0; i < 20; i++) {
-    let radius = random(900, 900);
+  for (let i = 0; i < 100; i++) {
+    let radius = random(200, 100);
     let angleOffset = random(200, 900);
     let axisOptions = ['x', 'y', 'z'];
     let axis = random(axisOptions);

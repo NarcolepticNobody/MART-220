@@ -14,14 +14,14 @@ class SpinningCone {
   }
 
   update(globalAngle) {
-    this.rotation += 3;
+    this.rotation += 0;
     this.angle = globalAngle + this.angleOffset;
   }
 
   display() {
-    let x = cos(this.angle * 1) * 800;
-    let z = sin(this.angle * 9) * 800;
-    let y = sin(frameCount * 0.05) * 50; // optional bounce
+    let x = cos(this.angle * 10) * 1200;
+    let z = sin(this.angle * 10) * 800;
+    let y = sin(frameCount * 0.05);
 
     push();
     translate(x, y, z);
