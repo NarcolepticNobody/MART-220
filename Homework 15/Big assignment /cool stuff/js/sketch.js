@@ -31,7 +31,7 @@ function setup() {
 
    // Create and set up the camera
     cam = createCamera();
-    cam.setPosition(1500, 1000, 1000);  // camera x, y, z
+    cam.setPosition(800, 900, 1900);  // camera x, y, z
     cam.lookAt(100, 50, 290);         // point the camera looks at
 
   let numTorus = int(random(100, 70));
@@ -64,8 +64,8 @@ function setup() {
 
 
   for (let i = 0; i < 100; i++) {
-    let radius = random(200, 100);
-    let angleOffset = random(200, 900);
+    let radius = random(200, 800);
+    let angleOffset = map(i, 1, numBox, 7, 900); //change to 900 for the cool thing
     let axisOptions = ['x', 'y', 'z'];
     let axis = random(axisOptions);
     cones.push(new SpinningCone(radius, angleOffset, axis));
