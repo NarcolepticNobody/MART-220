@@ -13,7 +13,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(1200, 500, WEBGL);
+  createCanvas(1000, 500, WEBGL);
   angleMode(DEGREES);
   colorMode(HSB, 360, 100, 100);
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
@@ -29,7 +29,7 @@ function setup() {
 
     // Create and set up the camera
     cam = createCamera();
-    cam.setPosition(700, 600, 900);  // camera x, y, z
+    cam.setPosition(1500, 1000, 1000);  // camera x, y, z
     cam.lookAt(100, 50, 190);         // point the camera looks at
 
   let numTorus = int(random(100, 70));
@@ -41,15 +41,15 @@ function setup() {
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
     */
-/*
+
   for (let i = 0; i < 900; i++) {
     let radius = (400, 900);
     let angleOffset = map(i, 80, numBox, 70, 900);
     boxes.push(new SpinningBox(radius, angleOffset)); //outer rim
   }
-*/
+
   for (let i = 0; i < 900; i++) {
-    let radius = random(900, 300);
+    let radius = random(1, 800);
     let angleOffset = map(i, 800, numBox, 70, 900); //change to 900 for the cool thing
     boxes.push(new SpinningBox(radius, angleOffset));
   }
