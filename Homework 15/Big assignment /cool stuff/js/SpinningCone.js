@@ -4,45 +4,33 @@ function rotateAxis(axis, angle) {
   else if (axis === 'z') rotateZ(angle);
 }
 
+
 class SpinningCone {
-  constructor(x, y, z, axis) {
-    this.position = createVector(x, y, z); // renamed from pos
-    this.baseY = y;
-    this.axis = axis;
+  constructor(radius, angleOffset, axis) {
+    this.radius = radius;      // how far from center
+    this.angleOffset = angleOffset; // starting angle
+    this.axis = axis;          // spinning axis
     this.rotation = 0;
-    this.hue = random(360);          // starting hue
-    this.targetHue = random(200, 255, 255);    // color shifting
   }
 
-  update() {
+  update(globalAngle) {
     this.rotation += 3;
-    this.hue = lerp(this.hue, this.targetHue, 0.02); // smooth color transition
-
-    if (frameCount % 180 === 0) {
-      this.targetHue = random(360); // new target color every 3 seconds
-    }
+    this.angle = globalAngle + this.angleOffset;
   }
 
   display() {
-    let bounceY = this.baseY + sin(frameCount * 2) * 200;
+    let x = cos(this.angle * 1) * 800;
+    let z = sin(this.angle * 9) * 800;
+    let y = sin(frameCount * 0.05) * 50; // optional bounce
 
     push();
-    translate(this.position.x, bounceY, this.position.z);
+    translate(x, y, z);
     rotateAxis(this.axis, this.rotation);
-    
-    shininess(50); 
-    
-    noStroke();
-    cone(100, 100);
-    pop();
-  }
 
-  get pos() {
-    // Match bounce height to display()
-    return createVector(
-      this.position.x,
-      this.baseY + sin(frameCount * 2) * 200,
-      this.position.z
-    );
+    noStroke();
+    specularMaterial(220);
+    shininess(80);
+    cone(40, 80, 24, 16);
+    pop();
   }
 }
