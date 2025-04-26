@@ -34,13 +34,13 @@ function setup() {
 
   let numTorus = int(random(100, 70));
   let numBox = int(random(2, 7));
-/*
+
   for (let i = 0; i < 400; i++) {
     let radius = (700, 200);
     let angleOffset = map(i, 0, numTorus, 0, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
-    */
+    
 
   for (let i = 0; i < 900; i++) {
     let radius = (400, 900);
