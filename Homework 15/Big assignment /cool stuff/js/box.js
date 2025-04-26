@@ -18,8 +18,8 @@ class SpinningBox {
     }
     display() {
         let x = cos(this.angle) * this.radius;
-        let z = sin(this.angle) * this.radius;
-        let y = cos(this.angle * 2) * 50;
+        let z = sin(this.angle * 1) * 200; //) * this.radius;
+        let y = cos(this.angle * 1) * 200;
       
         //let col = color(this.hue, 80, 100); // Convert from HSB
         let col = color(this.hue, 100, 80); // Unique box coloring
@@ -31,6 +31,7 @@ class SpinningBox {
         ambientMaterial(red(col), green(col), blue(col)); // Use RGB here too
         noStroke();
         box(20);
+        //box(90);
         pop();
       }
       

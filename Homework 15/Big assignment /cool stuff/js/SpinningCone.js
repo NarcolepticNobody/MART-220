@@ -24,7 +24,7 @@ class SpinningCone {
   }
 
   display() {
-    let bounceY = this.baseY + sin(frameCount * 2) * 300;
+    let bounceY = this.baseY + sin(frameCount * 2) * 200;
 
     push();
     translate(this.position.x, bounceY, this.position.z);
@@ -33,7 +33,7 @@ class SpinningCone {
     shininess(50); 
     
     noStroke();
-    cone(50, 90);
+    cone(100, 100);
     pop();
   }
 
