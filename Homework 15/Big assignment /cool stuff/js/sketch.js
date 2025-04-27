@@ -28,12 +28,12 @@ function setup() {
   textSize(36);
   
   
-
+/*
    // Create and set up the camera
     cam = createCamera();
     cam.setPosition(800, 900, 1900);  // camera x, y, z
-    cam.lookAt(100, 50, 290);         // point the camera looks at
-
+    cam.lookAt(100, 100, 100);         // point the camera looks at
+*/
   let numTorus = int(random(100, 70));
   let numBox = int(random(2, 7));
 
@@ -52,7 +52,7 @@ function setup() {
 
   for (let i = 0; i < 700; i++) {
     let radius = (200, 1200);
-    let angleOffset = map(i, 80, numBox, 90, 1200);
+    let angleOffset = map(i, 100, numBox, 90, 1200);
     boxes.push(new SpinningBox(radius, angleOffset)); //outer rim2
   }
 
@@ -62,7 +62,7 @@ function setup() {
     boxes.push(new SpinningBox(radius, angleOffset));
   }
 
-
+/*
   for (let i = 0; i < 100; i++) {
     let radius = random(200, 800);
     let angleOffset = map(i, 1, numBox, 7, 900); //change to 900 for the cool thing
@@ -70,11 +70,11 @@ function setup() {
     let axis = random(axisOptions);
     cones.push(new SpinningCone(radius, angleOffset, axis));
   }
-    
+   */ 
 }
 
 function draw() {
-  background(30);
+  background(3);
   orbitControl();
 
   // === Lighting ===
@@ -97,15 +97,15 @@ pointLight(0, 255, 100, 0, 300, 0);
 // Subtle rim light from the left side
 directionalLight(150, 150, 255, -1, 0, 0);
 
-/*    // === Camera rotation logic ===
-let radius = 900; // Distance from center
+   // === Camera rotation logic ===
+let radius = 3000; // Distance from center
 let camX = radius * cos(angle * 0.1);
 let camZ = radius * sin(angle * 0.1);
 let camY = 200; // Keep camera slightly above center
 
 cam.setPosition(camX, camY, camZ);
 cam.lookAt(0, 0, 0); // Always look at the center
-*/
+
 
 
 
@@ -139,16 +139,7 @@ textAlign(CENTER, CENTER);
 text("", 0, 0);
 pop();
 
-// Draw simple sparkly stars in the background
-push();
-resetMatrix(); // resets transforms so stars don't rotate with the scene
-camera(); // resets the camera
-noStroke();
-for (let i = 0; i < 100; i++) {
-  fill(255, random(150, 255)); // white with slight twinkle
-  ellipse(random(width), random(height), random(1, 3));
-}
-pop();
+
 
     angle += 1;
     globalAngle += 0.01; // slowly orbit all cones
