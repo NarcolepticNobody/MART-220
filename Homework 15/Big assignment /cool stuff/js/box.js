@@ -19,8 +19,8 @@ class SpinningBox {
     translate(x, y, z);
     rotateX(this.rotation);
     noStroke();
+    specularMaterial(220);
     shininess(80);
-    ambientMaterial(200); // simple neutral gray, or use specularMaterial() for shiny
     box(40);
     pop();
   }
