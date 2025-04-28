@@ -110,6 +110,11 @@ function mousePressed() {
 // Draw function
 function draw() {
     background(40, 100, 10);
+
+for (let i = 0; i < logredArray.length; i++) {
+    logredArray[i].update(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y);
+  }
+  
     updateHealth(health, maxHealth);
     collidesWithTree();
 
