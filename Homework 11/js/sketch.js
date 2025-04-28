@@ -84,7 +84,7 @@ function setup() {
     }
 
      // Create badlog objects
-     for (let i = 0; i < logredStrings.length; i++) {
+     for (let i = 0; i < 4; i++) {
 
         let myLog = new logred(random(50, width - 50), random(50, height - 50), 40, 40);
         logredArray.push(myLog);
@@ -114,7 +114,7 @@ function draw() {
 for (let i = 0; i < logredArray.length; i++) {
     logredArray[i].update(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y);
   }
-  
+
     updateHealth(health, maxHealth);
     collidesWithTree();
 

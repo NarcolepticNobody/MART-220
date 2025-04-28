@@ -19,7 +19,7 @@ class logred {
 
   // New method to chase the player
   update(targetX, targetY) {
-    let speed = 2.5; // red logs are faster to make them scarier!
+    let speed = 1; // red logs are faster to make them scarier!
 
     let dir = createVector(targetX - this.currentAnimation.position.x, targetY - this.currentAnimation.position.y);
     dir.normalize();

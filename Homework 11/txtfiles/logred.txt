@@ -3,11 +3,3 @@ logred/logred 02.png
 logred/logred 03.png
 logred/logred 04.png
 logred/logred 05.png
-logred/logred 06.png
-logred/logred 07.png
-logred/logred 08.png
-logred/logred 09.png
-logred/logred 10.png
-logred/logred 11.png
-logred/logred 12.png
-logred/logred 13.png
