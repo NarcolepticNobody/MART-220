@@ -49,8 +49,8 @@ class logred {
     if (this.isLunging && d > 160) {
       this.isLunging = false;
     }
-    this.currentAnimation.position.x = constrain(this.currentAnimation.position.x, 0 + 10, width - 10);
-    this.currentAnimation.position.y = constrain(this.currentAnimation.position.y, 0 + 10, height - 10);
+    this.currentAnimation.position.x = constrain(this.currentAnimation.position.x, 0 + 20, width - 20);
+    this.currentAnimation.position.y = constrain(this.currentAnimation.position.y, 0 + 20, height - 20);
 
   }
 }
