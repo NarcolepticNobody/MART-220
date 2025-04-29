@@ -30,7 +30,9 @@ class SpinningCone {
     translate(this.position.x, bounceY, this.position.z);
     rotateAxis(this.axis, this.rotation);
     
-    shininess(50); 
+    specularMaterial(120, 80, 60);
+    shininess(100);
+    
     
     noStroke();
     cone(50, 90);

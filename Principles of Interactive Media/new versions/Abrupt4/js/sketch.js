@@ -20,7 +20,7 @@ function setup() {
  
   textFont(font);
   textSize(36);
-  fill(120, 80, 60); // HSB for a nice forest green
+  fill('red');
 
   // Create and set up the camera
   cam = createCamera();
@@ -66,17 +66,18 @@ function draw() {
   //pointLight(255, 255, 255, 0, -200, 300);
   //directionalLight(200, 200, 200, 1, -1, -1);
 
-// Neon pink front light
-pointLight(255, 150, 200, 0, 100, 300);
 
-// Electric blue side rim light
-pointLight(100, 150, 255, -300, 0, 0);
+// Cheerful yellow sunlight from above
+directionalLight(255, 255, 100, 0, -1, 0);
 
-// Sharp red directional from right
-directionalLight(255, 50, 50, 1, 0, 0);
+  // Warm orange sunset fill
+  pointLight(255, 165, 0, -300, 0, 100);
 
-
-
+  // Passionate red side glow
+  pointLight(255, 50, 50, 300, 0, 0);
+  
+  // Bright golden-yellow highlight from above
+  directionalLight(255, 255, 100, 0, -1, 0);
   //orbitControl();
 
 
@@ -93,11 +94,6 @@ directionalLight(255, 50, 50, 1, 0, 0);
   directionalLight(255, 255, 255, 0.25, 0.25, -1);
   pointLight(-1, 100, 5, 0, 0, 300);
 */
-
-
-
-
-
 
   // "Flow" text
   push();
