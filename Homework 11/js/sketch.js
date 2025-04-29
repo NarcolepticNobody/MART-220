@@ -69,7 +69,7 @@ function setup() {
       }
           */
 
-    let treeW = 10; // your tree width
+    let treeW = 40; // your tree width
     let treeH = 40; // your tree height
 
     for (let i = 0; i < 14; i++) {
@@ -128,8 +128,6 @@ function draw() {
     // Display food
     for (let i = 0; i < foodArray.length; i++) {
         foodArray[i].draw();
-
-
 
         // Check collision with character
         if (myAnimation.isColliding(foodArray[i].foodPiece)) {
