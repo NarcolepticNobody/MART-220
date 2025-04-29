@@ -3,8 +3,8 @@ class SpinningBox {
       this.radius = radius;
       this.angleOffset = angleOffset;
       this.rotation = 0;
-      this.hue = random(360);
-      this.targetHue = random(360);
+      //this.hue = random(360);
+      //this.targetHue = random(360);
     }
   
     update(globalAngle) {
@@ -13,7 +13,7 @@ class SpinningBox {
   
       this.hue = lerp(this.hue, this.targetHue, 0.02);
       if (frameCount % 150 === 0) {
-        this.targetHue = random(360);
+        //this.targetHue = random(360);
       }
     }
     display() {
@@ -22,13 +22,15 @@ class SpinningBox {
         let y = cos(this.angle * 2) * 50;
       
         //let col = color(this.hue, 80, 100); // Convert from HSB
-        let col = color(this.hue, 100, 80); // Unique box coloring
-        ambientMaterial(red(col), green(col), blue(col));
+        //let col = color(this.hue, 100, 80); // Unique box coloring
+        //ambientMaterial(red(col), green(col), blue(col));
         
         push();
         translate(x, y, z);
         rotateX(this.rotation);
-        ambientMaterial(red(col), green(col), blue(col)); // Use RGB here too
+        specularMaterial(120, 80, 60);
+        shininess(100);
+
         noStroke();
         box(20);
         pop();

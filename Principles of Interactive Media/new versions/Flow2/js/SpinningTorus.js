@@ -3,8 +3,8 @@ class SpinningTorus {
     this.radius = radius;
     this.angleOffset = angleOffset;
     this.rotation = 0;
-    this.hue = random(360);
-    this.targetHue = random(360);
+    //this.hue = random(360);
+    //this.targetHue = random(360);
   }
 
   update(globalAngle) {
@@ -13,7 +13,7 @@ class SpinningTorus {
 
     this.hue = lerp(this.hue, this.targetHue, 0.09);
     if (frameCount % 120 === 0) {
-      this.targetHue = random(360);
+     // this.targetHue = random(360);
     }
   }
 
@@ -28,7 +28,7 @@ class SpinningTorus {
     translate(x, y, z);
     rotateX(this.rotation);
     rotateY(this.rotation);
-    ambientMaterial(red(col), green(col), blue(col)); // Use RGB here
+    //ambientMaterial(red(col), green(col), blue(col)); // Use RGB here
     noStroke();
     torus(15, 15);
     pop();
