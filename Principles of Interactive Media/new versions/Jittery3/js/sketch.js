@@ -64,7 +64,7 @@ function setup() {
 }
 
 function draw() {
-  background(30);
+  background(10);
   //orbitControl();
 
     // === Camera rotation logic ===

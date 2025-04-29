@@ -61,7 +61,7 @@ function setup() {
 
 
 function draw() {
-  background(30);
+  background(10);
   //ambientLight(60);
   //pointLight(255, 255, 255, 0, -200, 300);
   //directionalLight(200, 200, 200, 1, -1, -1);

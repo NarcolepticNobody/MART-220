@@ -23,7 +23,7 @@ function setup() {
 
   
   textFont(font);
-  textSize(36);
+  textSize(10);
   
   
 
@@ -64,7 +64,7 @@ function setup() {
 }
 
 function draw() {
-  background(30);
+  background(10);
   //orbitControl();
 
     // === Camera rotation logic ===
@@ -97,7 +97,7 @@ textFont(font);
 textSize(59);
 fill(320, 80, 100);
 textAlign(CENTER, CENTER);
-text("Confined", 0, 0);
+text("", 0, 0);
 pop();
 
 // "how do you feel?" text
@@ -109,7 +109,7 @@ translate(feelTextPos.x, feelTextPos.y, feelTextPos.z);
 rotateY(thetaY);
 textFont(font);
 textSize(59);
-fill(320, 80, 100);
+fill('green');
 textAlign(CENTER, CENTER);
 text("how do you feel?", 0, 0);
 pop();

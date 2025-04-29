@@ -64,7 +64,7 @@ function setup() {
 }
 
 function draw() {
-    background(30);
+    background(10);
     //orbitControl();
 
       // === Camera rotation logic ===
@@ -94,7 +94,7 @@ textFont(font);
 textSize(59);
 fill(320, 80, 100);
 textAlign(CENTER, CENTER);
-text("Glide", 0, 0);
+text("", 0, 0);
 pop();
 
 // "how do you feel?" text
