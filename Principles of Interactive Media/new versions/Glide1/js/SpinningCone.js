@@ -10,16 +10,16 @@ class SpinningCone {
     this.baseY = y;
     this.axis = axis;
     this.rotation = 0;
-    this.hue = random(360);          // starting hue
-    this.targetHue = random(200, 255, 255);    // color shifting
+    //this.hue = random(360);          // starting hue
+    //this.targetHue = random(200, 255, 255);    // color shifting
   }
 
   update() {
     this.rotation += 3;
-    this.hue = lerp(this.hue, this.targetHue, 0.02); // smooth color transition
+    //this.hue = lerp(this.hue, this.targetHue, 0.02); // smooth color transition
 
     if (frameCount % 180 === 0) {
-      this.targetHue = random(360); // new target color every 3 seconds
+      //this.targetHue = random(360); // new target color every 3 seconds
     }
   }
 
@@ -30,7 +30,8 @@ class SpinningCone {
     translate(this.position.x, bounceY, this.position.z);
     rotateAxis(this.axis, this.rotation);
     
-    shininess(50); 
+    specularMaterial(120, 80, 60);
+    shininess(100);
     
     noStroke();
     cone(50, 90);
