@@ -13,7 +13,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(1920, 1080, WEBGL);
+  createCanvas(displayWidth, displayHeight, WEBGL);
   angleMode(DEGREES);
   colorMode(HSB, 360, 100, 100);
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
@@ -21,7 +21,7 @@ function setup() {
 
   cam = createCamera(); // hmmmmmm
 
-  fill('deeppink');
+  fill('yellow');
   textFont(font);
   textSize(36);
   

@@ -29,6 +29,8 @@ class SpinningBox {
         translate(x, y, z);
         rotateX(this.rotation);
         ambientMaterial(red(col), green(col), blue(col)); // Use RGB here too
+        specularMaterial(120, 80, 60);
+shininess(100);
         noStroke();
         box(20);
         pop();

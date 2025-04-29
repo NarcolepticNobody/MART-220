@@ -29,6 +29,8 @@ class SpinningTorus {
     rotateX(this.rotation);
     rotateY(this.rotation);
     ambientMaterial(red(col), green(col), blue(col)); // Use RGB here
+    specularMaterial(120, 80, 60);
+shininess(100);
     noStroke();
     torus(10, 10);
     pop();
