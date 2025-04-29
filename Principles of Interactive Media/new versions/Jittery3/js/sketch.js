@@ -94,7 +94,7 @@ textFont(font);
 textSize(59);
 fill(320, 80, 100);
 textAlign(CENTER, CENTER);
-text("Jittery", 0, 0);
+text("", 0, 0);
 pop();
 
 // "how do you feel?" text
@@ -105,8 +105,9 @@ thetaY = atan2(dir.x, dir.z);
 translate(feelTextPos.x, feelTextPos.y, feelTextPos.z);
 rotateY(thetaY);
 textFont(font);
+
 textSize(59);
-fill(320, 80, 100);
+fill('yellow');
 textAlign(CENTER, CENTER);
 text("how do you feel?", 0, 0);
 pop();
