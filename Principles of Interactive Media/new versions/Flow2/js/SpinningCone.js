@@ -30,7 +30,8 @@ class SpinningCone {
     translate(this.position.x, bounceY, this.position.z);
     rotateAxis(this.axis, this.rotation);
     
-    shininess(50); 
+    specularMaterial(120, 80, 60); // Green-ish in HSB (but can adjust in RGB too)
+  shininess(100); // Higher value = shinier
     
     noStroke();
     cone(50, 90);

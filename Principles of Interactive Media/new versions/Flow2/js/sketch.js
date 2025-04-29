@@ -21,7 +21,7 @@ function setup() {
 
   cam = createCamera(); // hmmmmmm
 
-  
+  fill('green')
   textFont(font);
   textSize(36);
   
@@ -76,8 +76,28 @@ let camY = 200; // Keep camera slightly above center
 cam.setPosition(camX, camY, camZ);
 cam.lookAt(0, 0, 0); // Always look at the center
  
-  // Lush green soft fill
-  pointLight(100, 255, 100, 0, -200, 200);
+    // Warm orange sunset fill
+pointLight(255, 165, 0, -300, 0, 100);
+
+// Passionate red side glow
+pointLight(255, 50, 50, 300, 0, 0);
+
+// Bright golden-yellow highlight from above
+directionalLight(255, 255, 100, 0, -1, 0);
+// Lush green soft fill
+pointLight(100, 255, 100, 0, -200, 200);
+
+
+
+// Neon pink front light
+pointLight(255, 150, 200, 0, 100, 300);
+
+// Sharp red directional from right
+directionalLight(255, 50, 50, 1, 0, 0);
+
+
+
+
 
 // "Flow" text
 push();
