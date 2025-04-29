@@ -13,7 +13,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(1920, 1280, WEBGL);
+  createCanvas(displayWidth, displayHeight, WEBGL);
   angleMode(DEGREES);
   colorMode(HSB, 360, 100, 100);
   colorMode(HSB, 360, 100, 100); // Enables HSB colors
@@ -21,7 +21,7 @@ function setup() {
 
   cam = createCamera(); // hmmmmmm
 
-  fill('deeppink');
+  
   textFont(font);
   textSize(36);
   
@@ -80,7 +80,10 @@ cam.lookAt(0, 0, 0); // Always look at the center
 pointLight(255, 100, 0, 100, 50, 0);   // red from right
 pointLight(255, 255, 255, -200, 255, 255);  // white from left
 pointLight(0, 0, 255, 0, -200, 0);  // blue from top
+// Lush green soft fill
+pointLight(100, 255, 100, 0, -200, 200);
 spotLight(255, 255, -200, -300, -300, 300, 300, 100, -1, PI / 600, 500);
+
 
 // "Flow" text
 push();
