@@ -21,11 +21,12 @@ var redhealth = 50;
 var maxHealth = 100;
 var startTime;
 var img, img2;
-let good, bad, end, attack, wahoo;
+let good, bad, end, attack, wahoo, cheer;
 var mySound;
 var myAnimation;
 var stomp; //log destroy 
 let gameOver = false;
+let gameWin = false;
 var bites = 50;
 
 // Preload assets
@@ -37,6 +38,7 @@ function preload() {
     bad = loadSound("assets/442602__topschool__ow-sound.mp3");
     end = loadSound("assets/wampp.mp3");
     wahoo = loadSound('assets/wahoo.wav')
+    cheer = loadSound('assets/cheer.wav')
 
     idleStrings = loadStrings('txtfiles/idle.txt');
     runStrings = loadStrings('txtfiles/run.txt');
@@ -274,9 +276,20 @@ function draw() {
             textSize(50);
             fill(255, 215, 0);
             text("YOU WIN!", width / 2 - 125, height / 2);
+//////////////////////////
             noLoop();
+            if (d < 30 && !gameWin) {
+                textSize(50);
+                fill(255, 0, 0);
+                text("You Big Lose!", width / 2 - 150, height / 2);
+                cheer.play();
+                cheer.setVolume(2);
+                noLoop();
+                mySound.stop();
+                gameWin = true;
+            }
         }
-
+////////////////////////
         // Check time left
         let timePassed = int((millis() - startTime) / 1000);
         timeLeft = max(countdown - timePassed, 0);
@@ -291,7 +304,7 @@ function draw() {
             gameOver = true;
             mySound.stop();
         }
-
+      
         // At the bottom of draw()
         for (let i = particles.length - 1; i >= 0; i--) {
             particles[i].update();
