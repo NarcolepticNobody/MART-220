@@ -23,8 +23,8 @@ class character {
   console.log(fileNames[0]);
       this.currentAnimation.addAnimation(animationType, fileNames[0], fileNames[fileNames.length - 1]);
       // set the hit box
-      this.currentAnimation.width = 300;
-      this.currentAnimation.height = 150;
+      this.currentAnimation.width = 200;
+      this.currentAnimation.height = 100;
   
     }
   
@@ -66,7 +66,7 @@ class character {
       }
       else {
         this.currentAnimation.velocity.x = 0;
-        this.currentAnimation.velocity.y = 0;
+        this.currentAnimation.velocity.y = 0; //
       }
     }
   
@@ -74,6 +74,9 @@ class character {
     // this gives direction in words
     updatePosition(direction) {
       this.direction = direction;
+      this.currentAnimation.position.x = constrain(this.currentAnimation.position.x, 0 + 10, width - 10);
+      this.currentAnimation.position.y = constrain(this.currentAnimation.position.y, 0 + 10, height - 10);
+
     }
   
   

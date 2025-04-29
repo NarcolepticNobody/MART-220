@@ -15,11 +15,7 @@ class tree {
     this.currentAnimation.img = 'trees/PineTree01.png';
     this.currentAnimation.scale = .30;
     //hit box
-    this.currentAnimation.width = 18;
-    this.currentAnimation.height = 90;
-    
-   
+    this.currentAnimation.width = 10;
+    this.currentAnimation.height = 10;
   }
-
-
-     }
+  }

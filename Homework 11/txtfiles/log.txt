@@ -6,8 +6,3 @@ log/log 05.png
 log/log 06.png
 log/log 07.png
 log/log 08.png
-log/log 09.png
-log/log 10.png
-log/log 11.png
-log/log 12.png
-log/log 13.png
