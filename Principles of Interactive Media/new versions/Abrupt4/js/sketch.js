@@ -78,6 +78,8 @@ directionalLight(255, 255, 100, 0, -1, 0);
   
   // Bright golden-yellow highlight from above
   directionalLight(255, 255, 100, 0, -1, 0);
+
+  //directionalLight(255, 255, 255, 0.25, 0.25, -1);
   //orbitControl();
 
 
@@ -107,7 +109,7 @@ directionalLight(255, 255, 100, 0, -1, 0);
   textSize(59);
   fill(320, 80, 100);
   textAlign(CENTER, CENTER);
-  text("Abrupt", 0, 0);
+  text("", 0, 0);
   pop();
 
 
@@ -120,7 +122,7 @@ directionalLight(255, 255, 100, 0, -1, 0);
   rotateY(thetaY);
   textFont(font);
   textSize(59);
-  fill(320, 80, 100);
+  fill('maroon');
   textAlign(CENTER, CENTER);
   text("how do you feel?", 0, 0);
   pop();
