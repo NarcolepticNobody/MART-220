@@ -74,8 +74,13 @@ console.log(fileNames[0]);
   // this gives direction in words
   updatePosition(direction) {
     this.direction = direction;
-    this.currentAnimation.position.x = constrain(this.currentAnimation.position.x, 0 + 10, width - 10);
-    this.currentAnimation.position.y = constrain(this.currentAnimation.position.y, 0 + 10, height - 10);
+    let halfW = this.currentAnimation.width * this.currentAnimation.scale / 2;
+    let halfH = this.currentAnimation.height * this.currentAnimation.scale / 2;
+    
+    this.currentAnimation.position.x = constrain(this.currentAnimation.position.x, 50 + halfW, width - 50 - halfW);
+    this.currentAnimation.position.y = constrain(this.currentAnimation.position.y, 50 + halfH, height - 50 - halfH);
+    
+
 
   }
 

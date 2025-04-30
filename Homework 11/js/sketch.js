@@ -117,7 +117,17 @@ function mousePressed() {
 // Draw function
 function draw() {
     background(40, 100, 10);
-  
+  // Draw boundary
+noFill();
+stroke(0); 
+strokeWeight(20);
+rect(10, 10, width - 40, height - 40); // play area: inset by 50px on each side
+
+// Put near top of draw()
+noFill();
+stroke(0);
+strokeWeight(0);
+rect(30, 30, width - 40, height - 40);
 
     for (let i = 0; i < logredArray.length; i++) {
         logredArray[i].update(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y);
