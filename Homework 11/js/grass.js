@@ -14,8 +14,9 @@ class grass {
     // this creates the initial sprite
     createAnimation() {
       this.currentAnimation = createSprite(this.x, this.y, 'static');
-      this.currentAnimation.img = 'grass/grass.png';
+      this.currentAnimation.img = 'grass/grass01.png';
       this.currentAnimation.scale = .14;
+
       //hit box//Needs particles
      this.currentAnimation.width = 12;
      this.currentAnimation.height = 12;

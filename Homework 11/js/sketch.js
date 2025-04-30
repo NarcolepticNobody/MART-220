@@ -29,6 +29,7 @@ let gameOver = false;
 let gameWin = false;
 var bites = 50;
 const borderThickness = 15; // thickness of edge borders
+let forestBackground;
 
 
 
@@ -50,6 +51,7 @@ function preload() {
     logredStrings = loadStrings('txtfiles/logred.txt');
     grassStrings = loadStrings('txtfiles/grass.txt');
     attackStrings = loadStrings('txtfiles/attack2.txt');
+    grassStrings = loadStrings('txtfiles/grass.txt');
     //img = loadImage('trees/PineTree 01.png');
     //img2 = loadImage('assets/log.png');
 
@@ -64,6 +66,7 @@ function setup() {
     myAnimation.loadAnimation('idle', idleStrings);
     myAnimation.loadAnimation('run', runStrings);
     myAnimation.loadAnimation('attack', attackStrings);
+    myAnimation.loadAnimation('grass', grassStrings);
 
     // Create food objects
     /*  for (let i = 0; i < 40; i++) {
@@ -75,14 +78,17 @@ function setup() {
           */
 
     let treeW = 40; // your tree width
-    let treeH = 40; // your tree height
-
+    let treeH = 50; // your tree height
+    let x = random(treeW / 1, width - treeW / 1);
+    let y = random(treeH / 1, height - treeH / 1);
     for (let i = 0; i < 14; i++) {
-        let x = random(treeW / 1, width - treeW / 1);
-        let y = random(treeH / 1, height - treeH / 1);
+         x = random(treeW / 1, width - treeW / 1);
+     y = random(treeH / 1, height - treeH / 1);
 
         let myTree = new tree(x, y, treeW, treeH);
         treeArray.push(myTree);
+        let myGrass = new grass(x + 17, y + treeH, 40, 40);
+        grassArray.push(myGrass);
     }
 
 
@@ -99,14 +105,24 @@ function setup() {
         let myLog = new logred(random(50, width - 50), random(50, height - 50), 40, 40);
         logredArray.push(myLog);
     }
-    /*  // Create grass objects
-      for (let i = 0; i < grassStrings.length; i++) {
+    
+   //  // Create grass objects
+     // for (let i = 0; i < grassStrings.length; i++) {
         
-        let myGrass = new grass(random(50, width - 50), random(50, height - 50), 40, 40);
-        grassArray.push(myGrass);
-    }
-      */
-
+      //  let myGrass = new grass(random(50, width - 50), random(50, height - 50), 40, 40);
+       // grassArray.push(myGrass);
+   // }
+     
+   forestBackground = createGraphics(width, height);
+   for (let x = 0; x < width; x += 40) {
+       for (let y = 0; y < height; y += 40) {
+           let shade = (random(30, 80));
+           forestBackground.noStroke();
+           //forestBackground.fill(shade, random(60, 120), shade / 2);
+           forestBackground.rect(x, y, 60, 60);
+       }
+   }
+   
 }
 
 function mousePressed() {
@@ -119,27 +135,35 @@ function mousePressed() {
 
 // Draw function
 function draw() {
-    background(40, 100, 10);
- // DRAW THICK EDGE BORDERS (solid rectangles)
-noStroke();
-fill(0); // black border, or change color as needed
+    
+    // DRAW THICK EDGE BORDERS (solid rectangles)
+    noStroke();
+    fill(0); // black border, or change color as needed
 
-// Top border
-rect(0, 0, width, borderThickness);
+    // Top border
+    rect(0, 0, width, borderThickness);
 
-// Bottom border
-rect(0, height - borderThickness, width, borderThickness);
+    // Bottom border
+    rect(0, height - borderThickness, width, borderThickness);
 
-// Left border
-rect(0, 0, borderThickness, height);
+    // Left border
+    rect(0, 0, borderThickness, height);
 
-// Right border
-rect(width - borderThickness, 0, borderThickness, height);
+    // Right border
+    rect(width - borderThickness, 0, borderThickness, height);
 
+ // Draw forest floor texture
+for (let x = 0; x < width; x += 40) {
+    for (let y = 0; y < height; y += 40) {
+        let shade = (30, 80); // range of foresty greens/browns
+        fill(shade, (60, 120), shade / 2);
+        noStroke();
+        rect(x, y, 40, 40);
+ 
+        }
 
-    for (let i = 0; i < logredArray.length; i++) {
-        logredArray[i].update(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y);
-    }
+}
+
 
     updateHealth(health, maxHealth);
     collidesWithTree();
@@ -215,8 +239,8 @@ rect(width - borderThickness, 0, borderThickness, height);
                         score++;
                         break;
                     }
-                    if (!cheer.isPlaying()) {
-                        cheer.play(); // log breaking sound
+                    if (!wahoo.isPlaying()) {
+                        wahoo.play(); // log breaking sound
                     }
                     ////////////////////////////////
 
@@ -277,37 +301,17 @@ rect(width - borderThickness, 0, borderThickness, height);
         }
     }
 
-    // Display UI
-    textSize(20);
-    fill(255, 215, 0);
-    text("Score: " + score, 405, 50);
-    //text("/" + scoreMax, 480, 30);
-    text("Time Left: " + timeLeft + "s", width - 500, 50);
-    textSize(40);
-    fill(255, 215, 0);
-    text("Feed the Dino!", width / 2 - 125, height / 10);
-    textSize(30);
-    text("Don't let them catch you!", width / 2 - 116, height / 4.9);
-
     // Check win condition
     if (score >= 8) {
         textSize(50);
         fill(255, 215, 0);
         text("YOU WIN!", width / 2 - 125, height / 2);
-        //////////////////////////
+        cheer.play();
+        cheer.setVolume(2);
         noLoop();
-        if (d < 30 && !gameWin) {
-            textSize(50);
-            fill(255, 0, 0);
-            text("You Big Lose!", width / 2 - 150, height / 2);
-            cheer.play();
-            cheer.setVolume(2);
-            noLoop();
-            mySound.stop();
-            gameWin = true;
-        }
+
     }
-    ////////////////////////
+
     // Check time left
     let timePassed = int((millis() - startTime) / 1000);
     timeLeft = max(countdown - timePassed, 0);
@@ -323,8 +327,8 @@ rect(width - borderThickness, 0, borderThickness, height);
         mySound.stop();
     }
 
-    // At the bottom of draw()
-    for (let i = particles.length - 1; i >= 0; i--) {
+      // At the bottom of draw()
+      for (let i = particles.length - 1; i >= 0; i--) {
         particles[i].update();
         particles[i].show();
 
@@ -333,6 +337,16 @@ rect(width - borderThickness, 0, borderThickness, height);
         }
     }
 
+    // ✅ TEXT SECTION LAST so it draws on top
+    textSize(20);
+    fill(255, 215, 0);
+    text("Score: " + score, 405, 50);
+    text("Time Left: " + timeLeft + "s", width - 500, 50);
+
+    textSize(30);
+    fill(255, 215, 0);
+    text("Stomp on the sandwiches, and avoid the orange bois!", width / 2 - 320, height / 10);
+    
 }//end of draw
 function findSafeSpawn() {
     let x, y;
