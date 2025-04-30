@@ -28,6 +28,9 @@ var stomp; //log destroy
 let gameOver = false;
 let gameWin = false;
 var bites = 50;
+const borderThickness = 15; // thickness of edge borders
+
+
 
 // Preload assets
 function preload() {
@@ -117,17 +120,22 @@ function mousePressed() {
 // Draw function
 function draw() {
     background(40, 100, 10);
-  // Draw boundary
-noFill();
-stroke(0); 
-strokeWeight(20);
-rect(10, 10, width - 40, height - 40); // play area: inset by 50px on each side
+ // DRAW THICK EDGE BORDERS (solid rectangles)
+noStroke();
+fill(0); // black border, or change color as needed
 
-// Put near top of draw()
-noFill();
-stroke(0);
-strokeWeight(0);
-rect(30, 30, width - 40, height - 40);
+// Top border
+rect(0, 0, width, borderThickness);
+
+// Bottom border
+rect(0, height - borderThickness, width, borderThickness);
+
+// Left border
+rect(0, 0, borderThickness, height);
+
+// Right border
+rect(width - borderThickness, 0, borderThickness, height);
+
 
     for (let i = 0; i < logredArray.length; i++) {
         logredArray[i].update(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y);
@@ -207,8 +215,8 @@ rect(30, 30, width - 40, height - 40);
                         score++;
                         break;
                     }
-                    if (!wahoo.isPlaying()) {
-                        wahoo.play(); // log breaking sound
+                    if (!cheer.isPlaying()) {
+                        cheer.play(); // log breaking sound
                     }
                     ////////////////////////////////
 
@@ -247,136 +255,136 @@ rect(30, 30, width - 40, height - 40);
                 }
             }
         }
-        }
+    }
     else {
-            myAnimation.draw('idle');
-        }
+        myAnimation.draw('idle');
+    }
 
-        for (let i = 0; i < logredArray.length; i++) {
-            logredArray[i].update(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y);
+    for (let i = 0; i < logredArray.length; i++) {
+        logredArray[i].update(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y);
 
-            let d = dist(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y, logredArray[i].currentAnimation.position.x, logredArray[i].currentAnimation.position.y);
+        let d = dist(myAnimation.currentAnimation.position.x, myAnimation.currentAnimation.position.y, logredArray[i].currentAnimation.position.x, logredArray[i].currentAnimation.position.y);
 
-            if (d < 30 && !gameOver) {
-                textSize(50);
-                fill(255, 0, 0);
-                text("You Big Lose!", width / 2 - 150, height / 2);
-                end.play();
-                end.setVolume(2);
-                noLoop();
-                mySound.stop();
-                gameOver = true;
-            }
-        }
-
-        // Display UI
-        textSize(20);
-        fill(255, 215, 0);
-        text("Score: " + score, 405, 30);
-        //text("/" + scoreMax, 480, 30);
-        text("Time Left: " + timeLeft + "s", width - 500, 30);
-        textSize(40);
-        fill(255, 215, 0);
-        text("Feed the Dino!", width / 2 - 125, height / 10);
-        textSize(30);
-        text("Don't let them catch you!", width / 2 - 116, height / 4.9);
-
-        // Check win condition
-        if (score >= 8) {
-            textSize(50);
-            fill(255, 215, 0);
-            text("YOU WIN!", width / 2 - 125, height / 2);
-//////////////////////////
-            noLoop();
-            if (d < 30 && !gameWin) {
-                textSize(50);
-                fill(255, 0, 0);
-                text("You Big Lose!", width / 2 - 150, height / 2);
-                cheer.play();
-                cheer.setVolume(2);
-                noLoop();
-                mySound.stop();
-                gameWin = true;
-            }
-        }
-////////////////////////
-        // Check time left
-        let timePassed = int((millis() - startTime) / 1000);
-        timeLeft = max(countdown - timePassed, 0);
-
-        if ((timeLeft <= 0 || health <= 0) && !gameOver) {
+        if (d < 30 && !gameOver) {
             textSize(50);
             fill(255, 0, 0);
-            text("You Big Lose!", width / 2 - 125, height / 2);
+            text("You Big Lose!", width / 2 - 150, height / 2);
             end.play();
             end.setVolume(2);
             noLoop();
-            gameOver = true;
             mySound.stop();
+            gameOver = true;
         }
-      
-        // At the bottom of draw()
-        for (let i = particles.length - 1; i >= 0; i--) {
-            particles[i].update();
-            particles[i].show();
-
-            if (particles[i].finished()) {
-                particles.splice(i, 1); // remove when done
-            }
-        }
-
-    }//end of draw
-    function findSafeSpawn() {
-        let x, y;
-        let safe = false;
-
-        while (!safe) {
-            x = random(50, width - 50);
-            y = random(50, height - 50);
-
-            safe = true; // assume it's safe first
-
-            // Check against trees
-            for (let tree of treeArray) {
-                if (x + 40 > tree.x && x < tree.x + tree.w &&
-                    y + 50 > tree.y && y < tree.y + tree.h) {
-                    safe = false;
-                    break;
-                }
-            }
-
-            // Check against normal logs
-            for (let log of logArray) {
-                if (dist(x, y, log.currentAnimation.position.x, log.currentAnimation.position.y) < 60) {
-                    safe = false;
-                    break;
-                }
-            }
-
-            // Check against bad logs
-            for (let redlog of logredArray) {
-                if (dist(x, y, redlog.currentAnimation.position.x, redlog.currentAnimation.position.y) < 60) {
-                    safe = false;
-                    break;
-                }
-            }
-        }
-
-        return createVector(x, y);
     }
 
-    function collidesWithTree(newX, newY) {
+    // Display UI
+    textSize(20);
+    fill(255, 215, 0);
+    text("Score: " + score, 405, 50);
+    //text("/" + scoreMax, 480, 30);
+    text("Time Left: " + timeLeft + "s", width - 500, 50);
+    textSize(40);
+    fill(255, 215, 0);
+    text("Feed the Dino!", width / 2 - 125, height / 10);
+    textSize(30);
+    text("Don't let them catch you!", width / 2 - 116, height / 4.9);
+
+    // Check win condition
+    if (score >= 8) {
+        textSize(50);
+        fill(255, 215, 0);
+        text("YOU WIN!", width / 2 - 125, height / 2);
+        //////////////////////////
+        noLoop();
+        if (d < 30 && !gameWin) {
+            textSize(50);
+            fill(255, 0, 0);
+            text("You Big Lose!", width / 2 - 150, height / 2);
+            cheer.play();
+            cheer.setVolume(2);
+            noLoop();
+            mySound.stop();
+            gameWin = true;
+        }
+    }
+    ////////////////////////
+    // Check time left
+    let timePassed = int((millis() - startTime) / 1000);
+    timeLeft = max(countdown - timePassed, 0);
+
+    if ((timeLeft <= 0 || health <= 0) && !gameOver) {
+        textSize(50);
+        fill(255, 0, 0);
+        text("You Big Lose!", width / 2 - 125, height / 2);
+        end.play();
+        end.setVolume(2);
+        noLoop();
+        gameOver = true;
+        mySound.stop();
+    }
+
+    // At the bottom of draw()
+    for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].show();
+
+        if (particles[i].finished()) {
+            particles.splice(i, 1); // remove when done
+        }
+    }
+
+}//end of draw
+function findSafeSpawn() {
+    let x, y;
+    let safe = false;
+
+    while (!safe) {
+        x = random(50, width - 50);
+        y = random(50, height - 50);
+
+        safe = true; // assume it's safe first
+
+        // Check against trees
         for (let tree of treeArray) {
-            if (newX + 40 > tree.x && newX < tree.x + tree.w &&
-                newY + 50 > tree.y && newY < tree.y + tree.h) {
-                return true; // Collision detected
+            if (x + 40 > tree.x && x < tree.x + tree.w &&
+                y + 50 > tree.y && y < tree.y + tree.h) {
+                safe = false;
+                break;
             }
         }
-        return false;
+
+        // Check against normal logs
+        for (let log of logArray) {
+            if (dist(x, y, log.currentAnimation.position.x, log.currentAnimation.position.y) < 60) {
+                safe = false;
+                break;
+            }
+        }
+
+        // Check against bad logs
+        for (let redlog of logredArray) {
+            if (dist(x, y, redlog.currentAnimation.position.x, redlog.currentAnimation.position.y) < 60) {
+                safe = false;
+                break;
+            }
+        }
     }
 
-    // Update health bar
-    function updateHealth(health, maxHealth) {
+    return createVector(x, y);
+}
 
-      
+function collidesWithTree(newX, newY) {
+    for (let tree of treeArray) {
+        if (newX + 40 > tree.x && newX < tree.x + tree.w &&
+            newY + 50 > tree.y && newY < tree.y + tree.h) {
+            return true; // Collision detected
+        }
     }
+    return false;
+}
+
+// Update health bar
+function updateHealth(health, maxHealth) {
+
+
+}

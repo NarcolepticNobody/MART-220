@@ -77,9 +77,11 @@ console.log(fileNames[0]);
     let halfW = this.currentAnimation.width * this.currentAnimation.scale / 2;
     let halfH = this.currentAnimation.height * this.currentAnimation.scale / 2;
     
-    this.currentAnimation.position.x = constrain(this.currentAnimation.position.x, 50 + halfW, width - 50 - halfW);
-    this.currentAnimation.position.y = constrain(this.currentAnimation.position.y, 50 + halfH, height - 50 - halfH);
+
     
+    this.currentAnimation.position.x = constrain(this.currentAnimation.position.x, 50, width - 50);
+  this.currentAnimation.position.y = constrain(this.currentAnimation.position.y, 50, height - 50);
+
 
 
   }
