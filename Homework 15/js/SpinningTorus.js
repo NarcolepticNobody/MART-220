@@ -12,8 +12,8 @@ class SpinningTorus {
 
   display() {
     let x = cos(this.angle * 2) * 100;
-    let z = sin(this.angle * 3) * 800;
-    let y = sin(this.angle * 2) * 700;
+    let z = sin(this.angle * 3) * 100;
+    let y = sin(this.angle * 2) * 100;
 
     push();
     translate(x, y, z);

@@ -8,7 +8,6 @@ let myFont;
 let cam;
 let font;
 
-
 function preload() {
     font = loadFont('assets/inconsolata.otf'); // No slash at the beginning
   }
@@ -24,7 +23,7 @@ function setup() {
 
   cam = createCamera(); // hmmmmmm
 
-  fill('deeppink');
+  fill('yellow');
   textFont(font);
   textSize(36);
   
@@ -35,35 +34,41 @@ function setup() {
     cam.setPosition(800, 900, 1900);  // camera x, y, z
     cam.lookAt(100, 100, 100);         // point the camera looks at
 */
-  let numTorus = int(random(400, 70));
-  let numBox = int(random(2, 7));
+  let numTorus = int(random(800, 70));
+  let numBox = int(random(2, 18));
 /*
   for (let i = 0; i < 400; i++) {
-    let radius = (70, 20);
-    let angleOffset = map(i, 0, numTorus, 0, 800); //change to 100 for a noodle!
+    let radius = (700, 200);
+    let angleOffset = map(i, 0, numTorus, 90, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
   */
-/*
+
   for (let i = 0; i < 900; i++) {
-    let radius = (400, 900);
-    let angleOffset = map(i, 80, numBox, 70, 900);
+    let radius = (100, 900);
+    let angleOffset = map(i, 2, numBox, 70, 900);
     boxes.push(new SpinningBox(radius, angleOffset)); //outer rim
   }
+/*
+  for (let i = 0; i < 100; i++) {
+    let radius = (400, 900);
+    let angleOffset = map(i, 80, numBox, 70, 100);
+    boxes.push(new SpinningSphere(radius, angleOffset)); //outer rim
+  }
 */
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 700; i++) {
     let radius = (200, 1200);
-    let angleOffset = map(i, 100, numBox, 90, 200);
+    let angleOffset = map(i, 100, numBox, 90, 100);
     boxes.push(new SpinningBox(radius, angleOffset)); //outer rim2
   }
-/*
-  for (let i = 0; i < 900; i++) {
+
+  for (let i = 0; i < 200; i++) {
     let radius = random(1, 800);
-    let angleOffset = map(i, 800, numBox, 70, 1); //change to 900 for the cool thing//also the insdie part with the big boxes
+    let angleOffset = map(i, 800, numBox, 70, 300); //change to 900 for the cool thing
     boxes.push(new SpinningBox(radius, angleOffset));
   }
-*/
 
+/*
   for (let i = 0; i < 100; i++) {
     let radius = random(200, 800);
     let angleOffset = map(i, 1, numBox, 7, 900); //change to 900 for the cool thing
@@ -71,7 +76,7 @@ function setup() {
     let axis = random(axisOptions);
     cones.push(new SpinningCone(radius, angleOffset, axis));
   }
-   
+   */ 
 }
 
 function draw() {
@@ -81,7 +86,7 @@ function draw() {
   // === Lighting ===
 
 // Lights for metallic green vibe
-//ambientLight(50); // soft ambient base
+ambientLight(50); // soft ambient base
 
 // Slight green-ish tint from the top front
 pointLight(100, 255, 100, 0, -200, 200);
@@ -98,14 +103,16 @@ pointLight(0, 255, 100, 0, 300, 0);
 // Subtle rim light from the left side
 directionalLight(150, 150, 255, -1, 0, 0);
 
-   // === Camera rotation logic ===
-let radius = 3000; // Distance from center
-let camX = radius * cos(angle * 0.1);
-let camZ = radius * sin(angle * 0.1);
-let camY = 200; // Keep camera slightly above center
 
-cam.setPosition(camX, camY, camZ);
-cam.lookAt(0, 0, 0); // Always look at the center
+
+   // === Camera rotation logic ===
+//let radius = 3000; // Distance from center
+//let camX = radius * cos(angle * 0.1);
+//let camZ = radius * sin(angle * 0.1);
+//let camY = 200; // Keep camera slightly above center
+
+//cam.setPosition(camX, camY, camZ);
+//cam.lookAt(0, 0, 0); // Always look at the center
 
 
 
@@ -143,7 +150,7 @@ pop();
 
 
     angle += 1;
-    globalAngle += 0.01; // slowly orbit all cones
+    globalAngle += 0.02; // slowly orbit all cones
   
     for (let t of toruses) {
       t.update(angle);

@@ -19,9 +19,9 @@ class SpinningCone {
   }
 
   display() {
-    let x = cos(this.angle * 1) * 10;
-    let z = sin(this.angle * 1) * 3;
-    let y = sin(frameCount * 3) * 800;
+    let x = cos(this.angle * 1) * 1000;
+    let z = sin(this.angle * 1) * 800;
+    let y = sin(frameCount * 3) * 800;;
 
     push();
     translate(x, y, z);
@@ -30,7 +30,7 @@ class SpinningCone {
     noStroke();
     specularMaterial(220);
     shininess(80);
-    cone(300, 400, 244, 100);
+    cone(40, 80, 24, 100);
     pop();
   }
 }

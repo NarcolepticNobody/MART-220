@@ -1,27 +1,23 @@
 class SpinningBox {
   constructor(radius, angleOffset) {
+    this.centerX = random(-500, 500); 
+    this.centerY = random(-200, 200);
+    this.centerZ = random(-500, 500);
     this.radius = radius;
     this.angleOffset = angleOffset;
-    this.rotation = 0;
   }
 
-  update(globalAngle) {
-    this.rotation += 2;
-    this.angle = -globalAngle + this.angleOffset; // Opposite direction!
+  update(angle) {
+    this.x = this.centerX + this.radius * cos(angle + this.angleOffset);
+    this.z = this.centerZ + this.radius * sin(angle + this.angleOffset);
   }
 
   display() {
-    let x = cos(this.angle * 1) * 900;
-    let z = sin(this.angle * 1) * 800;
-    let y = cos(this.angle) * this.radius;
-
     push();
-    translate(x, y, z);
-    rotateX(this.rotation);
-    noStroke();
-    specularMaterial(220);
-    shininess(80);
-    box(60);
+    translate(this.x, this.centerY, this.z);
+    rotateY(frameCount * 0.1); // local spin (optional)
+    fill(200, 80, 100);
+    box(20);
     pop();
   }
 }
