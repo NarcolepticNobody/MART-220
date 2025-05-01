@@ -1,6 +1,6 @@
 class SpinningBox {
   constructor(radius, angleOffset) {
-    this.centerX = random(-500, 500);  // assign fixed position
+    this.centerX = random(-500, 500); 
     this.centerY = random(-300, 300);
     this.centerZ = random(-500, 500);
     this.radius = radius;
@@ -15,7 +15,7 @@ class SpinningBox {
   display() {
     push();
     translate(this.x, this.centerY, this.z);
-    rotateY(frameCount * 0.5); // local spin (optional)
+    rotateY(frameCount * 0.1); // local spin (optional)
     fill(200, 80, 100);
     box(20);
     pop();

@@ -36,26 +36,26 @@ function setup() {
 */
   let numTorus = int(random(800, 70));
   let numBox = int(random(2, 18));
-
+/*
   for (let i = 0; i < 400; i++) {
     let radius = (700, 200);
     let angleOffset = map(i, 0, numTorus, 90, 100); //change to 100 for a noodle!
     toruses.push(new SpinningTorus(radius, angleOffset));
   }
-  
+  */
 
   for (let i = 0; i < 900; i++) {
     let radius = (100, 900);
     let angleOffset = map(i, 2, numBox, 70, 900);
     boxes.push(new SpinningBox(radius, angleOffset)); //outer rim
   }
-
+/*
   for (let i = 0; i < 100; i++) {
     let radius = (400, 900);
-    let angleOffset = map(i, 80, numBox, 70, 900);
+    let angleOffset = map(i, 80, numBox, 70, 100);
     boxes.push(new SpinningSphere(radius, angleOffset)); //outer rim
   }
-
+*/
   for (let i = 0; i < 700; i++) {
     let radius = (200, 1200);
     let angleOffset = map(i, 100, numBox, 90, 100);
@@ -92,13 +92,13 @@ ambientLight(50); // soft ambient base
 pointLight(100, 255, 100, 0, -200, 200);
 
 // Cool bluish fill from the side
-//pointLight(100, 150, 255, -300, 0, 0);
+pointLight(100, 150, 255, -300, 0, 0);
 
 // Neutral white highlight from top right
 directionalLight(255, 255, 255, 1, -1, -1);
 
 // Bright green light from below
-//pointLight(0, 255, 100, 0, 300, 0);
+pointLight(0, 255, 100, 0, 300, 0);
 
 // Subtle rim light from the left side
 directionalLight(150, 150, 255, -1, 0, 0);
