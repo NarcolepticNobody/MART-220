@@ -81,7 +81,7 @@ function setup() {
     let treeH = 50; // your tree height
     let x = random(treeW / 1, width - treeW / 1);
     let y = random(treeH / 1, height - treeH / 1);
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < 21; i++) {
          x = random(treeW / 1, width - treeW / 1);
      y = random(treeH / 1, height - treeH / 1);
 
