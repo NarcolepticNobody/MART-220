@@ -239,8 +239,8 @@ for (let x = 0; x < width; x += 40) {
                         score++;
                         break;
                     }
-                    if (!wahoo.isPlaying()) {
-                        wahoo.play(); // log breaking sound
+                    if (!bad.isPlaying()) {
+                        bad.play(); // log breaking sound
                     }
                     ////////////////////////////////
 
@@ -269,8 +269,8 @@ for (let x = 0; x < width; x += 40) {
                                 particles = [];
                                 //logArray.splice(i, 1);
                             }
-                            if (!wahoo.isPlaying()) {
-                                wahoo.play(); // log breaking sound
+                            if (!bad.isPlaying()) {
+                                bad.play(); // log breaking sound
                             }
 
                         }
