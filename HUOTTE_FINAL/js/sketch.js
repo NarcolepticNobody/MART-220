@@ -21,7 +21,7 @@ var redhealth = 50;
 var maxHealth = 100;
 var startTime;
 var img, img2;
-let good, bad, end, attack, wahoo, cheer;
+let good, bad, end, attack, wahoo, cheer, bone;
 var mySound;
 var myAnimation;
 var stomp; //log destroy 
@@ -43,6 +43,7 @@ function preload() {
     end = loadSound("assets/wampp.mp3");
     wahoo = loadSound('assets/wahoo.wav')
     cheer = loadSound('assets/cheer.wav')
+    bone = loadSound('assets/boneCrunch.wav')
 
     idleStrings = loadStrings('txtfiles/idle.txt');
     runStrings = loadStrings('txtfiles/run.txt');
@@ -239,8 +240,8 @@ for (let x = 0; x < width; x += 40) {
                         score++;
                         break;
                     }
-                    if (!bad.isPlaying()) {
-                        bad.play(); // log breaking sound
+                    if (!bone.isPlaying()) {
+                        bone.play(); // log breaking sound
                     }
                     ////////////////////////////////
 
@@ -269,8 +270,8 @@ for (let x = 0; x < width; x += 40) {
                                 particles = [];
                                 //logArray.splice(i, 1);
                             }
-                            if (!bad.isPlaying()) {
-                                bad.play(); // log breaking sound
+                            if (!bone.isPlaying()) {
+                                bone.play(); // log breaking sound
                             }
 
                         }
